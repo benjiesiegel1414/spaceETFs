@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TopSpaceETFs.com — Best Space & Aerospace ETFs Ranked</title>
+<style>
+  :root{
+    --bg: #07060d;
+    --bg-panel: #0f0d1c;
+    --bg-panel-2: #15122a;
+    --purple: #8b5cf6;
+    --purple-bright: #b794f6;
+    --purple-deep: #4c1d95;
+    --white: #f5f3ff;
+    --grey: #a8a3bd;
+    --line: #2a2540;
+    --green: #34d399;
+    --red: #f87171;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--white);
+    line-height: 1.6;
+    overflow-x:hidden;
+  }
+
+  /* Starfield background */
+  .stars{
+    position:fixed;
+    inset:0;
+    z-index:-2;
+    background:
+      radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,.9), transparent),
+      radial-gradient(1px 1px at 60% 70%, rgba(255,255,255,.7), transparent),
+      radial-gradient(1px 1px at 80% 10%, rgba(255,255,255,.8), transparent),
+      radial-gradient(1.5px 1.5px at 40% 85%, rgba(255,255,255,.6), transparent),
+      radial-gradient(1px 1px at 10% 60%, rgba(255,255,255,.5), transparent),
+      radial-gradient(1.5px 1.5px at 90% 50%, rgba(255,255,255,.7), transparent),
+      radial-gradient(1px 1px at 50% 15%, rgba(255,255,255,.6), transparent),
+      radial-gradient(1px 1px at 75% 90%, rgba(255,255,255,.5), transparent);
+    background-size: 100% 100%;
+    background-repeat: repeat;
+  }
+  .stars::after{
+    content:"";
+    position:absolute; inset:0;
+    background: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(139,92,246,0.25), transparent 60%);
+  }
+
+  a{color:inherit; text-decoration:none;}
+
+  .wrap{max-width:1180px; margin:0 auto; padding:0 24px;}
+
+  /* HEADER */
+  header{
+    position:sticky; top:0; z-index:50;
+    background: rgba(7,6,13,0.75);
+    backdrop-filter: blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 0;
+    position:relative;
+    overflow:hidden;
+  }
+  .logo{
+    display:flex; align-items:center;
+    font-weight:800; font-size:1.3rem; letter-spacing:0.5px;
+  }
+  .logo .logo-mark{margin-right:10px;}
+  .logo-text{display:inline-block;}
+  .logo-mark{
+    width:34px; height:34px; border-radius:50%;
+    background: radial-gradient(circle at 35% 35%, var(--purple-bright), var(--purple-deep) 70%, #000 100%);
+    box-shadow: 0 0 18px rgba(139,92,246,.6);
+    position:relative; flex-shrink:0;
+  }
+  .logo-mark::after{
+    content:"";
+    position:absolute; top:-3px; left:-3px; right:-3px; bottom:-3px;
+    border:1px solid rgba(139,92,246,.4);
+    border-radius:50%;
+    transform: rotate(25deg);
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+  }
+  .logo span{color: var(--purple-bright);}
+
+  nav ul{
+    display:flex; gap:32px; list-style:none;
+  }
+  nav ul li a{
+    font-size:0.95rem; font-weight:500; color: var(--grey);
+    transition: color .2s;
+  }
+  nav ul li a:hover, nav ul li a.active{color:var(--white);}
+
+  .nav-cta{
+    display:flex; align-items:center; gap:10px; flex-wrap:wrap; justify-content:flex-end;
+  }
+  .nav-cta .btn{padding:8px 14px; font-size:0.82rem;}
+  .btn{
+    display:inline-block;
+    padding:10px 22px;
+    border-radius:8px;
+    font-weight:600;
+    font-size:0.9rem;
+    transition: all .2s;
+    border:1px solid transparent;
+  }
+  .btn-primary{
+    background: linear-gradient(135deg, var(--purple) 0%, var(--purple-deep) 100%);
+    color:#fff;
+    box-shadow: 0 4px 20px rgba(139,92,246,.35);
+  }
+  .btn-primary:hover{transform: translateY(-2px); box-shadow: 0 6px 24px rgba(139,92,246,.5);}
+  .btn-ghost{
+    border-color: var(--line); color: var(--grey);
+  }
+  .btn-ghost:hover{border-color: var(--purple); color: var(--white);}
+
+  .shooting-star{
+    position:absolute;
+    top:50%; left:0;
+    width:3px; height:3px;
+    border-radius:50%;
+    background:#fff;
+    box-shadow: 0 0 6px 1px rgba(255,255,255,.9), 0 0 14px 3px rgba(139,92,246,.7);
+    opacity:0;
+    pointer-events:none;
+  }
+  .shooting-star::before{
+    content:"";
+    position:absolute;
+    top:50%; right:100%;
+    width:90px; height:1px;
+    transform: translateY(-50%);
+    background: linear-gradient(to left, rgba(255,255,255,.9), rgba(139,92,246,.5), transparent);
+  }
+  @keyframes shoot-star{
+    0%{ opacity:0; transform: translate(0,-50%) scale(0.6); }
+    5%{ opacity:1; transform: translate(0,-50%) scale(1); }
+    85%{ opacity:1; }
+    100%{ opacity:0; transform: translate(var(--shoot-dist, 600px), -50%) scale(0.6); }
+  }
+  .shooting-star{
+    animation: shoot-star 5s linear infinite;
+  }
+
+  /* HERO */
+  .hero{
+    padding: 80px 0 30px;
+    text-align:center;
+    position:relative;
+  }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:0.78rem; letter-spacing:2px; text-transform:uppercase;
+    color: var(--purple-bright);
+    border:1px solid var(--purple-deep);
+    background: rgba(139,92,246,.08);
+    padding:6px 16px; border-radius:999px;
+    margin-bottom:28px;
+  }
+  .eyebrow .dot{width:6px; height:6px; border-radius:50%; background: var(--green); box-shadow:0 0 8px var(--green);}
+
+  .hero h1{
+    font-size: clamp(2.4rem, 6vw, 4.2rem);
+    font-weight:800;
+    letter-spacing:-1.5px;
+    line-height:1.1;
+    margin-bottom:24px;
+  }
+  .hero h1 .grad{
+    background: linear-gradient(135deg, var(--purple-bright), var(--purple) 60%, #fff);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  .hero p.sub{
+    max-width:640px; margin:0 auto 36px;
+    color: var(--grey);
+    font-size:1.1rem;
+  }
+  .hero-ctas{display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-bottom:56px;}
+
+  .hero-stats{
+    display:flex; justify-content:center; gap:48px; flex-wrap:wrap;
+    border-top:1px solid var(--line);
+    padding-top:36px;
+    max-width:760px; margin:0 auto;
+  }
+  .hero-stats .stat{text-align:center;}
+  .hero-stats .stat .num{
+    font-size:1.8rem; font-weight:800; color:var(--white);
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .hero-stats .stat .num span{color:var(--purple-bright);}
+  .hero-stats .stat .label{
+    font-size:0.8rem; color:var(--grey); text-transform:uppercase; letter-spacing:1px; margin-top:4px;
+  }
+
+  /* SECTION HEADINGS */
+  .section{padding: 80px 0;}
+  .section-head{
+    display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:16px;
+    margin-bottom:40px;
+  }
+  .section-head h2{
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight:800; letter-spacing:-1px;
+  }
+  .section-head h2 span{color:var(--purple-bright);}
+  .section-head p{color:var(--grey); max-width:480px;}
+  .updated-badge{
+    font-size:0.8rem; color: var(--grey);
+    border:1px solid var(--line); border-radius:999px; padding:6px 14px;
+    white-space:nowrap;
+  }
+  .updated-badge b{color:var(--purple-bright);}
+
+  /* TABLE */
+  .table-card{
+    background: var(--bg-panel);
+    border:1px solid var(--line);
+    border-radius:16px;
+    overflow:hidden;
+  }
+  .table-scroll{overflow-x:auto;}
+  table{width:100%; border-collapse:collapse; min-width:780px;}
+  thead th{
+    text-align:left;
+    font-size:0.75rem; text-transform:uppercase; letter-spacing:1px;
+    color:var(--grey);
+    padding:16px 20px;
+    border-bottom:1px solid var(--line);
+    background: var(--bg-panel-2);
+    white-space:nowrap;
+  }
+  thead th.num, tbody td.num{text-align:right;}
+  tbody td{
+    padding:18px 20px;
+    border-bottom:1px solid var(--line);
+    font-size:0.95rem;
+    vertical-align:middle;
+  }
+  tbody tr:last-child td{border-bottom:none;}
+  tbody tr{transition: background .15s;}
+  tbody tr:hover{background: rgba(139,92,246,.06);}
+
+  .rank{
+    display:inline-flex; align-items:center; justify-content:center;
+    width:28px; height:28px; border-radius:8px;
+    background: var(--bg-panel-2);
+    border:1px solid var(--line);
+    font-weight:700; font-size:0.85rem; color: var(--purple-bright);
+  }
+  .ticker-cell{display:flex; align-items:center; gap:12px;}
+  .ticker-icon{
+    width:38px; height:38px; border-radius:10px; flex-shrink:0;
+    display:flex; align-items:center; justify-content:center;
+    background: linear-gradient(135deg, var(--purple-deep), #1e1b3a);
+    border:1px solid var(--line);
+    font-weight:800; font-size:0.8rem; color: var(--purple-bright);
+  }
+  .ticker-name b{display:block; font-weight:700; font-size:0.98rem;}
+  .ticker-name small{color:var(--grey); font-size:0.8rem;}
+  .pos{color:var(--green); font-weight:600;}
+  .neg{color:var(--red); font-weight:600;}
+  .mono{font-family:'JetBrains Mono', monospace;}
+  .holding-tag{
+    display:inline-block; font-size:0.75rem; color:var(--grey);
+    background: var(--bg-panel-2); border:1px solid var(--line);
+    padding:3px 10px; border-radius:999px;
+  }
+  .view-link{color:var(--purple-bright); font-weight:600; font-size:0.85rem; white-space:nowrap;}
+  .view-link:hover{text-decoration:underline;}
+
+  /* small screens: convert table to cards */
+  @media (max-width: 760px){
+    .table-scroll{overflow-x:visible;}
+    table, thead, tbody, th, td, tr{display:block;}
+    thead{display:none;}
+    tbody tr{
+      padding:18px 18px; border-bottom:1px solid var(--line);
+      display:grid; grid-template-columns: 1fr 1fr; gap:8px 16px;
+    }
+    tbody td{padding:0; border:none; font-size:0.9rem;}
+    tbody td.ticker-cell{grid-column: 1 / -1;}
+    tbody td.num{text-align:left;}
+    tbody td::before{
+      content: attr(data-label);
+      display:block; font-size:0.7rem; text-transform:uppercase; letter-spacing:1px; color:var(--grey); margin-bottom:2px;
+    }
+    tbody td.ticker-cell::before{display:none;}
+  }
+
+  /* WHY / FEATURES */
+  .features-grid{
+    display:grid; grid-template-columns: repeat(3, 1fr); gap:24px;
+  }
+  .feature-card{
+    background: var(--bg-panel);
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:28px;
+    transition: border-color .2s, transform .2s;
+  }
+  .feature-card:hover{border-color:var(--purple-deep); transform: translateY(-4px);}
+  .feature-icon{
+    width:46px; height:46px; border-radius:12px;
+    background: rgba(139,92,246,.12);
+    border:1px solid var(--purple-deep);
+    display:flex; align-items:center; justify-content:center;
+    margin-bottom:18px; font-size:1.3rem;
+  }
+  .feature-card h3{font-size:1.1rem; margin-bottom:10px; font-weight:700;}
+  .feature-card p{color:var(--grey); font-size:0.92rem;}
+
+  @media (max-width:880px){.features-grid{grid-template-columns:1fr 1fr;}}
+  @media (max-width:560px){.features-grid{grid-template-columns:1fr;}}
+
+  /* BLOG */
+  .blog-grid{
+    display:grid; grid-template-columns: repeat(3, 1fr); gap:24px;
+  }
+  .blog-card{
+    background: var(--bg-panel);
+    border:1px solid var(--line);
+    border-radius:16px;
+    overflow:hidden;
+    display:flex; flex-direction:column;
+    transition: transform .2s, border-color .2s;
+  }
+  .blog-card:hover{transform: translateY(-4px); border-color:var(--purple-deep);}
+  .blog-thumb{
+    height:160px;
+    background: linear-gradient(135deg, var(--purple-deep) 0%, #1c1733 60%, #000 100%);
+    position:relative;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .blog-thumb::before{
+    content:"";
+    position:absolute; inset:0;
+    background:
+      radial-gradient(2px 2px at 25% 30%, #fff, transparent),
+      radial-gradient(1.5px 1.5px at 70% 60%, #fff, transparent),
+      radial-gradient(1px 1px at 50% 80%, #fff, transparent),
+      radial-gradient(1.5px 1.5px at 85% 20%, #fff, transparent);
+    opacity:.7;
+  }
+  .blog-thumb span{
+    font-size:0.75rem; letter-spacing:2px; text-transform:uppercase;
+    color: var(--purple-bright);
+    border:1px solid var(--purple-deep);
+    background: rgba(0,0,0,.4);
+    padding:6px 14px; border-radius:999px;
+    position:relative; z-index:1;
+  }
+  .blog-body{padding:22px; flex:1; display:flex; flex-direction:column;}
+  .blog-tag{font-size:0.75rem; color:var(--purple-bright); font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:10px;}
+  .blog-body h3{font-size:1.08rem; margin-bottom:10px; line-height:1.4;}
+  .blog-body p{color:var(--grey); font-size:0.9rem; flex:1; margin-bottom:16px;}
+  .blog-meta{font-size:0.8rem; color:var(--grey); border-top:1px solid var(--line); padding-top:14px; display:flex; justify-content:space-between;}
+  .coming-soon-badge{
+    position:absolute; top:12px; right:12px;
+    font-size:0.7rem; font-weight:700; letter-spacing:1px;
+    background: var(--purple); color:#fff;
+    padding:4px 10px; border-radius:6px; z-index:2;
+  }
+
+  @media (max-width:880px){.blog-grid{grid-template-columns:1fr 1fr;}}
+  @media (max-width:560px){.blog-grid{grid-template-columns:1fr;}}
+
+  /* NEWSLETTER */
+  .newsletter{
+    background: linear-gradient(135deg, var(--purple-deep) 0%, #1a1530 60%, #07060d 100%);
+    border:1px solid var(--line);
+    border-radius:24px;
+    padding:56px 40px;
+    text-align:center;
+    position:relative; overflow:hidden;
+  }
+  .newsletter::before{
+    content:"";
+    position:absolute; width:300px; height:300px; border-radius:50%;
+    background: radial-gradient(circle, rgba(139,92,246,.35), transparent 70%);
+    top:-100px; right:-80px;
+  }
+  .newsletter h2{font-size:clamp(1.6rem,4vw,2.2rem); font-weight:800; margin-bottom:12px;}
+  .newsletter p{color:var(--grey); margin-bottom:28px; max-width:480px; margin-inline:auto;}
+  .newsletter-form{
+    display:flex; gap:12px; justify-content:center; max-width:440px; margin:0 auto; flex-wrap:wrap;
+  }
+  .newsletter-form input{
+    flex:1; min-width:200px;
+    padding:13px 18px; border-radius:8px;
+    border:1px solid var(--line);
+    background: rgba(255,255,255,.04);
+    color:var(--white); font-size:0.95rem;
+  }
+  .newsletter-form input::placeholder{color:var(--grey);}
+  .newsletter-form input:focus{outline:2px solid var(--purple); border-color:transparent;}
+
+  /* DISCLAIMER */
+  .disclaimer{
+    font-size:0.8rem; color:var(--grey);
+    border:1px solid var(--line); border-radius:12px;
+    padding:20px 24px; background: var(--bg-panel);
+  }
+
+  /* FOOTER */
+  footer{border-top:1px solid var(--line); padding:56px 0 28px; margin-top:40px;}
+  .footer-grid{
+    display:grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap:32px; margin-bottom:40px;
+  }
+  .footer-grid h4{font-size:0.85rem; text-transform:uppercase; letter-spacing:1px; color:var(--grey); margin-bottom:16px;}
+  .footer-grid ul{list-style:none;}
+  .footer-grid ul li{margin-bottom:10px;}
+  .footer-grid ul li a{color:var(--grey); font-size:0.9rem; transition:color .2s;}
+  .footer-grid ul li a:hover{color:var(--purple-bright);}
+  .footer-brand p{color:var(--grey); font-size:0.9rem; max-width:320px; margin-top:14px;}
+  .footer-bottom{
+    border-top:1px solid var(--line); padding-top:24px;
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+    font-size:0.82rem; color:var(--grey);
+  }
+  @media (max-width:880px){.footer-grid{grid-template-columns:1fr 1fr;}}
+  @media (max-width:560px){.footer-grid{grid-template-columns:1fr;}}
+
+  /* RESPONSIVE NAV */
+  @media (max-width:880px){
+    nav ul{
+      position:fixed; top:70px; left:0; right:0;
+      flex-direction:column; align-items:center; gap:0;
+      background: var(--bg-panel);
+      border-bottom:1px solid var(--line);
+      max-height:0; overflow:hidden; transition: max-height .3s;
+    }
+    nav ul.open{max-height:300px;}
+    nav ul li{width:100%; text-align:center;}
+    nav ul li a{display:block; padding:16px 0;}
+    .nav-cta .btn-ghost{display:none;}
+    .mobile-toggle{display:block;}
+  }
+</style>
+</head>
+<body>
+<div class="stars"></div>
+
+<header>
+  <div class="wrap nav">
+    <a href="#" class="logo"><span class="logo-mark"></span><span class="logo-text">Top<span>Space</span>ETFs.com</span></a>
+    <div class="shooting-star" id="shootingStar"></div>
+    <div class="nav-cta">
+      <a href="https://topdividendetfs.com" class="btn btn-ghost">Top Dividend ETFs ↗</a>
+      <a href="https://monthlyetfs.com" class="btn btn-ghost">Monthly ETFs ↗</a>
+      <a href="https://weeklyetfs.com" class="btn btn-ghost">Weekly ETFs ↗</a>
+      <a href="https://growthetfs.com" class="btn btn-ghost">Growth ETFs ↗</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero wrap">
+  <div class="eyebrow"><span class="dot"></span> Updated Weekly · Data via Google Sheets</div>
+  <h1>The Best <span class="grad">Space & Aerospace ETFs</span><br>Ranked, Tracked, Explained.</h1>
+  <p class="sub">From satellite mega-constellations to lunar logistics — we track every fund riding the new space economy, so you can find the right exposure in seconds.</p>
+  <div class="hero-ctas" style="margin-bottom:0;">
+    <a href="#rankings" class="btn btn-primary">View Top ETFs</a>
+    <a href="#why" class="btn btn-ghost">Why Space ETFs?</a>
+  </div>
+
+</section>
+
+<!-- RANKINGS TABLE -->
+<section class="wrap" id="rankings" style="padding:20px 24px 80px;">
+  <div class="section-head">
+    <div>
+      <h2>Top Space ETFs <span>Ranked</span></h2>
+      <p>Ranked by 1-year performance. Click any ticker for a full breakdown of holdings, fees, and dividend history.</p>
+    </div>
+    <div class="updated-badge">Sample data — last updated <b>June 11, 2026</b></div>
+  </div>
+
+  <div class="table-card">
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>ETF</th>
+            <th class="num">Price</th>
+            <th class="num">1Y Return</th>
+            <th class="num">Expense Ratio</th>
+            <th class="num">AUM</th>
+            <th class="num">Dividend Yield</th>
+            <th>Top Holding</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-label="Rank"><span class="rank">1</span></td>
+            <td data-label="ETF" class="ticker-cell">
+              <div class="ticker-icon">UFO</div>
+              <div class="ticker-name"><b>Procure Space ETF</b><small>UFO · NYSE Arca</small></div>
+            </td>
+            <td data-label="Price" class="num mono">$24.18</td>
+            <td data-label="1Y Return" class="num pos">+27.4%</td>
+            <td data-label="Expense Ratio" class="num mono">0.75%</td>
+            <td data-label="AUM" class="num mono">$142M</td>
+            <td data-label="Dividend Yield" class="num mono">0.41%</td>
+            <td data-label="Top Holding"><span class="holding-tag">Iridium Comm.</span></td>
+            <td><a href="#" class="view-link">View →</a></td>
+          </tr>
+          <tr>
+            <td data-label="Rank"><span class="rank">2</span></td>
+            <td data-label="ETF" class="ticker-cell">
+              <div class="ticker-icon">ARKX</div>
+              <div class="ticker-name"><b>ARK Space Exploration & Innovation ETF</b><small>ARKX · NYSE Arca</small></div>
+            </td>
+            <td data-label="Price" class="num mono">$15.92</td>
+            <td data-label="1Y Return" class="num pos">+24.1%</td>
+            <td data-label="Expense Ratio" class="num mono">0.70%</td>
+            <td data-label="AUM" class="num mono">$268M</td>
+            <td data-label="Dividend Yield" class="num mono">0.18%</td>
+            <td data-label="Top Holding"><span class="holding-tag">Kratos Defense</span></td>
+            <td><a href="#" class="view-link">View →</a></td>
+          </tr>
+          <tr>
+            <td data-label="Rank"><span class="rank">3</span></td>
+            <td data-label="ETF" class="ticker-cell">
+              <div class="ticker-icon">ROKT</div>
+              <div class="ticker-name"><b>SPDR S&P Kensho Final Frontiers ETF</b><small>ROKT · NYSE Arca</small></div>
+            </td>
+            <td data-label="Price" class="num mono">$48.61</td>
+            <td data-label="1Y Return" class="num pos">+19.7%</td>
+            <td data-label="Expense Ratio" class="num mono">0.45%</td>
+            <td data-label="AUM" class="num mono">$96M</td>
+            <td data-label="Dividend Yield" class="num mono">0.62%</td>
+            <td data-label="Top Holding"><span class="holding-tag">Rocket Lab</span></td>
+            <td><a href="#" class="view-link">View →</a></td>
+          </tr>
+          <tr>
+            <td data-label="Rank"><span class="rank">4</span></td>
+            <td data-label="ETF" class="ticker-cell">
+              <div class="ticker-icon">YODA</div>
+              <div class="ticker-name"><b>Defiance Quantum & Aerospace ETF</b><small>YODA · NASDAQ</small></div>
+            </td>
+            <td data-label="Price" class="num mono">$33.04</td>
+            <td data-label="1Y Return" class="num pos">+16.2%</td>
+            <td data-label="Expense Ratio" class="num mono">0.65%</td>
+            <td data-label="AUM" class="num mono">$57M</td>
+            <td data-label="Dividend Yield" class="num mono">0.00%</td>
+            <td data-label="Top Holding"><span class="holding-tag">Lockheed Martin</span></td>
+            <td><a href="#" class="view-link">View →</a></td>
+          </tr>
+          <tr>
+            <td data-label="Rank"><span class="rank">5</span></td>
+            <td data-label="ETF" class="ticker-cell">
+              <div class="ticker-icon">ITA</div>
+              <div class="ticker-name"><b>iShares U.S. Aerospace & Defense ETF</b><small>ITA · NYSE Arca</small></div>
+            </td>
+            <td data-label="Price" class="num mono">$165.30</td>
+            <td data-label="1Y Return" class="num pos">+14.8%</td>
+            <td data-label="Expense Ratio" class="num mono">0.40%</td>
+            <td data-label="AUM" class="num mono">$5.1B</td>
+            <td data-label="Dividend Yield" class="num mono">0.74%</td>
+            <td data-label="Top Holding"><span class="holding-tag">Boeing</span></td>
+            <td><a href="#" class="view-link">View →</a></td>
+          </tr>
+          <tr>
+            <td data-label="Rank"><span class="rank">6</span></td>
+            <td data-label="ETF" class="ticker-cell">
+              <div class="ticker-icon">PPA</div>
+              <div class="ticker-name"><b>Invesco Aerospace & Defense ETF</b><small>PPA · NASDAQ</small></div>
+            </td>
+            <td data-label="Price" class="num mono">$112.77</td>
+            <td data-label="1Y Return" class="num pos">+13.5%</td>
+            <td data-label="Expense Ratio" class="num mono">0.58%</td>
+            <td data-label="AUM" class="num mono">$3.4B</td>
+            <td data-label="Dividend Yield" class="num mono">0.55%</td>
+            <td data-label="Top Holding"><span class="holding-tag">GE Aerospace</span></td>
+            <td><a href="#" class="view-link">View →</a></td>
+          </tr>
+          <tr>
+            <td data-label="Rank"><span class="rank">7</span></td>
+            <td data-label="ETF" class="ticker-cell">
+              <div class="ticker-icon">XAR</div>
+              <div class="ticker-name"><b>SPDR S&P Aerospace & Defense ETF</b><small>XAR · NYSE Arca</small></div>
+            </td>
+            <td data-label="Price" class="num mono">$178.42</td>
+            <td data-label="1Y Return" class="num pos">+12.1%</td>
+            <td data-label="Expense Ratio" class="num mono">0.35%</td>
+            <td data-label="AUM" class="num mono">$1.8B</td>
+            <td data-label="Dividend Yield" class="num mono">0.49%</td>
+            <td data-label="Top Holding"><span class="holding-tag">Rocket Lab</span></td>
+            <td><a href="#" class="view-link">View →</a></td>
+          </tr>
+          <tr>
+            <td data-label="Rank"><span class="rank">8</span></td>
+            <td data-label="ETF" class="ticker-cell">
+              <div class="ticker-icon">DFNS</div>
+              <div class="ticker-name"><b>Global X Defense Tech ETF</b><small>DFNS · NASDAQ</small></div>
+            </td>
+            <td data-label="Price" class="num mono">$41.55</td>
+            <td data-label="1Y Return" class="num pos">+11.6%</td>
+            <td data-label="Expense Ratio" class="num mono">0.50%</td>
+            <td data-label="AUM" class="num mono">$610M</td>
+            <td data-label="Dividend Yield" class="num mono">0.22%</td>
+            <td data-label="Top Holding"><span class="holding-tag">Palantir</span></td>
+            <td><a href="#" class="view-link">View →</a></td>
+          </tr>
+          <tr>
+            <td data-label="Rank"><span class="rank">9</span></td>
+            <td data-label="ETF" class="ticker-cell">
+              <div class="ticker-icon">SATO</div>
+              <div class="ticker-name"><b>Astrum Global Satellite & Comm ETF</b><small>SATO · NASDAQ</small></div>
+            </td>
+            <td data-label="Price" class="num mono">$19.86</td>
+            <td data-label="1Y Return" class="num neg">-3.2%</td>
+            <td data-label="Expense Ratio" class="num mono">0.69%</td>
+            <td data-label="AUM" class="num mono">$22M</td>
+            <td data-label="Dividend Yield" class="num mono">1.05%</td>
+            <td data-label="Top Holding"><span class="holding-tag">Viasat</span></td>
+            <td><a href="#" class="view-link">View →</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <p style="margin-top:14px; font-size:0.8rem; color:var(--grey);">*All figures shown are sample/placeholder data for layout purposes and will be replaced by live data from Google Sheets.</p>
+</section>
+
+<!-- WHY SPACE ETFS -->
+<section class="section wrap" id="why">
+  <div class="section-head">
+    <div>
+      <h2>Why <span>Space ETFs</span> Right Now</h2>
+      <p>A new wave of launches, IPOs, and government contracts is reshaping the sector. Here's what's driving the interest.</p>
+    </div>
+  </div>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">🚀</div>
+      <h3>IPO Wave</h3>
+      <p>A growing list of space-economy companies — from launch providers to satellite operators — are heading toward public markets, expanding the universe of investable names.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🛰️</div>
+      <h3>Diversified Exposure</h3>
+      <p>Space ETFs spread risk across launch, satellite, communications, and defense-adjacent companies — instead of betting on a single rocket company.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🏛️</div>
+      <h3>Government Tailwinds</h3>
+      <p>Defense and civil space budgets continue to expand globally, supporting long-term contracts for many of the holdings inside these funds.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📡</div>
+      <h3>Satellite Internet Boom</h3>
+      <p>Low-earth-orbit broadband is scaling fast, driving revenue for satellite manufacturers, launch providers, and ground infrastructure companies.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📊</div>
+      <h3>Side-by-Side Data</h3>
+      <p>Compare expense ratios, AUM, holdings, and returns across every major space-themed fund — updated on a regular cadence.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">💜</div>
+      <h3>From the TopDividendETFs Team</h3>
+      <p>Built by the same team behind TopDividendETFs.com, applying the same research-first approach to the space investing theme.</p>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG -->
+<section class="section wrap" id="blog">
+  <div class="section-head">
+    <div>
+      <h2>From the <span>Blog</span></h2>
+      <p>Deep dives on space ETFs, stocks, IPOs, and the macro trends shaping the sector. New articles coming soon.</p>
+    </div>
+    <a href="#" class="btn btn-ghost">View All Posts →</a>
+  </div>
+  <div class="blog-grid">
+    <article class="blog-card">
+      <div class="blog-thumb"><span class="coming-soon-badge">Coming Soon</span><span>Funds 101</span></div>
+      <div class="blog-body">
+        <div class="blog-tag">ETF Basics</div>
+        <h3>Space ETFs 101: What's Actually Inside These Funds?</h3>
+        <p>A breakdown of the sectors, holdings, and strategies behind the major space and aerospace ETFs on the market today.</p>
+        <div class="blog-meta"><span>Coming Soon</span><span>5 min read</span></div>
+      </div>
+    </article>
+    <article class="blog-card">
+      <div class="blog-thumb"><span class="coming-soon-badge">Coming Soon</span><span>IPO Watch</span></div>
+      <div class="blog-body">
+        <div class="blog-tag">IPO Watch</div>
+        <h3>The Space Companies Headed Toward an IPO</h3>
+        <p>Tracking the launch providers, satellite makers, and space infrastructure firms rumored or confirmed to be going public.</p>
+        <div class="blog-meta"><span>Coming Soon</span><span>7 min read</span></div>
+      </div>
+    </article>
+    <article class="blog-card">
+      <div class="blog-thumb"><span class="coming-soon-badge">Coming Soon</span><span>Deep Dive</span></div>
+      <div class="blog-body">
+        <div class="blog-tag">Deep Dive</div>
+        <h3>UFO vs. ARKX: Which Space ETF Fits Your Portfolio?</h3>
+        <p>A side-by-side look at two of the most popular pure-play space ETFs — holdings, fees, performance, and risk profile.</p>
+        <div class="blog-meta"><span>Coming Soon</span><span>6 min read</span></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+
+
+<!-- DISCLAIMER -->
+<section class="wrap" style="margin-bottom:60px;">
+  <div class="disclaimer">
+    <strong>Disclosure:</strong> TopSpaceETFs.com is for informational and educational purposes only and does not constitute investment, financial, or legal advice. ETF data shown on this page is placeholder/sample content for design purposes and does not reflect real market data. Always do your own research and consult a licensed financial advisor before making investment decisions. Past performance does not guarantee future results.
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="logo"><span class="logo-mark"></span><span class="logo-text">Top<span>Space</span>ETFs.com</span></a>
+        <p>Independent research and rankings for space, satellite, and aerospace-themed ETFs. A sister site to TopDividendETFs.com.</p>
+      </div>
+      <div>
+        <h4>Site</h4>
+        <ul>
+          <li><a href="#rankings">Rankings</a></li>
+          <li><a href="#why">Why Space ETFs</a></li>
+          <li><a href="#blog">Blog</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="https://topdividendetfs.com">TopDividendETFs.com</a></li>
+          <li><a href="#">Methodology</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Disclosure</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Use</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 TopSpaceETFs.com. All rights reserved.</span>
+      <span>Not investment advice. Data updated weekly.</span>
+    </div>
+  </div>
+</footer>
+<script>
+  function setShootDistance(){
+    const star = document.getElementById('shootingStar');
+    const nav = document.querySelector('header .nav');
+    if(star && nav) star.style.setProperty('--shoot-dist', (nav.offsetWidth - 20) + 'px');
+  }
+  setShootDistance();
+  window.addEventListener('resize', setShootDistance);
+</script>
+
+</body>
+</html>
