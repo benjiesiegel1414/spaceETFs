@@ -68,7 +68,7 @@
         }
         .nav{
             display:flex; align-items:center; justify-content:space-between;
-            padding:18px 0;
+            padding:18px 0; position:relative; overflow:hidden;
         }
         .logo{display:flex; align-items:center; font-weight:800; font-size:1.3rem; letter-spacing:0.5px;}
         .logo .logo-mark{margin-right:10px;}
@@ -79,6 +79,21 @@
             position:relative; flex-shrink:0;
         }
         .logo span{color:var(--purple-bright);}
+
+        .nav-cta{
+            display:flex; align-items:center; gap:10px; flex-wrap:wrap; justify-content:flex-end;
+        }
+        .btn{
+            display:inline-block; padding:8px 16px; border-radius:8px;
+            font-weight:600; font-size:0.85rem; transition:all .2s; border:1px solid transparent;
+            white-space:nowrap;
+        }
+        .btn-ghost{
+            border-color:var(--line); color:var(--grey);
+        }
+        .btn-ghost:hover{
+            border-color:var(--purple); color:var(--white);
+        }
 
         /* BLOG HERO */
         .blog-hero{
@@ -174,14 +189,21 @@
             <span class="logo-mark"></span>
             <span class="logo-text">Top<span>Space</span>ETFs.com</span>
         </a>
+        
+        <div class="nav-cta">
+            <a href="https://topdividendetfs.com" class="btn btn-ghost">Top Dividend ETFs ↗</a>
+            <a href="https://monthlyetfs.com" class="btn btn-ghost">Monthly ETFs ↗</a>
+            <a href="https://weeklyetfs.com" class="btn btn-ghost">Weekly ETFs ↗</a>
+            <a href="https://growthetfs.com" class="btn btn-ghost">Growth ETFs ↗</a>
+        </div>
     </div>
 </header>
 
 <!-- BLOG HERO -->
 <section class="blog-hero wrap">
     <h1>Space <span class="grad">ETF Insights</span></h1>
-    <p>Deep dives, analysis, and updates on the space economy, satellite technology, and the ETFs that track them.</p><br>
-    Not financial advice - For entertainment purposes ONLY!
+    <p>Deep dives, analysis, and updates on the space economy, satellite technology, and the ETFs that track them.</p>
+    <p style="margin-top:12px; color:#f87171; font-size:0.95rem;">Not financial advice — For entertainment purposes ONLY!</p>
 </section>
 
 <!-- BLOG POSTS -->
@@ -311,7 +333,7 @@
                 <ul>
                     <li><a href="https://TopSpaceETFs.com/rankings">Rankings</a></li>
                     <li><a href="https://TopSpaceETFs.com/why-space-etfs">Why Space ETFs</a></li>
-                    <li><a href="https://TopSpaceETFs.com/blog">Blog</a></li>
+                    <li><a href="https://TopSpaceETFs.com/blog.html">Blog</a></li>
                 </ul>
             </div>
 
