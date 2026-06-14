@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog — TopSpaceETFs.com</title>
+    
+    <!-- Favicons & Manifest -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#4c1d95">
+
+    <style>
+        :root{
+            --bg: #07060d;
+            --bg-panel: #0f0d1c;
+            --bg-panel-2: #15122a;
+            --purple: #8b5cf6;
+            --purple-bright: #b794f6;
+            --purple-deep: #4c1d95;
+            --white: #f5f3ff;
+            --grey: #a8a3bd;
+            --line: #2a2540;
+            --green: #34d399;
+            --red: #f87171;
+        }
+
+        *{margin:0;padding:0;box-sizing:border-box;}
+        html{scroll-behavior:smooth;}
+        body{
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg);
+            color: var(--white);
+            line-height: 1.6;
+            overflow-x:hidden;
+        }
+
+        .stars{
+            position:fixed; inset:0; z-index:-2;
+            background:
+                radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,.9), transparent),
+                radial-gradient(1px 1px at 60% 70%, rgba(255,255,255,.7), transparent),
+                radial-gradient(1px 1px at 80% 10%, rgba(255,255,255,.8), transparent),
+                radial-gradient(1.5px 1.5px at 40% 85%, rgba(255,255,255,.6), transparent),
+                radial-gradient(1px 1px at 10% 60%, rgba(255,255,255,.5), transparent),
+                radial-gradient(1.5px 1.5px at 90% 50%, rgba(255,255,255,.7), transparent),
+                radial-gradient(1px 1px at 50% 15%, rgba(255,255,255,.6), transparent),
+                radial-gradient(1px 1px at 75% 90%, rgba(255,255,255,.5), transparent);
+            background-size:100% 100%; background-repeat:repeat;
+        }
+        .stars::after{
+            content:""; position:absolute; inset:0;
+            background: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(139,92,246,0.25), transparent 60%);
+        }
+
+        a{color:inherit; text-decoration:none;}
+        .wrap{max-width:1180px; margin:0 auto; padding:0 24px;}
+
+        /* HEADER */
+        header{
+            position:sticky; top:0; z-index:50;
+            background: rgba(7,6,13,0.75);
+            backdrop-filter: blur(10px);
+            border-bottom:1px solid var(--line);
+        }
+        .nav{
+            display:flex; align-items:center; justify-content:space-between;
+            padding:18px 0;
+        }
+        .logo{display:flex; align-items:center; font-weight:800; font-size:1.3rem; letter-spacing:0.5px;}
+        .logo .logo-mark{margin-right:10px;}
+        .logo-mark{
+            width:34px; height:34px; border-radius:50%;
+            background: radial-gradient(circle at 35% 35%, var(--purple-bright), var(--purple-deep) 70%, #000 100%);
+            box-shadow: 0 0 18px rgba(139,92,246,.6);
+            position:relative; flex-shrink:0;
+        }
+        .logo span{color:var(--purple-bright);}
+
+        /* BLOG HERO */
+        .blog-hero{
+            padding:120px 0 80px; text-align:center; position:relative;
+        }
+        .blog-hero h1{
+            font-size:clamp(2.6rem, 6vw, 4.2rem); font-weight:800;
+            letter-spacing:-1.5px; line-height:1.1; margin-bottom:20px;
+        }
+        .blog-hero .grad{
+            background:linear-gradient(135deg, var(--purple-bright), var(--purple) 60%, #fff);
+            -webkit-background-clip:text; background-clip:text; color:transparent;
+        }
+        .blog-hero p{
+            max-width:620px; margin:0 auto; color:var(--grey); font-size:1.1rem;
+        }
+
+        /* BLOG GRID */
+        .blog-grid{
+            display:grid; grid-template-columns:repeat(auto-fit, minmax(360px, 1fr)); gap:28px;
+            padding-bottom:80px;
+        }
+        .blog-card{
+            background:var(--bg-panel); border:1px solid var(--line);
+            border-radius:16px; overflow:hidden; display:flex; flex-direction:column;
+            transition:transform .2s, border-color .2s;
+        }
+        .blog-card:hover{
+            transform:translateY(-6px); border-color:var(--purple-deep);
+        }
+        .blog-thumb{
+            height:200px;
+            background:linear-gradient(135deg, var(--purple-deep) 0%, #1c1733 60%, #000 100%);
+            position:relative; display:flex; align-items:center; justify-content:center;
+        }
+        .blog-thumb::before{
+            content:""; position:absolute; inset:0;
+            background:
+                radial-gradient(2px 2px at 25% 30%, #fff, transparent),
+                radial-gradient(1.5px 1.5px at 70% 60%, #fff, transparent),
+                radial-gradient(1px 1px at 50% 80%, #fff, transparent),
+                radial-gradient(1.5px 1.5px at 85% 20%, #fff, transparent);
+            opacity:.7;
+        }
+        .blog-thumb span{
+            font-size:0.78rem; letter-spacing:2px; text-transform:uppercase;
+            color:var(--purple-bright); border:1px solid var(--purple-deep);
+            background:rgba(0,0,0,.5); padding:6px 16px; border-radius:999px;
+            position:relative; z-index:1;
+        }
+        .blog-body{
+            padding:24px; flex:1; display:flex; flex-direction:column;
+        }
+        .blog-tag{
+            font-size:0.78rem; color:var(--purple-bright); font-weight:700;
+            letter-spacing:1px; text-transform:uppercase; margin-bottom:10px;
+        }
+        .blog-body h3{
+            font-size:1.22rem; line-height:1.35; margin-bottom:12px;
+        }
+        .blog-body p{
+            color:var(--grey); font-size:0.95rem; flex:1; margin-bottom:20px;
+        }
+        .blog-meta{
+            font-size:0.84rem; color:var(--grey); border-top:1px solid var(--line);
+            padding-top:14px; display:flex; justify-content:space-between;
+        }
+
+        /* FOOTER */
+        footer{border-top:1px solid var(--line); padding:56px 0 28px; margin-top:40px;}
+        .footer-grid{display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:32px; margin-bottom:40px;}
+        .footer-grid h4{font-size:0.85rem; text-transform:uppercase; letter-spacing:1px; color:var(--grey); margin-bottom:16px;}
+        .footer-grid ul{list-style:none;}
+        .footer-grid ul li{margin-bottom:10px;}
+        .footer-grid ul li a{color:var(--grey); font-size:0.9rem; transition:color .2s;}
+        .footer-grid ul li a:hover{color:var(--purple-bright);}
+        .footer-brand p{color:var(--grey); font-size:0.9rem; max-width:320px; margin-top:14px;}
+        .footer-bottom{
+            border-top:1px solid var(--line); padding-top:24px;
+            display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+            font-size:0.82rem; color:var(--grey);
+        }
+        @media(max-width:880px){.footer-grid{grid-template-columns:1fr 1fr;}}
+        @media(max-width:560px){.footer-grid{grid-template-columns:1fr;}}
+    </style>
+</head>
+<body>
+<div class="stars"></div>
+
+<header>
+    <div class="wrap nav">
+        <a href="https://TopSpaceETFs.com" class="logo">
+            <span class="logo-mark"></span>
+            <span class="logo-text">Top<span>Space</span>ETFs.com</span>
+        </a>
+    </div>
+</header>
+
+<!-- BLOG HERO -->
+<section class="blog-hero wrap">
+    <h1>Space <span class="grad">ETF Insights</span></h1>
+    <p>Deep dives, analysis, and updates on the space economy, satellite technology, and the ETFs that track them.</p>
+</section>
+
+<!-- BLOG POSTS -->
+<section class="wrap">
+    <div class="blog-grid">
+
+        <!-- Post 1 -->
+        <article class="blog-card">
+            <div class="blog-thumb"><span>ETF Analysis</span></div>
+            <div class="blog-body">
+                <div class="blog-tag">ETF Analysis</div>
+                <h3>UFO vs ARKX vs ROKT: Which Space ETF is Best in 2026?</h3>
+                <p>Side-by-side comparison of holdings, expense ratios, AUM, performance, and risk profiles of the top space-themed ETFs.</p>
+                <div class="blog-meta"><span>June 12, 2026</span><span>8 min read</span></div>
+            </div>
+        </article>
+
+        <!-- Post 2 -->
+        <article class="blog-card">
+            <div class="blog-thumb"><span>IPO Watch</span></div>
+            <div class="blog-body">
+                <div class="blog-tag">IPO Watch</div>
+                <h3>Space Companies Going Public in 2026–2027: The Full Pipeline</h3>
+                <p>Tracking the next wave of space IPOs including launch providers, satellite operators, and lunar infrastructure companies.</p>
+                <div class="blog-meta"><span>June 10, 2026</span><span>12 min read</span></div>
+            </div>
+        </article>
+
+        <!-- Post 3 -->
+        <article class="blog-card">
+            <div class="blog-thumb"><span>Market Trends</span></div>
+            <div class="blog-body">
+                <div class="blog-tag">Market Trends</div>
+                <h3>Why Satellite Internet Stocks Are Outperforming Traditional Telecom</h3>
+                <p>Starlink, OneWeb, and Project Kuiper are reshaping global connectivity. How this impacts space ETFs.</p>
+                <div class="blog-meta"><span>June 8, 2026</span><span>6 min read</span></div>
+            </div>
+        </article>
+
+        <!-- Post 4 -->
+        <article class="blog-card">
+            <div class="blog-thumb"><span>Fund Spotlight</span></div>
+            <div class="blog-body">
+                <div class="blog-tag">Fund Spotlight</div>
+                <h3>Inside ARKX: Cathie Wood’s Space Exploration ETF Holdings Revealed</h3>
+                <p>A detailed breakdown of ARKX’s current portfolio and what it tells us about the future of space investing.</p>
+                <div class="blog-meta"><span>June 5, 2026</span><span>9 min read</span></div>
+            </div>
+        </article>
+
+        <!-- Post 5 -->
+        <article class="blog-card">
+            <div class="blog-thumb"><span>Defense & Space</span></div>
+            <div class="blog-body">
+                <div class="blog-tag">Defense & Space</div>
+                <h3>How Rising Geopolitical Tensions Are Fueling Aerospace & Defense ETFs</h3>
+                <p>National security budgets are expanding. Which space and defense ETFs are best positioned to benefit?</p>
+                <div class="blog-meta"><span>June 3, 2026</span><span>7 min read</span></div>
+            </div>
+        </article>
+
+        <!-- Post 6 -->
+        <article class="blog-card">
+            <div class="blog-thumb"><span>Beginner Guide</span></div>
+            <div class="blog-body">
+                <div class="blog-tag">Beginner Guide</div>
+                <h3>Space ETFs 101: Everything You Need to Know Before Investing</h3>
+                <p>A complete beginner’s guide to space-themed ETFs — what they hold, risks, costs, and how they fit in a portfolio.</p>
+                <div class="blog-meta"><span>June 1, 2026</span><span>10 min read</span></div>
+            </div>
+        </article>
+
+        <!-- Post 7 -->
+        <article class="blog-card">
+            <div class="blog-thumb"><span>Industry News</span></div>
+            <div class="blog-body">
+                <div class="blog-tag">Industry News</div>
+                <h3>NASA’s Artemis Program: Investment Opportunities in Lunar Economy</h3>
+                <p>Which public companies and ETFs stand to benefit from the return to the Moon and future lunar infrastructure.</p>
+                <div class="blog-meta"><span>May 28, 2026</span><span>11 min read</span></div>
+            </div>
+        </article>
+
+        <!-- Post 8 -->
+        <article class="blog-card">
+            <div class="blog-thumb"><span>Performance</span></div>
+            <div class="blog-body">
+                <div class="blog-tag">Performance</div>
+                <h3>2026 Mid-Year Review: How Space ETFs Have Performed So Far</h3>
+                <p>Year-to-date returns, volatility comparison, and top performers among space and aerospace funds.</p>
+                <div class="blog-meta"><span>May 25, 2026</span><span>5 min read</span></div>
+            </div>
+        </article>
+
+        <!-- Post 9 -->
+        <article class="blog-card">
+            <div class="blog-thumb"><span>Strategy</span></div>
+            <div class="blog-body">
+                <div class="blog-tag">Strategy</div>
+                <h3>Building a Diversified Space Portfolio: ETFs + Individual Stocks</h3>
+                <p>How to combine space ETFs with direct holdings in SpaceX suppliers, satellite operators, and launch companies.</p>
+                <div class="blog-meta"><span>May 22, 2026</span><span>8 min read</span></div>
+            </div>
+        </article>
+
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="wrap">
+        <div class="footer-grid">
+            
+            <!-- Brand -->
+            <div class="footer-brand">
+                <a href="https://TopSpaceETFs.com" class="logo">
+                    <span class="logo-mark"></span>
+                    <span class="logo-text">Top<span>Space</span>ETFs.com</span>
+                </a>
+                <p>Independent research and rankings for space, satellite, and aerospace-themed ETFs.<br>
+                   A sister site to <a href="https://topdividendetfs.com" target="_blank" rel="noopener">TopDividendETFs.com</a>.</p>
+            </div>
+
+            <!-- Site -->
+            <div>
+                <h4>Site</h4>
+                <ul>
+                    <li><a href="https://TopSpaceETFs.com/rankings">Rankings</a></li>
+                    <li><a href="https://TopSpaceETFs.com/why-space-etfs">Why Space ETFs</a></li>
+                    <li><a href="https://TopSpaceETFs.com/blog">Blog</a></li>
+                </ul>
+            </div>
+
+            <!-- Resources -->
+            <div>
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="https://topdividendetfs.com" target="_blank" rel="noopener">TopDividendETFs.com</a></li>
+                    <li><a href="mailto:Business@TopDividendETFs.com">Contact Us</a></li>
+                </ul>
+            </div>
+
+            <!-- Legal -->
+            <div>
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="https://TopSpaceETFs.com/legal.html">Disclosure</a></li>
+                    <li><a href="https://TopSpaceETFs.com/privacy-policy.html">Privacy Policy</a></li>
+                    <li><a href="https://TopSpaceETFs.com/terms-of-use.html">Terms of Use</a></li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <span>© 2026 TopSpaceETFs.com. All rights reserved.</span>
+            <span>Not investment advice. Data updated daily.</span>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
