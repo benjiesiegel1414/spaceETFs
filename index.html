@@ -20,9 +20,7 @@
   }
 
   *{margin:0;padding:0;box-sizing:border-box;}
-
   html{scroll-behavior:smooth;}
-
   body{
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     background: var(--bg);
@@ -31,11 +29,8 @@
     overflow-x:hidden;
   }
 
-  /* Starfield background */
   .stars{
-    position:fixed;
-    inset:0;
-    z-index:-2;
+    position:fixed; inset:0; z-index:-2;
     background:
       radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,.9), transparent),
       radial-gradient(1px 1px at 60% 70%, rgba(255,255,255,.7), transparent),
@@ -45,17 +40,14 @@
       radial-gradient(1.5px 1.5px at 90% 50%, rgba(255,255,255,.7), transparent),
       radial-gradient(1px 1px at 50% 15%, rgba(255,255,255,.6), transparent),
       radial-gradient(1px 1px at 75% 90%, rgba(255,255,255,.5), transparent);
-    background-size: 100% 100%;
-    background-repeat: repeat;
+    background-size:100% 100%; background-repeat:repeat;
   }
   .stars::after{
-    content:"";
-    position:absolute; inset:0;
+    content:""; position:absolute; inset:0;
     background: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(139,92,246,0.25), transparent 60%);
   }
 
   a{color:inherit; text-decoration:none;}
-
   .wrap{max-width:1180px; margin:0 auto; padding:0 24px;}
 
   /* HEADER */
@@ -67,16 +59,10 @@
   }
   .nav{
     display:flex; align-items:center; justify-content:space-between;
-    padding:18px 0;
-    position:relative;
-    overflow:hidden;
+    padding:18px 0; position:relative; overflow:hidden;
   }
-  .logo{
-    display:flex; align-items:center;
-    font-weight:800; font-size:1.3rem; letter-spacing:0.5px;
-  }
+  .logo{display:flex; align-items:center; font-weight:800; font-size:1.3rem; letter-spacing:0.5px;}
   .logo .logo-mark{margin-right:10px;}
-  .logo-text{display:inline-block;}
   .logo-mark{
     width:34px; height:34px; border-radius:50%;
     background: radial-gradient(circle at 35% 35%, var(--purple-bright), var(--purple-deep) 70%, #000 100%);
@@ -84,272 +70,219 @@
     position:relative; flex-shrink:0;
   }
   .logo-mark::after{
-    content:"";
-    position:absolute; top:-3px; left:-3px; right:-3px; bottom:-3px;
-    border:1px solid rgba(139,92,246,.4);
-    border-radius:50%;
-    transform: rotate(25deg);
-    border-top-color: transparent;
-    border-bottom-color: transparent;
+    content:""; position:absolute; top:-3px; left:-3px; right:-3px; bottom:-3px;
+    border:1px solid rgba(139,92,246,.4); border-radius:50%;
+    transform:rotate(25deg); border-top-color:transparent; border-bottom-color:transparent;
   }
-  .logo span{color: var(--purple-bright);}
-
-  nav ul{
-    display:flex; gap:32px; list-style:none;
-  }
-  nav ul li a{
-    font-size:0.95rem; font-weight:500; color: var(--grey);
-    transition: color .2s;
-  }
+  .logo span{color:var(--purple-bright);}
+  nav ul{display:flex; gap:32px; list-style:none;}
+  nav ul li a{font-size:0.95rem; font-weight:500; color:var(--grey); transition:color .2s;}
   nav ul li a:hover, nav ul li a.active{color:var(--white);}
-
-  .nav-cta{
-    display:flex; align-items:center; gap:10px; flex-wrap:wrap; justify-content:flex-end;
-  }
+  .nav-cta{display:flex; align-items:center; gap:10px; flex-wrap:wrap; justify-content:flex-end;}
   .nav-cta .btn{padding:8px 14px; font-size:0.82rem;}
   .btn{
-    display:inline-block;
-    padding:10px 22px;
-    border-radius:8px;
-    font-weight:600;
-    font-size:0.9rem;
-    transition: all .2s;
-    border:1px solid transparent;
+    display:inline-block; padding:10px 22px; border-radius:8px;
+    font-weight:600; font-size:0.9rem; transition:all .2s; border:1px solid transparent;
   }
   .btn-primary{
     background: linear-gradient(135deg, var(--purple) 0%, var(--purple-deep) 100%);
-    color:#fff;
-    box-shadow: 0 4px 20px rgba(139,92,246,.35);
+    color:#fff; box-shadow: 0 4px 20px rgba(139,92,246,.35);
   }
-  .btn-primary:hover{transform: translateY(-2px); box-shadow: 0 6px 24px rgba(139,92,246,.5);}
-  .btn-ghost{
-    border-color: var(--line); color: var(--grey);
-  }
-  .btn-ghost:hover{border-color: var(--purple); color: var(--white);}
+  .btn-primary:hover{transform:translateY(-2px); box-shadow: 0 6px 24px rgba(139,92,246,.5);}
+  .btn-ghost{border-color:var(--line); color:var(--grey);}
+  .btn-ghost:hover{border-color:var(--purple); color:var(--white);}
 
   .shooting-star{
-    position:absolute;
-    top:50%; left:0;
-    width:3px; height:3px;
-    border-radius:50%;
+    position:absolute; top:50%; left:0;
+    width:3px; height:3px; border-radius:50%;
     background:#fff;
     box-shadow: 0 0 6px 1px rgba(255,255,255,.9), 0 0 14px 3px rgba(139,92,246,.7);
-    opacity:0;
-    pointer-events:none;
+    opacity:0; pointer-events:none;
   }
   .shooting-star::before{
-    content:"";
-    position:absolute;
-    top:50%; right:100%;
-    width:90px; height:1px;
-    transform: translateY(-50%);
+    content:""; position:absolute; top:50%; right:100%;
+    width:90px; height:1px; transform:translateY(-50%);
     background: linear-gradient(to left, rgba(255,255,255,.9), rgba(139,92,246,.5), transparent);
   }
   @keyframes shoot-star{
-    0%{ opacity:0; transform: translate(0,-50%) scale(0.6); }
-    5%{ opacity:1; transform: translate(0,-50%) scale(1); }
-    85%{ opacity:1; }
-    100%{ opacity:0; transform: translate(var(--shoot-dist, 600px), -50%) scale(0.6); }
+    0%{opacity:0; transform:translate(0,-50%) scale(0.6);}
+    5%{opacity:1; transform:translate(0,-50%) scale(1);}
+    85%{opacity:1;}
+    100%{opacity:0; transform:translate(var(--shoot-dist,600px),-50%) scale(0.6);}
   }
-  .shooting-star{
-    animation: shoot-star 5s linear infinite;
-  }
+  .shooting-star{animation:shoot-star 5s linear infinite;}
 
   /* HERO */
-  .hero{
-    padding: 80px 0 30px;
-    text-align:center;
-    position:relative;
-  }
+  .hero{padding:80px 0 30px; text-align:center; position:relative;}
   .eyebrow{
     display:inline-flex; align-items:center; gap:8px;
     font-size:0.78rem; letter-spacing:2px; text-transform:uppercase;
-    color: var(--purple-bright);
-    border:1px solid var(--purple-deep);
-    background: rgba(139,92,246,.08);
-    padding:6px 16px; border-radius:999px;
-    margin-bottom:28px;
+    color:var(--purple-bright); border:1px solid var(--purple-deep);
+    background:rgba(139,92,246,.08); padding:6px 16px; border-radius:999px; margin-bottom:28px;
   }
-  .eyebrow .dot{width:6px; height:6px; border-radius:50%; background: var(--green); box-shadow:0 0 8px var(--green);}
-
+  .eyebrow .dot{width:6px; height:6px; border-radius:50%; background:var(--green); box-shadow:0 0 8px var(--green);}
   .hero h1{
-    font-size: clamp(2.4rem, 6vw, 4.2rem);
-    font-weight:800;
-    letter-spacing:-1.5px;
-    line-height:1.1;
-    margin-bottom:24px;
+    font-size:clamp(2.4rem, 6vw, 4.2rem); font-weight:800;
+    letter-spacing:-1.5px; line-height:1.1; margin-bottom:24px;
   }
   .hero h1 .grad{
-    background: linear-gradient(135deg, var(--purple-bright), var(--purple) 60%, #fff);
-    -webkit-background-clip:text;
-    background-clip:text;
-    color:transparent;
+    background:linear-gradient(135deg, var(--purple-bright), var(--purple) 60%, #fff);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
   }
-  .hero p.sub{
-    max-width:640px; margin:0 auto 36px;
-    color: var(--grey);
-    font-size:1.1rem;
-  }
+  .hero p.sub{max-width:640px; margin:0 auto 36px; color:var(--grey); font-size:1.1rem;}
   .hero-ctas{display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-bottom:56px;}
 
-  .hero-stats{
-    display:flex; justify-content:center; gap:48px; flex-wrap:wrap;
-    border-top:1px solid var(--line);
-    padding-top:36px;
-    max-width:760px; margin:0 auto;
-  }
-  .hero-stats .stat{text-align:center;}
-  .hero-stats .stat .num{
-    font-size:1.8rem; font-weight:800; color:var(--white);
-    font-family: 'JetBrains Mono', monospace;
-  }
-  .hero-stats .stat .num span{color:var(--purple-bright);}
-  .hero-stats .stat .label{
-    font-size:0.8rem; color:var(--grey); text-transform:uppercase; letter-spacing:1px; margin-top:4px;
-  }
-
   /* SECTION HEADINGS */
-  .section{padding: 80px 0;}
+  .section{padding:80px 0;}
   .section-head{
     display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:16px;
     margin-bottom:40px;
   }
-  .section-head h2{
-    font-size: clamp(1.8rem, 4vw, 2.6rem);
-    font-weight:800; letter-spacing:-1px;
-  }
+  .section-head h2{font-size:clamp(1.8rem, 4vw, 2.6rem); font-weight:800; letter-spacing:-1px;}
   .section-head h2 span{color:var(--purple-bright);}
   .section-head p{color:var(--grey); max-width:480px;}
   .updated-badge{
-    font-size:0.8rem; color: var(--grey);
-    border:1px solid var(--line); border-radius:999px; padding:6px 14px;
-    white-space:nowrap;
+    font-size:0.8rem; color:var(--grey);
+    border:1px solid var(--line); border-radius:999px; padding:6px 14px; white-space:nowrap;
   }
   .updated-badge b{color:var(--purple-bright);}
 
   /* TABLE */
   .table-card{
-    background: var(--bg-panel);
-    border:1px solid var(--line);
-    border-radius:16px;
-    overflow:hidden;
+    background:var(--bg-panel); border:1px solid var(--line);
+    border-radius:16px; overflow:hidden;
   }
   .table-scroll{overflow-x:auto;}
-  table{width:100%; border-collapse:collapse; min-width:780px;}
+  table{width:100%; border-collapse:collapse; min-width:820px;}
+
   thead th{
     text-align:left;
     font-size:0.75rem; text-transform:uppercase; letter-spacing:1px;
-    color:var(--grey);
-    padding:16px 20px;
+    color:var(--grey); padding:16px 20px;
     border-bottom:1px solid var(--line);
-    background: var(--bg-panel-2);
+    background:var(--bg-panel-2);
     white-space:nowrap;
+    user-select:none;
   }
+  thead th.sortable{
+    cursor:pointer;
+    transition:color .15s;
+  }
+  thead th.sortable:hover{color:var(--purple-bright);}
+  thead th.sort-asc,
+  thead th.sort-desc{color:var(--purple-bright);}
+  .sort-icon{
+    display:inline-block; margin-left:5px; opacity:0.4; font-size:0.7rem;
+    transition:opacity .15s;
+  }
+  thead th.sort-asc .sort-icon,
+  thead th.sort-desc .sort-icon{opacity:1;}
+  thead th.sort-asc .sort-icon::after{content:"▲";}
+  thead th.sort-desc .sort-icon::after{content:"▼";}
+  thead th:not(.sort-asc):not(.sort-desc) .sort-icon::after{content:"⇅";}
+
   thead th.num, tbody td.num{text-align:right;}
   tbody td{
-    padding:18px 20px;
-    border-bottom:1px solid var(--line);
-    font-size:0.95rem;
-    vertical-align:middle;
+    padding:18px 20px; border-bottom:1px solid var(--line);
+    font-size:0.95rem; vertical-align:middle;
   }
   tbody tr:last-child td{border-bottom:none;}
-  tbody tr{transition: background .15s;}
-  tbody tr:hover{background: rgba(139,92,246,.06);}
+  tbody tr{transition:background .15s;}
+  tbody tr:hover{background:rgba(139,92,246,.06);}
 
   .rank{
     display:inline-flex; align-items:center; justify-content:center;
     width:28px; height:28px; border-radius:8px;
-    background: var(--bg-panel-2);
-    border:1px solid var(--line);
-    font-weight:700; font-size:0.85rem; color: var(--purple-bright);
+    background:var(--bg-panel-2); border:1px solid var(--line);
+    font-weight:700; font-size:0.85rem; color:var(--purple-bright);
   }
   .ticker-cell{display:flex; align-items:center; gap:12px;}
   .ticker-icon{
     width:38px; height:38px; border-radius:10px; flex-shrink:0;
     display:flex; align-items:center; justify-content:center;
-    background: linear-gradient(135deg, var(--purple-deep), #1e1b3a);
+    background:linear-gradient(135deg, var(--purple-deep), #1e1b3a);
     border:1px solid var(--line);
-    font-weight:800; font-size:0.8rem; color: var(--purple-bright);
+    font-weight:800; font-size:0.75rem; color:var(--purple-bright);
+    letter-spacing:-0.5px;
   }
   .ticker-name b{display:block; font-weight:700; font-size:0.98rem;}
   .ticker-name small{color:var(--grey); font-size:0.8rem;}
-  .pos{color:var(--green); font-weight:600;}
-  .neg{color:var(--red); font-weight:600;}
-  .mono{font-family:'JetBrains Mono', monospace;}
+  .mono{font-family:'JetBrains Mono', 'Courier New', monospace;}
   .holding-tag{
     display:inline-block; font-size:0.75rem; color:var(--grey);
-    background: var(--bg-panel-2); border:1px solid var(--line);
+    background:var(--bg-panel-2); border:1px solid var(--line);
     padding:3px 10px; border-radius:999px;
   }
-  .view-link{color:var(--purple-bright); font-weight:600; font-size:0.85rem; white-space:nowrap;}
-  .view-link:hover{text-decoration:underline;}
 
-  /* small screens: convert table to cards */
-  @media (max-width: 760px){
+  /* Loading / error states */
+  .table-status{
+    padding:60px 20px; text-align:center; color:var(--grey);
+  }
+  .table-status .spinner{
+    width:32px; height:32px; border-radius:50%;
+    border:2px solid var(--line);
+    border-top-color:var(--purple);
+    animation:spin .8s linear infinite;
+    margin:0 auto 16px;
+  }
+  @keyframes spin{to{transform:rotate(360deg);}}
+  .table-status .status-msg{font-size:0.95rem;}
+  .table-status .status-sub{font-size:0.82rem; margin-top:6px; opacity:.6;}
+
+  /* small screens */
+  @media (max-width:760px){
     .table-scroll{overflow-x:visible;}
     table, thead, tbody, th, td, tr{display:block;}
     thead{display:none;}
     tbody tr{
-      padding:18px 18px; border-bottom:1px solid var(--line);
-      display:grid; grid-template-columns: 1fr 1fr; gap:8px 16px;
+      padding:18px; border-bottom:1px solid var(--line);
+      display:grid; grid-template-columns:1fr 1fr; gap:8px 16px;
     }
     tbody td{padding:0; border:none; font-size:0.9rem;}
-    tbody td.ticker-cell{grid-column: 1 / -1;}
+    tbody td.ticker-cell{grid-column:1/-1;}
     tbody td.num{text-align:left;}
     tbody td::before{
-      content: attr(data-label);
-      display:block; font-size:0.7rem; text-transform:uppercase; letter-spacing:1px; color:var(--grey); margin-bottom:2px;
+      content:attr(data-label);
+      display:block; font-size:0.7rem; text-transform:uppercase;
+      letter-spacing:1px; color:var(--grey); margin-bottom:2px;
     }
     tbody td.ticker-cell::before{display:none;}
   }
 
   /* WHY / FEATURES */
-  .features-grid{
-    display:grid; grid-template-columns: repeat(3, 1fr); gap:24px;
-  }
+  .features-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
   .feature-card{
-    background: var(--bg-panel);
-    border:1px solid var(--line);
-    border-radius:16px;
-    padding:28px;
-    transition: border-color .2s, transform .2s;
+    background:var(--bg-panel); border:1px solid var(--line);
+    border-radius:16px; padding:28px;
+    transition:border-color .2s, transform .2s;
   }
-  .feature-card:hover{border-color:var(--purple-deep); transform: translateY(-4px);}
+  .feature-card:hover{border-color:var(--purple-deep); transform:translateY(-4px);}
   .feature-icon{
     width:46px; height:46px; border-radius:12px;
-    background: rgba(139,92,246,.12);
-    border:1px solid var(--purple-deep);
+    background:rgba(139,92,246,.12); border:1px solid var(--purple-deep);
     display:flex; align-items:center; justify-content:center;
     margin-bottom:18px; font-size:1.3rem;
   }
   .feature-card h3{font-size:1.1rem; margin-bottom:10px; font-weight:700;}
   .feature-card p{color:var(--grey); font-size:0.92rem;}
-
-  @media (max-width:880px){.features-grid{grid-template-columns:1fr 1fr;}}
-  @media (max-width:560px){.features-grid{grid-template-columns:1fr;}}
+  @media(max-width:880px){.features-grid{grid-template-columns:1fr 1fr;}}
+  @media(max-width:560px){.features-grid{grid-template-columns:1fr;}}
 
   /* BLOG */
-  .blog-grid{
-    display:grid; grid-template-columns: repeat(3, 1fr); gap:24px;
-  }
+  .blog-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
   .blog-card{
-    background: var(--bg-panel);
-    border:1px solid var(--line);
-    border-radius:16px;
-    overflow:hidden;
-    display:flex; flex-direction:column;
-    transition: transform .2s, border-color .2s;
+    background:var(--bg-panel); border:1px solid var(--line);
+    border-radius:16px; overflow:hidden; display:flex; flex-direction:column;
+    transition:transform .2s, border-color .2s;
   }
-  .blog-card:hover{transform: translateY(-4px); border-color:var(--purple-deep);}
+  .blog-card:hover{transform:translateY(-4px); border-color:var(--purple-deep);}
   .blog-thumb{
     height:160px;
-    background: linear-gradient(135deg, var(--purple-deep) 0%, #1c1733 60%, #000 100%);
-    position:relative;
-    display:flex; align-items:center; justify-content:center;
+    background:linear-gradient(135deg, var(--purple-deep) 0%, #1c1733 60%, #000 100%);
+    position:relative; display:flex; align-items:center; justify-content:center;
   }
   .blog-thumb::before{
-    content:"";
-    position:absolute; inset:0;
+    content:""; position:absolute; inset:0;
     background:
       radial-gradient(2px 2px at 25% 30%, #fff, transparent),
       radial-gradient(1.5px 1.5px at 70% 60%, #fff, transparent),
@@ -359,10 +292,8 @@
   }
   .blog-thumb span{
     font-size:0.75rem; letter-spacing:2px; text-transform:uppercase;
-    color: var(--purple-bright);
-    border:1px solid var(--purple-deep);
-    background: rgba(0,0,0,.4);
-    padding:6px 14px; border-radius:999px;
+    color:var(--purple-bright); border:1px solid var(--purple-deep);
+    background:rgba(0,0,0,.4); padding:6px 14px; border-radius:999px;
     position:relative; z-index:1;
   }
   .blog-body{padding:22px; flex:1; display:flex; flex-direction:column;}
@@ -373,55 +304,21 @@
   .coming-soon-badge{
     position:absolute; top:12px; right:12px;
     font-size:0.7rem; font-weight:700; letter-spacing:1px;
-    background: var(--purple); color:#fff;
-    padding:4px 10px; border-radius:6px; z-index:2;
+    background:var(--purple); color:#fff; padding:4px 10px; border-radius:6px; z-index:2;
   }
-
-  @media (max-width:880px){.blog-grid{grid-template-columns:1fr 1fr;}}
-  @media (max-width:560px){.blog-grid{grid-template-columns:1fr;}}
-
-  /* NEWSLETTER */
-  .newsletter{
-    background: linear-gradient(135deg, var(--purple-deep) 0%, #1a1530 60%, #07060d 100%);
-    border:1px solid var(--line);
-    border-radius:24px;
-    padding:56px 40px;
-    text-align:center;
-    position:relative; overflow:hidden;
-  }
-  .newsletter::before{
-    content:"";
-    position:absolute; width:300px; height:300px; border-radius:50%;
-    background: radial-gradient(circle, rgba(139,92,246,.35), transparent 70%);
-    top:-100px; right:-80px;
-  }
-  .newsletter h2{font-size:clamp(1.6rem,4vw,2.2rem); font-weight:800; margin-bottom:12px;}
-  .newsletter p{color:var(--grey); margin-bottom:28px; max-width:480px; margin-inline:auto;}
-  .newsletter-form{
-    display:flex; gap:12px; justify-content:center; max-width:440px; margin:0 auto; flex-wrap:wrap;
-  }
-  .newsletter-form input{
-    flex:1; min-width:200px;
-    padding:13px 18px; border-radius:8px;
-    border:1px solid var(--line);
-    background: rgba(255,255,255,.04);
-    color:var(--white); font-size:0.95rem;
-  }
-  .newsletter-form input::placeholder{color:var(--grey);}
-  .newsletter-form input:focus{outline:2px solid var(--purple); border-color:transparent;}
+  @media(max-width:880px){.blog-grid{grid-template-columns:1fr 1fr;}}
+  @media(max-width:560px){.blog-grid{grid-template-columns:1fr;}}
 
   /* DISCLAIMER */
   .disclaimer{
     font-size:0.8rem; color:var(--grey);
     border:1px solid var(--line); border-radius:12px;
-    padding:20px 24px; background: var(--bg-panel);
+    padding:20px 24px; background:var(--bg-panel);
   }
 
   /* FOOTER */
   footer{border-top:1px solid var(--line); padding:56px 0 28px; margin-top:40px;}
-  .footer-grid{
-    display:grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap:32px; margin-bottom:40px;
-  }
+  .footer-grid{display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:32px; margin-bottom:40px;}
   .footer-grid h4{font-size:0.85rem; text-transform:uppercase; letter-spacing:1px; color:var(--grey); margin-bottom:16px;}
   .footer-grid ul{list-style:none;}
   .footer-grid ul li{margin-bottom:10px;}
@@ -433,24 +330,8 @@
     display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
     font-size:0.82rem; color:var(--grey);
   }
-  @media (max-width:880px){.footer-grid{grid-template-columns:1fr 1fr;}}
-  @media (max-width:560px){.footer-grid{grid-template-columns:1fr;}}
-
-  /* RESPONSIVE NAV */
-  @media (max-width:880px){
-    nav ul{
-      position:fixed; top:70px; left:0; right:0;
-      flex-direction:column; align-items:center; gap:0;
-      background: var(--bg-panel);
-      border-bottom:1px solid var(--line);
-      max-height:0; overflow:hidden; transition: max-height .3s;
-    }
-    nav ul.open{max-height:300px;}
-    nav ul li{width:100%; text-align:center;}
-    nav ul li a{display:block; padding:16px 0;}
-    .nav-cta .btn-ghost{display:none;}
-    .mobile-toggle{display:block;}
-  }
+  @media(max-width:880px){.footer-grid{grid-template-columns:1fr 1fr;}}
+  @media(max-width:560px){.footer-grid{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
@@ -471,14 +352,13 @@
 
 <!-- HERO -->
 <section class="hero wrap">
-  <div class="eyebrow"><span class="dot"></span> Updated Weekly · Data via Google Sheets</div>
+  <div class="eyebrow"><span class="dot"></span> Live Data updated daily!</div>
   <h1>The Best <span class="grad">Space & Aerospace ETFs</span><br>Ranked, Tracked, Explained.</h1>
   <p class="sub">From satellite mega-constellations to lunar logistics — we track every fund riding the new space economy, so you can find the right exposure in seconds.</p>
   <div class="hero-ctas" style="margin-bottom:0;">
     <a href="#rankings" class="btn btn-primary">View Top ETFs</a>
     <a href="#why" class="btn btn-ghost">Why Space ETFs?</a>
   </div>
-
 </section>
 
 <!-- RANKINGS TABLE -->
@@ -486,160 +366,39 @@
   <div class="section-head">
     <div>
       <h2>Top Space ETFs <span>Ranked</span></h2>
-      <p>Ranked by 1-year performance. Click any ticker for a full breakdown of holdings, fees, and dividend history.</p>
+      <p>Click any column header to sort. Data pulled live from our Google Sheets database.</p>
     </div>
-    <div class="updated-badge">Sample data — last updated <b>June 11, 2026</b></div>
+    <div class="updated-badge">Live data · Last fetched <b id="fetchTime">—</b></div>
   </div>
 
   <div class="table-card">
     <div class="table-scroll">
-      <table>
+      <table id="etfTable">
         <thead>
           <tr>
-            <th>Rank</th>
-            <th>ETF</th>
-            <th class="num">Price</th>
-            <th class="num">1Y Return</th>
-            <th class="num">Expense Ratio</th>
-            <th class="num">AUM</th>
-            <th class="num">Dividend Yield</th>
-            <th>Top Holding</th>
-            <th></th>
+            <th data-col="rank" class="sortable">#<span class="sort-icon"></span></th>
+            <th data-col="symbol" class="sortable">ETF<span class="sort-icon"></span></th>
+            <th data-col="dividendYield" class="sortable num">Dividend Yield<span class="sort-icon"></span></th>
+            <th data-col="aum" class="sortable num">AUM<span class="sort-icon"></span></th>
+            <th data-col="provider" class="sortable">Fund Provider<span class="sort-icon"></span></th>
+            <th data-col="inceptionDate" class="sortable">Inception Date<span class="sort-icon"></span></th>
           </tr>
         </thead>
-        <tbody>
+        <tbody id="etfTableBody">
           <tr>
-            <td data-label="Rank"><span class="rank">1</span></td>
-            <td data-label="ETF" class="ticker-cell">
-              <div class="ticker-icon">UFO</div>
-              <div class="ticker-name"><b>Procure Space ETF</b><small>UFO · NYSE Arca</small></div>
+            <td colspan="6">
+              <div class="table-status">
+                <div class="spinner"></div>
+                <div class="status-msg">Loading live ETF data…</div>
+                <div class="status-sub">Fetching from Google Sheets</div>
+              </div>
             </td>
-            <td data-label="Price" class="num mono">$24.18</td>
-            <td data-label="1Y Return" class="num pos">+27.4%</td>
-            <td data-label="Expense Ratio" class="num mono">0.75%</td>
-            <td data-label="AUM" class="num mono">$142M</td>
-            <td data-label="Dividend Yield" class="num mono">0.41%</td>
-            <td data-label="Top Holding"><span class="holding-tag">Iridium Comm.</span></td>
-            <td><a href="#" class="view-link">View →</a></td>
-          </tr>
-          <tr>
-            <td data-label="Rank"><span class="rank">2</span></td>
-            <td data-label="ETF" class="ticker-cell">
-              <div class="ticker-icon">ARKX</div>
-              <div class="ticker-name"><b>ARK Space Exploration & Innovation ETF</b><small>ARKX · NYSE Arca</small></div>
-            </td>
-            <td data-label="Price" class="num mono">$15.92</td>
-            <td data-label="1Y Return" class="num pos">+24.1%</td>
-            <td data-label="Expense Ratio" class="num mono">0.70%</td>
-            <td data-label="AUM" class="num mono">$268M</td>
-            <td data-label="Dividend Yield" class="num mono">0.18%</td>
-            <td data-label="Top Holding"><span class="holding-tag">Kratos Defense</span></td>
-            <td><a href="#" class="view-link">View →</a></td>
-          </tr>
-          <tr>
-            <td data-label="Rank"><span class="rank">3</span></td>
-            <td data-label="ETF" class="ticker-cell">
-              <div class="ticker-icon">ROKT</div>
-              <div class="ticker-name"><b>SPDR S&P Kensho Final Frontiers ETF</b><small>ROKT · NYSE Arca</small></div>
-            </td>
-            <td data-label="Price" class="num mono">$48.61</td>
-            <td data-label="1Y Return" class="num pos">+19.7%</td>
-            <td data-label="Expense Ratio" class="num mono">0.45%</td>
-            <td data-label="AUM" class="num mono">$96M</td>
-            <td data-label="Dividend Yield" class="num mono">0.62%</td>
-            <td data-label="Top Holding"><span class="holding-tag">Rocket Lab</span></td>
-            <td><a href="#" class="view-link">View →</a></td>
-          </tr>
-          <tr>
-            <td data-label="Rank"><span class="rank">4</span></td>
-            <td data-label="ETF" class="ticker-cell">
-              <div class="ticker-icon">YODA</div>
-              <div class="ticker-name"><b>Defiance Quantum & Aerospace ETF</b><small>YODA · NASDAQ</small></div>
-            </td>
-            <td data-label="Price" class="num mono">$33.04</td>
-            <td data-label="1Y Return" class="num pos">+16.2%</td>
-            <td data-label="Expense Ratio" class="num mono">0.65%</td>
-            <td data-label="AUM" class="num mono">$57M</td>
-            <td data-label="Dividend Yield" class="num mono">0.00%</td>
-            <td data-label="Top Holding"><span class="holding-tag">Lockheed Martin</span></td>
-            <td><a href="#" class="view-link">View →</a></td>
-          </tr>
-          <tr>
-            <td data-label="Rank"><span class="rank">5</span></td>
-            <td data-label="ETF" class="ticker-cell">
-              <div class="ticker-icon">ITA</div>
-              <div class="ticker-name"><b>iShares U.S. Aerospace & Defense ETF</b><small>ITA · NYSE Arca</small></div>
-            </td>
-            <td data-label="Price" class="num mono">$165.30</td>
-            <td data-label="1Y Return" class="num pos">+14.8%</td>
-            <td data-label="Expense Ratio" class="num mono">0.40%</td>
-            <td data-label="AUM" class="num mono">$5.1B</td>
-            <td data-label="Dividend Yield" class="num mono">0.74%</td>
-            <td data-label="Top Holding"><span class="holding-tag">Boeing</span></td>
-            <td><a href="#" class="view-link">View →</a></td>
-          </tr>
-          <tr>
-            <td data-label="Rank"><span class="rank">6</span></td>
-            <td data-label="ETF" class="ticker-cell">
-              <div class="ticker-icon">PPA</div>
-              <div class="ticker-name"><b>Invesco Aerospace & Defense ETF</b><small>PPA · NASDAQ</small></div>
-            </td>
-            <td data-label="Price" class="num mono">$112.77</td>
-            <td data-label="1Y Return" class="num pos">+13.5%</td>
-            <td data-label="Expense Ratio" class="num mono">0.58%</td>
-            <td data-label="AUM" class="num mono">$3.4B</td>
-            <td data-label="Dividend Yield" class="num mono">0.55%</td>
-            <td data-label="Top Holding"><span class="holding-tag">GE Aerospace</span></td>
-            <td><a href="#" class="view-link">View →</a></td>
-          </tr>
-          <tr>
-            <td data-label="Rank"><span class="rank">7</span></td>
-            <td data-label="ETF" class="ticker-cell">
-              <div class="ticker-icon">XAR</div>
-              <div class="ticker-name"><b>SPDR S&P Aerospace & Defense ETF</b><small>XAR · NYSE Arca</small></div>
-            </td>
-            <td data-label="Price" class="num mono">$178.42</td>
-            <td data-label="1Y Return" class="num pos">+12.1%</td>
-            <td data-label="Expense Ratio" class="num mono">0.35%</td>
-            <td data-label="AUM" class="num mono">$1.8B</td>
-            <td data-label="Dividend Yield" class="num mono">0.49%</td>
-            <td data-label="Top Holding"><span class="holding-tag">Rocket Lab</span></td>
-            <td><a href="#" class="view-link">View →</a></td>
-          </tr>
-          <tr>
-            <td data-label="Rank"><span class="rank">8</span></td>
-            <td data-label="ETF" class="ticker-cell">
-              <div class="ticker-icon">DFNS</div>
-              <div class="ticker-name"><b>Global X Defense Tech ETF</b><small>DFNS · NASDAQ</small></div>
-            </td>
-            <td data-label="Price" class="num mono">$41.55</td>
-            <td data-label="1Y Return" class="num pos">+11.6%</td>
-            <td data-label="Expense Ratio" class="num mono">0.50%</td>
-            <td data-label="AUM" class="num mono">$610M</td>
-            <td data-label="Dividend Yield" class="num mono">0.22%</td>
-            <td data-label="Top Holding"><span class="holding-tag">Palantir</span></td>
-            <td><a href="#" class="view-link">View →</a></td>
-          </tr>
-          <tr>
-            <td data-label="Rank"><span class="rank">9</span></td>
-            <td data-label="ETF" class="ticker-cell">
-              <div class="ticker-icon">SATO</div>
-              <div class="ticker-name"><b>Astrum Global Satellite & Comm ETF</b><small>SATO · NASDAQ</small></div>
-            </td>
-            <td data-label="Price" class="num mono">$19.86</td>
-            <td data-label="1Y Return" class="num neg">-3.2%</td>
-            <td data-label="Expense Ratio" class="num mono">0.69%</td>
-            <td data-label="AUM" class="num mono">$22M</td>
-            <td data-label="Dividend Yield" class="num mono">1.05%</td>
-            <td data-label="Top Holding"><span class="holding-tag">Viasat</span></td>
-            <td><a href="#" class="view-link">View →</a></td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
-
-  <p style="margin-top:14px; font-size:0.8rem; color:var(--grey);">*All figures shown are sample/placeholder data for layout purposes and will be replaced by live data from Google Sheets.</p>
+  <p style="margin-top:14px; font-size:0.8rem; color:var(--grey);">*Data sourced directly from our Google Sheets database and updated weekly. Always verify figures before making investment decisions.</p>
 </section>
 
 <!-- WHY SPACE ETFS -->
@@ -724,12 +483,10 @@
   </div>
 </section>
 
-
-
 <!-- DISCLAIMER -->
 <section class="wrap" style="margin-bottom:60px;">
   <div class="disclaimer">
-    <strong>Disclosure:</strong> TopSpaceETFs.com is for informational and educational purposes only and does not constitute investment, financial, or legal advice. ETF data shown on this page is placeholder/sample content for design purposes and does not reflect real market data. Always do your own research and consult a licensed financial advisor before making investment decisions. Past performance does not guarantee future results.
+    <strong>Disclosure:</strong> TopSpaceETFs.com is for informational and educational purposes only and does not constitute investment, financial, or legal advice. ETF data is sourced from our regularly updated Google Sheets database. Always do your own research and consult a licensed financial advisor before making investment decisions. Past performance does not guarantee future results.
   </div>
 </section>
 
@@ -773,15 +530,189 @@
     </div>
   </div>
 </footer>
-<script>
-  function setShootDistance(){
-    const star = document.getElementById('shootingStar');
-    const nav = document.querySelector('header .nav');
-    if(star && nav) star.style.setProperty('--shoot-dist', (nav.offsetWidth - 20) + 'px');
-  }
-  setShootDistance();
-  window.addEventListener('resize', setShootDistance);
-</script>
 
+<script>
+// ─── CONFIG ────────────────────────────────────────────────────────────────
+const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSrmLZYgKhMuwExsTbxDBBrN0aTAj0KIlFH5kPeZblp_7FXO7AGfgwilgbt3qCKF9XIir_QTNeYRpqy/pub?gid=0&single=true&output=csv';
+
+// ─── STATE ─────────────────────────────────────────────────────────────────
+let etfData = [];
+let sortCol = null;
+let sortDir = 'asc'; // 'asc' | 'desc'
+
+// ─── HELPERS ───────────────────────────────────────────────────────────────
+
+// Parse CSV text respecting quoted fields
+function parseCSV(text) {
+  const lines = text.trim().split('\n');
+  const headers = splitCSVLine(lines[0]);
+  return lines.slice(1).map(line => {
+    const vals = splitCSVLine(line);
+    const obj = {};
+    headers.forEach((h, i) => { obj[h.trim()] = (vals[i] || '').trim(); });
+    return obj;
+  }).filter(row => Object.values(row).some(v => v !== ''));
+}
+
+function splitCSVLine(line) {
+  const result = [];
+  let cur = '', inQuote = false;
+  for (let i = 0; i < line.length; i++) {
+    const ch = line[i];
+    if (ch === '"') { inQuote = !inQuote; continue; }
+    if (ch === ',' && !inQuote) { result.push(cur); cur = ''; continue; }
+    cur += ch;
+  }
+  result.push(cur);
+  return result;
+}
+
+// Strip % and $ and B/M suffixes, return numeric value for sorting
+function toSortVal(col, raw) {
+  if (!raw || raw === '—' || raw === '') return -Infinity;
+
+  if (col === 'aum') {
+    // e.g. "$1.2B", "$242M", "$5B+"
+    const clean = raw.replace(/[$,+\s]/g, '').toUpperCase();
+    const num = parseFloat(clean);
+    if (clean.endsWith('B')) return num * 1e9;
+    if (clean.endsWith('M')) return num * 1e6;
+    if (clean.endsWith('K')) return num * 1e3;
+    return num || -Infinity;
+  }
+  if (col === 'dividendYield' || col === 'expenseRatio') {
+    return parseFloat(raw.replace(/[%~\s]/g, '')) || -Infinity;
+  }
+  if (col === 'inceptionDate') {
+    // Try to parse date; handle MM/DD/YYYY or just YYYY
+    const d = new Date(raw);
+    return isNaN(d.getTime()) ? -Infinity : d.getTime();
+  }
+  if (col === 'rank') return parseInt(raw) || 0;
+  return raw.toLowerCase();
+}
+
+// ─── RENDER ────────────────────────────────────────────────────────────────
+function renderTable(data) {
+  const tbody = document.getElementById('etfTableBody');
+  if (!data.length) {
+    tbody.innerHTML = `<tr><td colspan="6"><div class="table-status">
+      <div class="status-msg">No ETF data found.</div>
+      <div class="status-sub">Check that your Google Sheet has data and is published correctly.</div>
+    </div></td></tr>`;
+    return;
+  }
+
+  tbody.innerHTML = data.map((row, i) => {
+    const symbol  = row['Symbol']         || '?';
+    const name    = row['Name']           || '';
+    const divYld  = row['Dividend Yield'] || '—';
+    const aum     = row['AUM']            || '—';
+    const prov    = row['Fund Provider']  || '—';
+    const incept  = row['Inception Date'] || '—';
+
+    return `
+    <tr>
+      <td data-label="Rank"><span class="rank">${i + 1}</span></td>
+      <td data-label="ETF" class="ticker-cell">
+        <div class="ticker-icon">${symbol}</div>
+        <div class="ticker-name"><b>${name || symbol}</b><small>${symbol}</small></div>
+      </td>
+      <td data-label="Dividend Yield" class="num mono">${divYld}</td>
+      <td data-label="AUM" class="num mono">${aum}</td>
+      <td data-label="Fund Provider">${prov}</td>
+      <td data-label="Inception Date">${incept}</td>
+    </tr>`;
+  }).join('');
+}
+
+function updateSortHeaders(activeCol) {
+  document.querySelectorAll('#etfTable thead th.sortable').forEach(th => {
+    th.classList.remove('sort-asc', 'sort-desc');
+    if (th.dataset.col === activeCol) {
+      th.classList.add(sortDir === 'asc' ? 'sort-asc' : 'sort-desc');
+    }
+  });
+}
+
+function sortData(col) {
+  if (sortCol === col) {
+    sortDir = sortDir === 'asc' ? 'desc' : 'asc';
+  } else {
+    sortCol = col;
+    sortDir = 'asc';
+  }
+
+  const colMap = {
+    rank:         null,
+    symbol:       'Symbol',
+    dividendYield:'Dividend Yield',
+    aum:          'AUM',
+    provider:     'Fund Provider',
+    inceptionDate:'Inception Date',
+  };
+
+  const sheetKey = colMap[col];
+  etfData.sort((a, b) => {
+    const rawA = sheetKey ? (a[sheetKey] || '') : '';
+    const rawB = sheetKey ? (b[sheetKey] || '') : '';
+    const va = toSortVal(col, rawA);
+    const vb = toSortVal(col, rawB);
+    if (va === vb) return 0;
+    if (va === -Infinity) return 1;
+    if (vb === -Infinity) return -1;
+    const cmp = va < vb ? -1 : 1;
+    return sortDir === 'asc' ? cmp : -cmp;
+  });
+
+  renderTable(etfData);
+  updateSortHeaders(col);
+}
+
+// ─── FETCH ─────────────────────────────────────────────────────────────────
+async function loadETFData() {
+  try {
+    // Use a CORS proxy approach: fetch directly (Sheets CSVs support CORS)
+    const res = await fetch(SHEET_CSV_URL);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const text = await res.text();
+    etfData = parseCSV(text);
+
+    renderTable(etfData);
+
+    // Update fetch time
+    const now = new Date();
+    document.getElementById('fetchTime').textContent =
+      now.toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'}) +
+      ' · ' +
+      now.toLocaleTimeString('en-US', {hour:'2-digit', minute:'2-digit'});
+
+  } catch (err) {
+    console.error('ETF fetch error:', err);
+    document.getElementById('etfTableBody').innerHTML = `
+      <tr><td colspan="7"><div class="table-status">
+        <div class="status-msg">⚠️ Could not load live data</div>
+        <div class="status-sub">Check that your Google Sheet is published to the web as CSV, then refresh.</div>
+      </div></td></tr>`;
+  }
+}
+
+// ─── SORT LISTENERS ────────────────────────────────────────────────────────
+document.querySelectorAll('#etfTable thead th.sortable').forEach(th => {
+  th.addEventListener('click', () => sortData(th.dataset.col));
+});
+
+// ─── SHOOTING STAR ─────────────────────────────────────────────────────────
+function setShootDistance() {
+  const star = document.getElementById('shootingStar');
+  const nav  = document.querySelector('header .nav');
+  if (star && nav) star.style.setProperty('--shoot-dist', (nav.offsetWidth - 20) + 'px');
+}
+setShootDistance();
+window.addEventListener('resize', setShootDistance);
+
+// ─── INIT ──────────────────────────────────────────────────────────────────
+loadETFData();
+</script>
 </body>
 </html>
