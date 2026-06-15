@@ -14,7 +14,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TopSpaceETFs.com — Best Space & Aerospace ETFs Ranked</title>
-    
+
+    <!-- ═══════════════════════════════════════════════════
+         SEO & SOCIAL META TAGS
+    ════════════════════════════════════════════════════ -->
+    <!-- Primary SEO -->
+    <meta name="description" content="The best space and aerospace ETFs ranked, tracked, and explained. Compare AUM, dividend yields, expense ratios, and fund providers — updated daily.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://topspaceetfs.com/">
+
+    <!-- Open Graph (Facebook, LinkedIn, iMessage, Slack, Discord…) -->
+    <meta property="og:type"        content="website">
+    <meta property="og:url"         content="https://topspaceetfs.com/">
+    <meta property="og:title"       content="TopSpaceETFs.com — Best Space & Aerospace ETFs Ranked">
+    <meta property="og:description" content="Every space-economy ETF tracked side-by-side. Compare AUM, yields, fees & providers in seconds. Data updated daily.">
+    <meta property="og:image"       content="https://raw.githubusercontent.com/benjiesiegel1414/spaceETFs/main/space.png">
+    <meta property="og:image:width"  content="1200">
+    <meta property="og:image:height" content="628">
+    <meta property="og:image:alt"   content="TopSpaceETFs.com — The Best Space & Aerospace ETFs Ranked">
+    <meta property="og:site_name"   content="TopSpaceETFs.com">
+
+    <!-- Twitter / X Card -->
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:url"         content="https://topspaceetfs.com/">
+    <meta name="twitter:title"       content="TopSpaceETFs.com — Best Space & Aerospace ETFs Ranked">
+    <meta name="twitter:description" content="Every space-economy ETF tracked side-by-side. Compare AUM, yields, fees & providers in seconds. Data updated daily.">
+    <meta name="twitter:image"       content="https://raw.githubusercontent.com/benjiesiegel1414/spaceETFs/main/space.png">
+    <meta name="twitter:image:alt"   content="TopSpaceETFs.com — The Best Space & Aerospace ETFs Ranked">
+    <!-- ═══════════════════════════════════════════════════ -->
+
     <!-- Favicons & Manifest -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -492,7 +520,7 @@
     <div>
       <h2>From the <span>Blog</span></h2>
       <p>Deep dives on space ETFs, stocks, IPOs, and the macro trends shaping the sector.</p>
-    </div>
+      </div>
     <a href="#" class="btn btn-ghost">View All Posts →</a>
   </div>
   <div class="blog-grid">
@@ -533,11 +561,6 @@
   </div>
 </section>
 
-<!-- FOOTER -->
-<!-- FOOTER -->
-<footer>
-<!-- FOOTER -->
-<!-- FOOTER -->
 <!-- FOOTER -->
 <footer>
   <div class="wrap">
@@ -591,7 +614,7 @@
     </div>
   </div>
 </footer>
-</footer>
+
 <script>
 const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSrmLZYgKhMuwExsTbxDBBrN0aTAj0KIlFH5kPeZblp_7FXO7AGfgwilgbt3qCKF9XIir_QTNeYRpqy/pub?gid=0&single=true&output=csv';
 
@@ -599,7 +622,6 @@ let etfData = [];
 let sortCol = null;
 let sortDir = 'asc';
 
-// ── CSV PARSER ──────────────────────────────────────────────────────────────
 function parseCSV(text) {
   const lines = text.trim().split('\n');
   const headers = splitCSVLine(lines[0]);
@@ -624,7 +646,6 @@ function splitCSVLine(line) {
   return result;
 }
 
-// ── SORT VALUE ──────────────────────────────────────────────────────────────
 function toSortVal(col, raw) {
   if (!raw || raw === '—' || raw === '') return -Infinity;
   if (col === 'aum') {
@@ -645,7 +666,6 @@ function toSortVal(col, raw) {
   return raw.toLowerCase();
 }
 
-// ── RENDER ──────────────────────────────────────────────────────────────────
 function renderTable(data) {
   const tbody = document.getElementById('etfTableBody');
   if (!data.length) {
@@ -673,7 +693,6 @@ function renderTable(data) {
   }).join('');
 }
 
-// ── SORT ────────────────────────────────────────────────────────────────────
 function sortData(col) {
   if (sortCol === col) {
     sortDir = sortDir === 'asc' ? 'desc' : 'asc';
@@ -709,7 +728,6 @@ function sortData(col) {
   });
 }
 
-// ── SEARCH ──────────────────────────────────────────────────────────────────
 function applySearch() {
   const q = document.getElementById('etfSearch').value.trim().toLowerCase();
   document.getElementById('searchClear').classList.toggle('visible', q.length > 0);
@@ -727,7 +745,6 @@ function applySearch() {
     : '';
 }
 
-// ── FETCH ────────────────────────────────────────────────────────────────────
 async function loadETFData() {
   try {
     const res = await fetch(SHEET_CSV_URL);
@@ -745,7 +762,6 @@ async function loadETFData() {
   }
 }
 
-// ── LISTENERS ────────────────────────────────────────────────────────────────
 document.querySelectorAll('#etfTable thead th.sortable').forEach(th => {
   th.addEventListener('click', () => sortData(th.dataset.col));
 });
@@ -758,7 +774,6 @@ document.getElementById('searchClear').addEventListener('click', () => {
   document.getElementById('etfSearch').focus();
 });
 
-// ── SHOOTING STAR ────────────────────────────────────────────────────────────
 function setShootDistance() {
   const star = document.getElementById('shootingStar');
   const nav  = document.querySelector('header .nav');
@@ -767,7 +782,6 @@ function setShootDistance() {
 setShootDistance();
 window.addEventListener('resize', setShootDistance);
 
-// ── INIT ─────────────────────────────────────────────────────────────────────
 loadETFData();
 </script>
 </body>
