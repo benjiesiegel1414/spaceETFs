@@ -77,6 +77,17 @@
   }
   a{color:inherit; text-decoration:none;}
   .wrap{max-width:1180px; margin:0 auto; padding:0 24px;}
+  /* DISCLAIMER BAR */
+  .disclaimer-bar{
+    background:rgba(139,92,246,.08);
+    border-bottom:1px solid rgba(139,92,246,.2);
+    padding:8px 24px;
+    text-align:center;
+    font-size:0.78rem;
+    color:var(--grey);
+    letter-spacing:0.2px;
+  }
+  .disclaimer-bar strong{color:var(--purple-bright);}
   header{
     position:sticky; top:0; z-index:50;
     background: rgba(7,6,13,0.75);
@@ -430,6 +441,11 @@
 <body>
 <div class="stars"></div>
 
+<!-- TOP DISCLAIMER BAR -->
+<div class="disclaimer-bar">
+  <strong>⚠️ Not Financial Advice:</strong> Nothing on this site is a buy or sell signal. All data is for informational &amp; entertainment purposes only. Always consult a licensed financial advisor before making investment decisions.
+</div>
+
 <header>
   <div class="wrap nav">
     <a href="/" class="logo"><span class="logo-mark"></span><span class="logo-text">Top<span>Space</span>ETFs.com</span></a>
@@ -446,10 +462,9 @@
 <section class="hero wrap">
   <div class="eyebrow"><span class="dot"></span> Data Updated Daily</div>
   <h1>The Best <span class="grad">Space & Aerospace ETFs</span><br>Ranked, Tracked, Explained.</h1>
-  <p class="sub">From satellite mega-constellations to lunar logistics... We track every fund riding the new space economy, so you can find the right exposure in seconds.<br>
+  <p class="sub">From satellite mega-constellations to lunar logistics... We track every fund riding the new space economy!<br>
     Hand-picked curated list updated often!<br>
-    100% FREE Top Space ETF List!
-
+  </p>
   <div class="hero-ctas">
     <a href="#rankings" class="btn btn-primary">View Top ETFs</a>
     <a href="#why" class="btn btn-ghost">Why Space ETFs?</a>
