@@ -352,6 +352,79 @@
   }
   @media(max-width:880px){.footer-grid{grid-template-columns:1fr 1fr;}}
   @media(max-width:560px){.footer-grid{grid-template-columns:1fr;}}
+
+  /* SPONSOR BANNER */
+  .sponsor-banner{
+    width:90%; max-width:900px; margin:24px auto;
+    display:flex; flex-direction:column; align-items:center; gap:10px;
+  }
+  .sponsor-ad{
+    width:100%; border-radius:16px; overflow:hidden; position:relative;
+    background:linear-gradient(135deg, #0a0818 0%, #1a0d3d 40%, #0d1f3c 70%, #07060d 100%);
+    border:1px solid rgba(139,92,246,.4);
+    box-shadow:0 0 32px rgba(139,92,246,.2), inset 0 0 60px rgba(0,0,0,.4);
+    padding:22px 32px; text-align:center; cursor:pointer;
+    transition:transform .25s, box-shadow .25s;
+    text-decoration:none; display:block;
+  }
+  .sponsor-ad:hover{
+    transform:translateY(-3px);
+    box-shadow:0 0 48px rgba(139,92,246,.35), inset 0 0 60px rgba(0,0,0,.4);
+    border-color:rgba(139,92,246,.7);
+  }
+  .sponsor-ad::before{
+    content:""; position:absolute; inset:0;
+    background:
+      radial-gradient(1px 1px at 8% 20%, rgba(255,255,255,.9), transparent),
+      radial-gradient(1.5px 1.5px at 22% 75%, rgba(255,255,255,.7), transparent),
+      radial-gradient(1px 1px at 38% 12%, rgba(255,255,255,.8), transparent),
+      radial-gradient(1px 1px at 55% 88%, rgba(255,255,255,.6), transparent),
+      radial-gradient(1.5px 1.5px at 70% 35%, rgba(255,255,255,.7), transparent),
+      radial-gradient(1px 1px at 82% 60%, rgba(255,255,255,.5), transparent),
+      radial-gradient(1px 1px at 91% 18%, rgba(255,255,255,.8), transparent),
+      radial-gradient(1.5px 1.5px at 15% 50%, rgba(255,255,255,.5), transparent),
+      radial-gradient(1px 1px at 47% 42%, rgba(255,255,255,.4), transparent),
+      radial-gradient(1px 1px at 63% 72%, rgba(255,255,255,.6), transparent);
+    pointer-events:none;
+  }
+  .sponsor-ad::after{
+    content:""; position:absolute; inset:0;
+    background:radial-gradient(ellipse 70% 60% at 50% 50%, rgba(139,92,246,.12), transparent 70%);
+    pointer-events:none;
+  }
+  .sponsor-ad-inner{position:relative; z-index:2;}
+  .sponsor-rocket{
+    font-size:1.8rem; display:block; margin-bottom:6px;
+    animation:hover-rocket 3s ease-in-out infinite;
+  }
+  @keyframes hover-rocket{
+    0%,100%{transform:translateY(0) rotate(-5deg);}
+    50%{transform:translateY(-8px) rotate(5deg);}
+  }
+  .sponsor-headline{
+    font-size:clamp(0.95rem,2.5vw,1.2rem); font-weight:800; color:#fff;
+    letter-spacing:-0.5px; margin-bottom:4px;
+    text-shadow:0 0 20px rgba(183,148,246,.6);
+  }
+  .sponsor-headline span{
+    background:linear-gradient(135deg, var(--purple-bright), #fff);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .sponsor-sub{font-size:0.85rem; color:var(--grey); margin-bottom:10px;}
+  .sponsor-cta{
+    display:inline-flex; align-items:center; gap:8px;
+    background:linear-gradient(135deg, var(--purple), var(--purple-deep));
+    color:#fff; font-weight:700; font-size:0.88rem;
+    padding:7px 18px; border-radius:8px;
+    box-shadow:0 4px 20px rgba(139,92,246,.4);
+    border:1px solid rgba(183,148,246,.3);
+    transition:box-shadow .2s, transform .2s;
+  }
+  .sponsor-ad:hover .sponsor-cta{
+    box-shadow:0 6px 28px rgba(139,92,246,.6);
+    transform:scale(1.04);
+  }
+  .sponsor-label{font-size:0.75rem; color:var(--grey); letter-spacing:1px; text-transform:uppercase;}
 </style>
 </head>
 <body>
@@ -379,6 +452,19 @@
     <a href="#why" class="btn btn-ghost">Why Space ETFs?</a>
   </div>
 </section>
+
+<!-- TOP SPONSOR BANNER -->
+<div class="sponsor-banner">
+  <a href="mailto:Business@TopDividendETFs.com" class="sponsor-ad">
+    <div class="sponsor-ad-inner">
+      <span class="sponsor-rocket">🚀</span>
+      <div class="sponsor-headline">Want to Sponsor <span>TopSpaceETFs.com?</span></div>
+      <div class="sponsor-sub">Reach thousands of space &amp; aerospace investors! Your brand, front and center in the new space economy.</div>
+      <div class="sponsor-cta">📡 Contact: Business@TopDividendETFs.com</div>
+    </div>
+  </a>
+  <div class="sponsor-label">Sponsored</div>
+</div>
 
 <section class="wrap" id="rankings" style="padding:20px 24px 80px;">
   <div class="section-head">
@@ -520,6 +606,19 @@
     <strong>Disclosure:</strong> TopSpaceETFs.com is for informational and educational purposes only and does not constitute investment, financial, or legal advice. Always do your own research and consult a licensed financial advisor before making investment decisions. Past performance does not guarantee future results.
   </div>
 </section>
+
+<!-- BOTTOM SPONSOR BANNER -->
+<div class="sponsor-banner">
+  <a href="mailto:Business@TopDividendETFs.com" class="sponsor-ad">
+    <div class="sponsor-ad-inner">
+      <span class="sponsor-rocket">🛰️</span>
+      <div class="sponsor-headline">Want to Sponsor <span>TopSpaceETFs.com?</span></div>
+      <div class="sponsor-sub">Put your brand in orbit. Advertise to a targeted audience of space &amp; aerospace ETF investors.</div>
+      <div class="sponsor-cta">✉️ Contact: Business@TopDividendETFs.com</div>
+    </div>
+  </a>
+  <div class="sponsor-label">Sponsored</div>
+</div>
 
 <footer>
   <div class="wrap">
