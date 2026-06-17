@@ -242,12 +242,6 @@
   tbody tr:last-child td{border-bottom:none;}
   tbody tr{transition:background .15s;}
   tbody tr:hover{background:rgba(139,92,246,.06);}
-  .rank{
-    display:inline-flex; align-items:center; justify-content:center;
-    width:28px; height:28px; border-radius:8px;
-    background:var(--bg-panel-2); border:1px solid var(--line);
-    font-weight:700; font-size:0.85rem; color:var(--purple-bright);
-  }
   .ticker-cell{display:flex; align-items:center; gap:12px;}
   .ticker-icon{
     width:38px; height:38px; border-radius:10px; flex-shrink:0;
@@ -363,8 +357,6 @@
   }
   @media(max-width:880px){.footer-grid{grid-template-columns:1fr 1fr;}}
   @media(max-width:560px){.footer-grid{grid-template-columns:1fr;}}
-
-  /* SPONSOR BANNER */
   .sponsor-banner{
     width:90%; max-width:900px; margin:24px auto;
     display:flex; flex-direction:column; align-items:center; gap:10px;
@@ -507,7 +499,6 @@
       <table id="etfTable">
         <thead>
           <tr>
-            <th data-col="rank" class="sortable">#<span class="sort-icon"></span></th>
             <th data-col="symbol" class="sortable">ETF<span class="sort-icon"></span></th>
             <th data-col="dividendYield" class="sortable num">Dividend Yield<span class="sort-icon"></span></th>
             <th data-col="aum" class="sortable num">AUM<span class="sort-icon"></span></th>
@@ -518,7 +509,7 @@
         </thead>
         <tbody id="etfTableBody">
           <tr>
-            <td colspan="7">
+            <td colspan="6">
               <div class="table-status">
                 <div class="spinner"></div>
                 <div class="status-msg">Loading ETF data…</div>
@@ -530,7 +521,13 @@
       </table>
     </div>
   </div>
-  <p style="margin-top:14px; font-size:0.8rem; color:var(--grey);">*Data updated daily. Always verify figures before making investment decisions.</p>
+
+  <p style="margin-top:12px; font-size:0.82rem; color:var(--grey);">
+    <strong>Note:</strong> ETFs are sorted by inception date (oldest to newest). 
+    ETFs are chosen based on which space ETFs seem interesting, talked about often or other metrics 
+    &amp; not intended to be a buy or sell signal EVER.
+  </p>
+  <p style="margin-top:8px; font-size:0.8rem; color:var(--grey);">*Data updated daily. Always verify figures before making investment decisions.</p>
 </section>
 
 <section class="section wrap" id="why">
@@ -684,7 +681,7 @@
 const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSrmLZYgKhMuwExsTbxDBBrN0aTAj0KIlFH5kPeZblp_7FXO7AGfgwilgbt3qCKF9XIir_QTNeYRpqy/pub?gid=0&single=true&output=csv';
 
 let etfData = [];
-let sortCol = null;
+let sortCol = 'inceptionDate';
 let sortDir = 'asc';
 
 function parseCSV(text) {
@@ -734,10 +731,10 @@ function toSortVal(col, raw) {
 function renderTable(data) {
   const tbody = document.getElementById('etfTableBody');
   if (!data.length) {
-    tbody.innerHTML = '<tr><td colspan="7"><div class="table-status"><div class="status-msg">No ETFs found matching your search.</div></div></td></tr>';
+    tbody.innerHTML = '<tr><td colspan="6"><div class="table-status"><div class="status-msg">No ETFs found matching your search.</div></div></td></tr>';
     return;
   }
-  tbody.innerHTML = data.map((row, i) => {
+  tbody.innerHTML = data.map((row) => {
     const symbol  = row['Symbol']         || '?';
     const name    = row['Name']           || symbol;
     const div     = row['Dividend Yield'] || '—';
@@ -746,7 +743,6 @@ function renderTable(data) {
     const expense = row['Expense Ratio']  || '—';
     const incept  = row['Inception Date'] || '—';
     return `<tr>
-      <td data-label="Rank"><span class="rank">${i + 1}</span></td>
       <td data-label="ETF" class="ticker-cell">
         <div class="ticker-icon">${symbol}</div>
         <div class="ticker-name"><b>${name}</b><small>${symbol}</small></div>
@@ -819,11 +815,15 @@ async function loadETFData() {
     if (!res.ok) throw new Error('HTTP ' + res.status);
     const text = await res.text();
     etfData = parseCSV(text);
+    
+    // Default sort: OLDEST to NEWEST by inception date
+    sortData('inceptionDate');
+    
     renderTable(etfData);
   } catch (err) {
     console.error(err);
     document.getElementById('etfTableBody').innerHTML =
-      '<tr><td colspan="7"><div class="table-status">' +
+      '<tr><td colspan="6"><div class="table-status">' +
       '<div class="status-msg">Could not load ETF data</div>' +
       '<div class="status-sub">Please refresh the page to try again.</div>' +
       '</div></td></tr>';
