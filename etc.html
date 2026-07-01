@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8T1SM6V1KK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  // Base config fires once on load. We override page_path/page_title below
+  // once we know which ETF this is, so each ticker logs as its own pageview
+  // in GA4 (e.g. /etf/NASA) instead of everything sharing /etf.html.
+  gtag('config', 'G-8T1SM6V1KK', { send_page_view: false });
+</script>
+    <meta name="google-site-verification" content="wk-lxF_14-QmcEqwK7PtgIu4-uFyO4EK4EtElCuVtpg" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageTitle">ETF Scorecard | TopSpaceETFs.com</title>
+    <meta id="pageDescription" name="description" content="Full scorecard for this space & aerospace ETF — dividend yield, AUM, expense ratio, provider, and inception date, updated daily.">
+    <meta name="robots" content="index, follow">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#4c1d95">
+    <style>
+        :root{
+            --bg: #07060d;
+            --bg-panel: #0f0d1c;
+            --bg-panel-2: #15122a;
+            --purple: #8b5cf6;
+            --purple-bright: #b794f6;
+            --purple-deep: #4c1d95;
+            --white: #f5f3ff;
+            --grey: #a8a3bd;
+            --line: #2a2540;
+            --green: #34d399;
+            --red: #f87171;
+        }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--white);
+    line-height: 1.6;
+    overflow-x:hidden;
+  }
+  .stars{
+    position:fixed; inset:0; z-index:-2;
+    background:
+      radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,.9), transparent),
+      radial-gradient(1px 1px at 60% 70%, rgba(255,255,255,.7), transparent),
+      radial-gradient(1px 1px at 80% 10%, rgba(255,255,255,.8), transparent),
+      radial-gradient(1.5px 1.5px at 40% 85%, rgba(255,255,255,.6), transparent),
+      radial-gradient(1px 1px at 10% 60%, rgba(255,255,255,.5), transparent),
+      radial-gradient(1.5px 1.5px at 90% 50%, rgba(255,255,255,.7), transparent),
+      radial-gradient(1px 1px at 50% 15%, rgba(255,255,255,.6), transparent),
+      radial-gradient(1px 1px at 75% 90%, rgba(255,255,255,.5), transparent);
+    background-size:100% 100%; background-repeat:repeat;
+  }
+  .stars::after{
+    content:""; position:absolute; inset:0;
+    background: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(139,92,246,0.25), transparent 60%);
+  }
+  a{color:inherit; text-decoration:none;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 24px;}
+  .disclaimer-bar{
+    background:rgba(139,92,246,.08);
+    border-bottom:1px solid rgba(139,92,246,.2);
+    padding:8px 24px; text-align:center; font-size:0.78rem; color:var(--grey); letter-spacing:0.2px;
+  }
+  .disclaimer-bar strong{color:var(--purple-bright);}
+  header{
+    position:sticky; top:0; z-index:50;
+    background: rgba(7,6,13,0.75);
+    backdrop-filter: blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex; align-items:center; justify-content:space-between; padding:18px 0; position:relative; overflow:hidden;}
+  .logo{display:flex; align-items:center; font-weight:800; font-size:1.3rem; letter-spacing:0.5px;}
+  .logo .logo-mark{margin-right:10px;}
+  .logo-mark{
+    width:34px; height:34px; border-radius:50%;
+    background: radial-gradient(circle at 35% 35%, var(--purple-bright), var(--purple-deep) 70%, #000 100%);
+    box-shadow: 0 0 18px rgba(139,92,246,.6); position:relative; flex-shrink:0;
+  }
+  .logo-mark::after{
+    content:""; position:absolute; top:-3px; left:-3px; right:-3px; bottom:-3px;
+    border:1px solid rgba(139,92,246,.4); border-radius:50%;
+    transform:rotate(25deg); border-top-color:transparent; border-bottom-color:transparent;
+  }
+  .logo span{color:var(--purple-bright);}
+  .nav-cta{display:flex; align-items:center; gap:10px; flex-wrap:wrap; justify-content:flex-end;}
+  .nav-cta .btn{padding:8px 14px; font-size:0.82rem;}
+  .btn{display:inline-block; padding:10px 22px; border-radius:8px; font-weight:600; font-size:0.9rem; transition:all .2s; border:1px solid transparent;}
+  .btn-primary{background: linear-gradient(135deg, var(--purple) 0%, var(--purple-deep) 100%); color:#fff; box-shadow: 0 4px 20px rgba(139,92,246,.35);}
+  .btn-primary:hover{transform:translateY(-2px); box-shadow: 0 6px 24px rgba(139,92,246,.5);}
+  .btn-ghost{border-color:var(--line); color:var(--grey);}
+  .btn-ghost:hover{border-color:var(--purple); color:var(--white);}
+  .shooting-star{
+    position:absolute; top:50%; left:0; width:3px; height:3px; border-radius:50%; background:#fff;
+    box-shadow: 0 0 6px 1px rgba(255,255,255,.9), 0 0 14px 3px rgba(139,92,246,.7);
+    opacity:0; pointer-events:none;
+  }
+  .shooting-star::before{
+    content:""; position:absolute; top:50%; right:100%; width:90px; height:1px; transform:translateY(-50%);
+    background: linear-gradient(to left, rgba(255,255,255,.9), rgba(139,92,246,.5), transparent);
+  }
+  @keyframes shoot-star{
+    0%{opacity:0; transform:translate(0,-50%) scale(0.6);}
+    5%{opacity:1; transform:translate(0,-50%) scale(1);}
+    85%{opacity:1;}
+    100%{opacity:0; transform:translate(var(--shoot-dist,600px),-50%) scale(0.6);}
+  }
+  .shooting-star{animation:shoot-star 5s linear infinite;}
+
+  .back-link{display:inline-flex; align-items:center; gap:8px; color:var(--purple-bright); font-weight:600; margin:32px 0 8px;}
+
+  /* SCORECARD HERO */
+  .score-hero{padding:24px 0 40px;}
+  .score-hero-top{
+    display:flex; align-items:center; gap:22px; flex-wrap:wrap; margin-bottom:18px;
+  }
+  .score-ticker-icon{
+    width:76px; height:76px; border-radius:18px; flex-shrink:0;
+    display:flex; align-items:center; justify-content:center;
+    background:linear-gradient(135deg, var(--purple-deep), #1e1b3a);
+    border:1px solid var(--line);
+    font-weight:800; font-size:1.1rem; color:var(--purple-bright); letter-spacing:-0.5px; text-align:center;
+    box-shadow:0 8px 24px rgba(139,92,246,.15);
+  }
+  .score-hero h1{font-size:clamp(1.8rem, 4vw, 2.8rem); font-weight:800; letter-spacing:-1px; margin-bottom:6px;}
+  .score-hero .symbol-badge{
+    display:inline-block; font-family:'JetBrains Mono','Courier New',monospace;
+    font-size:0.95rem; color:var(--purple-bright);
+    background:rgba(139,92,246,.1); border:1px solid var(--purple-deep);
+    padding:3px 12px; border-radius:999px; margin-left:10px; vertical-align:middle;
+  }
+  .score-hero-sub{color:var(--grey); font-size:1rem; max-width:640px;}
+  .updated-badge{
+    display:inline-flex; align-items:center; gap:8px; font-size:0.8rem; color:var(--grey);
+    border:1px solid var(--line); border-radius:999px; padding:6px 14px; white-space:nowrap; margin-top:16px;
+  }
+  .updated-badge .dot{width:6px; height:6px; border-radius:50%; background:var(--green); box-shadow:0 0 8px var(--green); flex-shrink:0;}
+
+  /* STAT GRID */
+  .stat-grid{
+    display:grid; grid-template-columns:repeat(4, 1fr); gap:18px; margin:32px 0;
+  }
+  .stat-card{
+    background:var(--bg-panel); border:1px solid var(--line); border-radius:16px;
+    padding:24px; transition:border-color .2s, transform .2s;
+  }
+  .stat-card:hover{border-color:var(--purple-deep); transform:translateY(-3px);}
+  .stat-label{font-size:0.75rem; text-transform:uppercase; letter-spacing:1px; color:var(--grey); margin-bottom:10px;}
+  .stat-value{font-size:1.7rem; font-weight:800; color:var(--white); font-family:'JetBrains Mono','Courier New',monospace;}
+  .stat-value.accent{color:var(--purple-bright);}
+  @media(max-width:880px){.stat-grid{grid-template-columns:1fr 1fr;}}
+  @media(max-width:520px){.stat-grid{grid-template-columns:1fr;}}
+
+  /* DETAIL PANEL */
+  .detail-panel{
+    background:var(--bg-panel); border:1px solid var(--line); border-radius:16px;
+    padding:32px; margin:32px 0;
+  }
+  .detail-panel h2{font-size:1.4rem; margin-bottom:18px; color:var(--purple-bright);}
+  .detail-row{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:14px 0; border-bottom:1px solid var(--line); font-size:0.95rem;
+  }
+  .detail-row:last-child{border-bottom:none;}
+  .detail-row .label{color:var(--grey);}
+  .detail-row .value{font-weight:700; font-family:'JetBrains Mono','Courier New',monospace;}
+
+  .loading-state, .error-state{
+    padding:80px 20px; text-align:center; color:var(--grey);
+  }
+  .spinner{
+    width:36px; height:36px; border-radius:50%;
+    border:2px solid var(--line); border-top-color:var(--purple);
+    animation:spin .8s linear infinite; margin:0 auto 18px;
+  }
+  @keyframes spin{to{transform:rotate(360deg);}}
+  .error-state h2{color:var(--white); margin-bottom:10px; font-size:1.4rem;}
+
+  .cta-row{display:flex; gap:16px; flex-wrap:wrap; margin:36px 0;}
+
+  .disclaimer{
+    font-size:0.8rem; color:var(--grey); border:1px solid var(--line); border-radius:12px;
+    padding:20px 24px; background:var(--bg-panel);
+  }
+
+  footer{border-top:1px solid var(--line); padding:56px 0 28px; margin-top:40px;}
+  .footer-grid{display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:32px; margin-bottom:40px;}
+  .footer-grid h4{font-size:0.85rem; text-transform:uppercase; letter-spacing:1px; color:var(--grey); margin-bottom:16px;}
+  .footer-grid ul{list-style:none;}
+  .footer-grid ul li{margin-bottom:10px;}
+  .footer-grid ul li a{color:var(--grey); font-size:0.9rem; transition:color .2s;}
+  .footer-grid ul li a:hover{color:var(--purple-bright);}
+  .footer-brand p{color:var(--grey); font-size:0.9rem; max-width:320px; margin-top:14px;}
+  .footer-bottom{
+    border-top:1px solid var(--line); padding-top:24px;
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+    font-size:0.82rem; color:var(--grey);
+  }
+  @media(max-width:880px){.footer-grid{grid-template-columns:1fr 1fr;}}
+  @media(max-width:560px){.footer-grid{grid-template-columns:1fr;}}
+
+  .sponsor-banner{width:90%; max-width:900px; margin:24px auto; display:flex; flex-direction:column; align-items:center; gap:10px;}
+  .sponsor-ad{
+    width:100%; border-radius:16px; overflow:hidden; position:relative;
+    background:linear-gradient(135deg, #0a0818 0%, #1a0d3d 40%, #0d1f3c 70%, #07060d 100%);
+    border:1px solid rgba(139,92,246,.4);
+    box-shadow:0 0 32px rgba(139,92,246,.2), inset 0 0 60px rgba(0,0,0,.4);
+    padding:22px 32px; text-align:center; cursor:pointer;
+    transition:transform .25s, box-shadow .25s; text-decoration:none; display:block;
+  }
+  .sponsor-ad:hover{transform:translateY(-3px); box-shadow:0 0 48px rgba(139,92,246,.35), inset 0 0 60px rgba(0,0,0,.4); border-color:rgba(139,92,246,.7);}
+  .sponsor-ad-inner{position:relative; z-index:2;}
+  .sponsor-rocket{font-size:1.8rem; display:block; margin-bottom:6px; animation:hover-rocket 3s ease-in-out infinite;}
+  @keyframes hover-rocket{0%,100%{transform:translateY(0) rotate(-5deg);} 50%{transform:translateY(-8px) rotate(5deg);}}
+  .sponsor-headline{font-size:clamp(0.95rem,2.5vw,1.2rem); font-weight:800; color:#fff; letter-spacing:-0.5px; margin-bottom:4px; text-shadow:0 0 20px rgba(183,148,246,.6);}
+  .sponsor-headline span{background:linear-gradient(135deg, var(--purple-bright), #fff); -webkit-background-clip:text; background-clip:text; color:transparent;}
+  .sponsor-sub{font-size:0.85rem; color:var(--grey); margin-bottom:10px;}
+  .sponsor-cta{
+    display:inline-flex; align-items:center; gap:8px;
+    background:linear-gradient(135deg, var(--purple), var(--purple-deep)); color:#fff; font-weight:700; font-size:0.88rem;
+    padding:7px 18px; border-radius:8px; box-shadow:0 4px 20px rgba(139,92,246,.4); border:1px solid rgba(183,148,246,.3);
+    transition:box-shadow .2s, transform .2s;
+  }
+  .sponsor-ad:hover .sponsor-cta{box-shadow:0 6px 28px rgba(139,92,246,.6); transform:scale(1.04);}
+  .sponsor-label{font-size:0.75rem; color:var(--grey); letter-spacing:1px; text-transform:uppercase;}
+</style>
+</head>
+<body>
+<div class="stars"></div>
+
+<div class="disclaimer-bar">
+  <strong>⚠️ Not Financial Advice:</strong> Nothing on this site is a buy or sell signal. All data is for informational &amp; entertainment purposes only. Always consult a licensed financial advisor before making investment decisions.
+</div>
+
+<header>
+  <div class="wrap nav">
+    <a href="/" class="logo"><span class="logo-mark"></span><span class="logo-text">Top<span>Space</span>ETFs.com</span></a>
+    <div class="shooting-star" id="shootingStar"></div>
+    <div class="nav-cta">
+      <a href="https://topdividendetfs.com" class="btn btn-ghost">Top Dividend ETFs ↗</a>
+      <a href="https://monthlyetfs.com" class="btn btn-ghost">Monthly ETFs ↗</a>
+      <a href="https://weeklyetfs.com" class="btn btn-ghost">Weekly ETFs ↗</a>
+      <a href="https://growthetfs.com" class="btn btn-ghost">Growth ETFs ↗</a>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <a href="/" class="back-link">← Back to All Rankings</a>
+</div>
+
+<!-- LOADING STATE -->
+<div class="wrap" id="loadingState">
+  <div class="loading-state">
+    <div class="spinner"></div>
+    <div>Loading scorecard…</div>
+  </div>
+</div>
+
+<!-- ERROR STATE (shown if ticker not found) -->
+<div class="wrap" id="errorState" style="display:none;">
+  <div class="error-state">
+    <h2>ETF Not Found</h2>
+    <p>We couldn't find a ticker matching that symbol in our rankings.</p>
+    <div class="cta-row" style="justify-content:center;">
+      <a href="/" class="btn btn-primary">View All ETFs</a>
+    </div>
+  </div>
+</div>
+
+<!-- SCORECARD (populated by JS) -->
+<div class="wrap" id="scorecard" style="display:none;">
+
+  <section class="score-hero">
+    <div class="score-hero-top">
+      <div class="score-ticker-icon" id="tickerIcon">—</div>
+      <div>
+        <h1 id="etfName">—<span class="symbol-badge" id="etfSymbolBadge"></span></h1>
+        <p class="score-hero-sub" id="etfSub">Full scorecard for this space & aerospace ETF, pulled from our live rankings data.</p>
+      </div>
+    </div>
+    <div class="updated-badge"><span class="dot"></span> Data Updated Daily</div>
+  </section>
+
+  <section class="stat-grid">
+    <div class="stat-card">
+      <div class="stat-label">Dividend Yield</div>
+      <div class="stat-value accent" id="statYield">—</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Assets Under Management</div>
+      <div class="stat-value" id="statAUM">—</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Expense Ratio</div>
+      <div class="stat-value" id="statExpense">—</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Inception Date</div>
+      <div class="stat-value" id="statInception" style="font-size:1.25rem;">—</div>
+    </div>
+  </section>
+
+  <section class="detail-panel">
+    <h2>Fund Details</h2>
+    <div class="detail-row"><span class="label">Ticker Symbol</span><span class="value" id="detailSymbol">—</span></div>
+    <div class="detail-row"><span class="label">Fund Name</span><span class="value" id="detailName">—</span></div>
+    <div class="detail-row"><span class="label">Fund Provider</span><span class="value" id="detailProvider">—</span></div>
+    <div class="detail-row"><span class="label">Dividend Yield</span><span class="value" id="detailYield">—</span></div>
+    <div class="detail-row"><span class="label">Assets Under Management</span><span class="value" id="detailAUM">—</span></div>
+    <div class="detail-row"><span class="label">Expense Ratio</span><span class="value" id="detailExpense">—</span></div>
+    <div class="detail-row"><span class="label">Inception Date</span><span class="value" id="detailInception">—</span></div>
+  </section>
+
+  <div class="cta-row">
+    <a href="/" class="btn btn-primary">← Compare All Space ETFs</a>
+    <a href="https://topspaceetfs.com/blog" class="btn btn-ghost">Read the Blog →</a>
+  </div>
+
+  <section style="margin-bottom:60px;">
+    <div class="disclaimer">
+      <strong>Disclosure:</strong> This scorecard is for informational and educational purposes only and does not constitute investment, financial, or legal advice. Data is pulled from our tracked rankings and may not reflect real-time fund changes. Always verify current holdings and performance directly with the fund issuer, and consult a licensed financial advisor before making investment decisions.
+    </div>
+  </section>
+
+</div>
+
+<!-- SPONSOR BANNER -->
+<div class="sponsor-banner">
+  <a href="mailto:Business@TopDividendETFs.com" class="sponsor-ad">
+    <div class="sponsor-ad-inner">
+      <span class="sponsor-rocket">🚀</span>
+      <div class="sponsor-headline">Want to Sponsor <span>TopSpaceETFs.com?</span></div>
+      <div class="sponsor-sub">Reach thousands of space &amp; aerospace investors! Your brand, front and center in the new space economy.</div>
+      <div class="sponsor-cta">📡 Contact: Business@TopDividendETFs.com</div>
+    </div>
+  </a>
+  <div class="sponsor-label">Sponsored</div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="https://TopSpaceETFs.com" class="logo">
+          <span class="logo-mark"></span>
+          <span class="logo-text">Top<span>Space</span>ETFs.com</span>
+        </a>
+        <p>Independent research and rankings for space, satellite, and aerospace-themed ETFs.<br>
+           A sister site to <a href="https://topdividendetfs.com" target="_blank" rel="noopener">TopDividendETFs.com</a>.</p>
+      </div>
+      <div>
+        <h4>Site</h4>
+        <ul>
+          <li><a href="https://TopSpaceETFs.com/">Rankings</a></li>
+          <li><a href="https://TopSpaceETFs.com/blog">Blog</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="https://topdividendetfs.com" target="_blank" rel="noopener">TopDividendETFs.com</a></li>
+          <li><a href="mailto:Business@TopDividendETFs.com">Contact Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="https://TopSpaceETFs.com/legal.html">Disclosure</a></li>
+          <li><a href="https://TopSpaceETFs.com/privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="https://TopSpaceETFs.com/terms-of-use.html">Terms of Use</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 TopSpaceETFs.com. All rights reserved.</span>
+      <span>Not investment advice. Data updated daily.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSrmLZYgKhMuwExsTbxDBBrN0aTAj0KIlFH5kPeZblp_7FXO7AGfgwilgbt3qCKF9XIir_QTNeYRpqy/pub?gid=0&single=true&output=csv';
+
+function parseCSV(text) {
+  const lines = text.trim().split('\n');
+  const headers = splitCSVLine(lines[0]);
+  return lines.slice(1).map(line => {
+    const vals = splitCSVLine(line);
+    const obj = {};
+    headers.forEach((h, i) => { obj[h.trim()] = (vals[i] || '').trim(); });
+    return obj;
+  }).filter(row => Object.values(row).some(v => v !== ''));
+}
+
+function splitCSVLine(line) {
+  const result = [];
+  let cur = '', inQuote = false;
+  for (let i = 0; i < line.length; i++) {
+    const ch = line[i];
+    if (ch === '"') { inQuote = !inQuote; continue; }
+    if (ch === ',' && !inQuote) { result.push(cur); cur = ''; continue; }
+    cur += ch;
+  }
+  result.push(cur);
+  return result;
+}
+
+function getQueryParam(name) {
+  const params = new URLSearchParams(window.location.search);
+  return params.get(name);
+}
+
+function trackScorecardPageview(symbol, name) {
+  // Fires a GA4 virtual pageview specific to this ETF, e.g. /etf/NASA,
+  // so each ticker's scorecard shows up as its own page in Analytics
+  // instead of everything rolling up under /etf.html.
+  const path = '/etf/' + encodeURIComponent(symbol);
+  const title = name + ' (' + symbol + ') — ETF Scorecard | TopSpaceETFs.com';
+  document.title = title;
+  gtag('event', 'page_view', {
+    page_path: path,
+    page_title: title,
+    page_location: window.location.origin + path
+  });
+}
+
+async function loadScorecard() {
+  const symbol = (getQueryParam('symbol') || '').trim().toUpperCase();
+  const loadingEl = document.getElementById('loadingState');
+  const errorEl = document.getElementById('errorState');
+  const cardEl = document.getElementById('scorecard');
+
+  if (!symbol) {
+    loadingEl.style.display = 'none';
+    errorEl.style.display = 'block';
+    return;
+  }
+
+  try {
+    const res = await fetch(SHEET_CSV_URL);
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const text = await res.text();
+    const rows = parseCSV(text);
+
+    const row = rows.find(r => (r['Symbol'] || '').trim().toUpperCase() === symbol);
+
+    if (!row) {
+      loadingEl.style.display = 'none';
+      errorEl.style.display = 'block';
+      return;
+    }
+
+    const sym      = row['Symbol'] || symbol;
+    const name     = row['Name'] || sym;
+    const yieldVal = row['Dividend Yield'] || '—';
+    const aum      = row['AUM'] || '—';
+    const provider = row['Fund Provider'] || '—';
+    const expense  = row['Expense Ratio'] || '—';
+    const incept   = row['Inception Date'] || '—';
+
+    document.getElementById('tickerIcon').textContent = sym;
+    document.getElementById('etfName').childNodes[0].textContent = name + ' ';
+    document.getElementById('etfSymbolBadge').textContent = sym;
+    document.getElementById('etfSub').textContent =
+      'Full scorecard for ' + name + ' (' + sym + '), pulled from our live rankings data — dividend yield, AUM, fees, and provider details in one place.';
+
+    document.getElementById('statYield').textContent = yieldVal;
+    document.getElementById('statAUM').textContent = aum;
+    document.getElementById('statExpense').textContent = expense;
+    document.getElementById('statInception').textContent = incept;
+
+    document.getElementById('detailSymbol').textContent = sym;
+    document.getElementById('detailName').textContent = name;
+    document.getElementById('detailProvider').textContent = provider;
+    document.getElementById('detailYield').textContent = yieldVal;
+    document.getElementById('detailAUM').textContent = aum;
+    document.getElementById('detailExpense').textContent = expense;
+    document.getElementById('detailInception').textContent = incept;
+
+    document.getElementById('pageTitle').textContent = name + ' (' + sym + ') — ETF Scorecard | TopSpaceETFs.com';
+    document.getElementById('pageDescription').setAttribute('content',
+      name + ' (' + sym + ') scorecard: dividend yield ' + yieldVal + ', AUM ' + aum + ', expense ratio ' + expense + '. Updated daily.');
+
+    loadingEl.style.display = 'none';
+    cardEl.style.display = 'block';
+
+    trackScorecardPageview(sym, name);
+
+  } catch (err) {
+    console.error(err);
+    loadingEl.style.display = 'none';
+    errorEl.style.display = 'block';
+  }
+}
+
+function setShootDistance() {
+  const star = document.getElementById('shootingStar');
+  const nav  = document.querySelector('header .nav');
+  if (star && nav) star.style.setProperty('--shoot-dist', (nav.offsetWidth - 20) + 'px');
+}
+setShootDistance();
+window.addEventListener('resize', setShootDistance);
+
+loadScorecard();
+</script>
+</body>
+</html>
