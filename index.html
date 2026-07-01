@@ -298,17 +298,49 @@
   .feature-card p{color:var(--grey); font-size:0.92rem;}
   @media(max-width:880px){.features-grid{grid-template-columns:1fr 1fr;}}
   @media(max-width:560px){.features-grid{grid-template-columns:1fr;}}
-  .blog-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
-  .blog-card{
-    background:var(--bg-panel); border:1px solid var(--line);
-    border-radius:16px; overflow:hidden; display:flex; flex-direction:column;
-    transition:transform .2s, border-color .2s;
+
+  /* ═══════════════════════════════════════════════════
+     BLOG CARDS — redesigned for clarity + clickability
+  ════════════════════════════════════════════════════ */
+  .blog-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
+    gap:22px;
   }
-  .blog-card:hover{transform:translateY(-4px); border-color:var(--purple-deep);}
+  .blog-card-link{display:block; height:100%;}
+  .blog-card{
+    position:relative;
+    background:var(--bg-panel);
+    border:1px solid var(--line);
+    border-radius:16px;
+    overflow:hidden;
+    display:flex; flex-direction:column;
+    height:100%;
+    cursor:pointer;
+    transition:transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+  }
+  .blog-card:hover{
+    transform:translateY(-6px);
+    border-color:var(--purple);
+    box-shadow:0 16px 40px rgba(139,92,246,.22);
+  }
+  .blog-card:hover .blog-thumb{filter:brightness(1.15);}
+  .blog-card:hover .blog-cta{color:var(--purple-bright);}
+  .blog-card:hover .blog-cta .arrow{transform:translateX(4px);}
+  .blog-new-badge{
+    position:absolute; top:14px; left:14px; z-index:3;
+    font-size:0.65rem; font-weight:800; letter-spacing:1px;
+    text-transform:uppercase;
+    background:var(--green); color:#052e1c;
+    padding:4px 10px; border-radius:999px;
+    box-shadow:0 0 14px rgba(52,211,153,.5);
+  }
   .blog-thumb{
-    height:160px;
+    height:150px;
     background:linear-gradient(135deg, var(--purple-deep) 0%, #1c1733 60%, #000 100%);
     position:relative; display:flex; align-items:center; justify-content:center;
+    transition:filter .2s ease;
+    flex-shrink:0;
   }
   .blog-thumb::before{
     content:""; position:absolute; inset:0;
@@ -319,24 +351,32 @@
       radial-gradient(1.5px 1.5px at 85% 20%, #fff, transparent);
     opacity:.7;
   }
-  .blog-thumb span{
-    font-size:0.75rem; letter-spacing:2px; text-transform:uppercase;
-    color:var(--purple-bright); border:1px solid var(--purple-deep);
-    background:rgba(0,0,0,.4); padding:6px 14px; border-radius:999px;
-    position:relative; z-index:1;
+  .blog-thumb-icon{
+    font-size:2.2rem; position:relative; z-index:1;
+    filter:drop-shadow(0 0 12px rgba(183,148,246,.6));
   }
-  .blog-body{padding:22px; flex:1; display:flex; flex-direction:column;}
-  .blog-tag{font-size:0.75rem; color:var(--purple-bright); font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:10px;}
-  .blog-body h3{font-size:1.08rem; margin-bottom:10px; line-height:1.4;}
-  .blog-body p{color:var(--grey); font-size:0.9rem; flex:1; margin-bottom:16px;}
-  .blog-meta{font-size:0.8rem; color:var(--grey); border-top:1px solid var(--line); padding-top:14px; display:flex; justify-content:space-between;}
-  .coming-soon-badge{
-    position:absolute; top:12px; right:12px;
-    font-size:0.7rem; font-weight:700; letter-spacing:1px;
-    background:var(--purple); color:#fff; padding:4px 10px; border-radius:6px; z-index:2;
+  .blog-body{padding:20px 22px 18px; flex:1; display:flex; flex-direction:column;}
+  .blog-tag{
+    font-size:0.72rem; color:var(--purple-bright); font-weight:700;
+    letter-spacing:1px; text-transform:uppercase; margin-bottom:10px;
   }
-  @media(max-width:880px){.blog-grid{grid-template-columns:1fr 1fr;}}
+  .blog-body h3{font-size:1.08rem; margin-bottom:10px; line-height:1.4; color:var(--white);}
+  .blog-body p{color:var(--grey); font-size:0.88rem; flex:1; margin-bottom:16px;}
+  .blog-meta{
+    font-size:0.78rem; color:var(--grey);
+    display:flex; justify-content:space-between; align-items:center;
+    margin-bottom:14px;
+  }
+  .blog-cta{
+    display:flex; align-items:center; gap:6px;
+    font-size:0.85rem; font-weight:700; color:var(--white);
+    border-top:1px solid var(--line);
+    padding-top:14px;
+    transition:color .2s ease;
+  }
+  .blog-cta .arrow{display:inline-block; transition:transform .2s ease;}
   @media(max-width:560px){.blog-grid{grid-template-columns:1fr;}}
+
   .disclaimer{
     font-size:0.8rem; color:var(--grey);
     border:1px solid var(--line); border-radius:12px;
@@ -580,39 +620,60 @@
     <a href="https://topspaceetfs.com/blog" class="btn btn-ghost">View All Posts →</a>
   </div>
   <div class="blog-grid">
-    <a href="https://topspaceetfs.com/all-in" style="text-decoration:none; color:inherit;">
+
+    <a href="https://topspaceetfs.com/spacex-ipo-public-spcx.html" class="blog-card-link">
       <article class="blog-card">
-        <div class="blog-thumb"><span>Market Outlook</span></div>
+        <span class="blog-new-badge">New</span>
+        <div class="blog-thumb"><span class="blog-thumb-icon">📈</span></div>
         <div class="blog-body">
-          <div class="blog-tag">STRATEGY</div>
+          <div class="blog-tag">Breaking</div>
+          <h3>SpaceX Is Now Public (SPCX): What It Means for Space ETF Investors</h3>
+          <p>SpaceX completed the largest IPO in history on June 12, 2026. Here's how the stock has traded since, what Nasdaq-100 inclusion means, and how NASA, UFO, and ARKX fit in now.</p>
+          <div class="blog-meta"><span>July 1, 2026</span><span>9 min read</span></div>
+          <div class="blog-cta">Read Article <span class="arrow">→</span></div>
+        </div>
+      </article>
+    </a>
+
+    <a href="https://topspaceetfs.com/all-in" class="blog-card-link">
+      <article class="blog-card">
+        <div class="blog-thumb"><span class="blog-thumb-icon">📊</span></div>
+        <div class="blog-body">
+          <div class="blog-tag">Strategy</div>
           <h3>Is it Time to Go All In on Space ETFs?</h3>
           <p>The space economy is heading toward $1.8–3 trillion by 2035. We explore the massive opportunity, key risks, and how investors should position themselves today.</p>
           <div class="blog-meta"><span>June 15, 2026</span><span>11 min read</span></div>
+          <div class="blog-cta">Read Article <span class="arrow">→</span></div>
         </div>
       </article>
     </a>
-    <a href="https://topspaceetfs.com/10-space-etfs-to-buy" style="text-decoration:none; color:inherit;">
+
+    <a href="https://topspaceetfs.com/10-space-etfs-to-buy" class="blog-card-link">
       <article class="blog-card">
-        <div class="blog-thumb"><span>Rankings</span></div>
+        <div class="blog-thumb"><span class="blog-thumb-icon">🚀</span></div>
         <div class="blog-body">
-          <div class="blog-tag">TOP PICKS</div>
+          <div class="blog-tag">Top Picks</div>
           <h3>10 Top Space ETFs To Buy in 2026</h3>
           <p>A complete ranking of the largest and most promising space & aerospace ETFs, including NASA, UFO, ARKX, ITA and more.</p>
           <div class="blog-meta"><span>June 15, 2026</span><span>12 min read</span></div>
+          <div class="blog-cta">Read Article <span class="arrow">→</span></div>
         </div>
       </article>
     </a>
-    <a href="https://topspaceetfs.com/5-must-see-space-etfs" style="text-decoration:none; color:inherit;">
+
+    <a href="https://topspaceetfs.com/5-must-see-space-etfs" class="blog-card-link">
       <article class="blog-card">
-        <div class="blog-thumb"><span>ETF Guide</span></div>
+        <div class="blog-thumb"><span class="blog-thumb-icon">🛰️</span></div>
         <div class="blog-body">
-          <div class="blog-tag">ETF GUIDE</div>
+          <div class="blog-tag">ETF Guide</div>
           <h3>Forget SpaceX Stock... These 5 Space ETFs Are MUST SEEs</h3>
           <p>Why wait for a SpaceX IPO? These five standout ETFs give you immediate, diversified exposure to the entire space economy right now.</p>
           <div class="blog-meta"><span>June 15, 2026</span><span>10 min read</span></div>
+          <div class="blog-cta">Read Article <span class="arrow">→</span></div>
         </div>
       </article>
     </a>
+
   </div>
 </section>
 
