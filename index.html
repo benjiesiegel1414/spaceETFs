@@ -241,7 +241,15 @@
   }
   tbody tr:last-child td{border-bottom:none;}
   tbody tr{transition:background .15s;}
-  tbody tr:hover{background:rgba(139,92,246,.06);}
+  tbody tr[data-symbol]{cursor:pointer;}
+  tbody tr[data-symbol]:hover{background:rgba(139,92,246,.1);}
+  tbody tr[data-symbol]:hover .ticker-name b{color:var(--purple-bright);}
+  tbody tr[data-symbol] td:last-child{position:relative;}
+  tbody tr[data-symbol] td:last-child::after{
+    content:"→"; position:absolute; right:14px; top:50%; transform:translateY(-50%) translateX(-4px);
+    color:var(--purple-bright); opacity:0; transition:opacity .15s, transform .15s;
+  }
+  tbody tr[data-symbol]:hover td:last-child::after{opacity:1; transform:translateY(-50%) translateX(0);}
   .ticker-cell{display:flex; align-items:center; gap:12px;}
   .ticker-icon{
     width:38px; height:38px; border-radius:10px; flex-shrink:0;
@@ -520,7 +528,7 @@
   <div class="section-head">
     <div>
       <h2>Top Space ETFs <span>Ranked</span></h2>
-      <p>Click any column header to sort. Search by ticker, name, or provider below:</p>
+      <p>Click any row to view its full scorecard. Click a column header to sort. Search by ticker, name, or provider below:</p>
     </div>
     <div class="updated-badge"><span class="dot"></span> Data Updated Daily</div>
   </div>
@@ -803,7 +811,7 @@ function renderTable(data) {
     const prov    = row['Fund Provider']  || '—';
     const expense = row['Expense Ratio']  || '—';
     const incept  = row['Inception Date'] || '—';
-    return `<tr>
+    return `<tr data-symbol="${symbol}" title="View full scorecard for ${symbol}">
       <td data-label="ETF" class="ticker-cell">
         <div class="ticker-icon">${symbol}</div>
         <div class="ticker-name"><b>${name}</b><small>${symbol}</small></div>
@@ -815,6 +823,16 @@ function renderTable(data) {
       <td data-label="Inception Date">${incept}</td>
     </tr>`;
   }).join('');
+  attachRowClickHandlers();
+}
+
+function attachRowClickHandlers() {
+  document.querySelectorAll('#etfTableBody tr[data-symbol]').forEach(tr => {
+    tr.addEventListener('click', () => {
+      const symbol = tr.getAttribute('data-symbol');
+      window.location.href = 'etf.html?symbol=' + encodeURIComponent(symbol);
+    });
+  });
 }
 
 function sortData(col) {
