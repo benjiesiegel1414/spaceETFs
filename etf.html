@@ -232,6 +232,16 @@
   }
   .sponsor-ad:hover .sponsor-cta{box-shadow:0 6px 28px rgba(139,92,246,.6); transform:scale(1.04);}
   .sponsor-label{font-size:0.75rem; color:var(--grey); letter-spacing:1px; text-transform:uppercase;}
+
+  /* DISPLAY AD BANNER */
+  .display-ad{
+    width:90%; max-width:900px; margin:24px auto;
+    display:flex; flex-direction:column; align-items:center; gap:8px;
+  }
+  .display-ad a{display:block; width:100%; border-radius:12px; overflow:hidden;
+    box-shadow:0 4px 20px rgba(0,0,0,.35); transition:transform .25s ease, box-shadow .25s ease;}
+  .display-ad a:hover{transform:translateY(-3px); box-shadow:0 8px 28px rgba(139,92,246,.25);}
+  .display-ad img{width:100%; height:auto; display:block;}
 </style>
 </head>
 <body>
@@ -334,17 +344,12 @@
 
 </div>
 
-<!-- SPONSOR BANNER -->
-<div class="sponsor-banner">
-  <a href="mailto:Business@TopDividendETFs.com" class="sponsor-ad">
-    <div class="sponsor-ad-inner">
-      <span class="sponsor-rocket">🚀</span>
-      <div class="sponsor-headline">Want to Sponsor <span>TopSpaceETFs.com?</span></div>
-      <div class="sponsor-sub">Reach thousands of space &amp; aerospace investors! Your brand, front and center in the new space economy.</div>
-      <div class="sponsor-cta">📡 Contact: Business@TopDividendETFs.com</div>
-    </div>
+<!-- DISPLAY AD BANNER -->
+<div class="display-ad">
+  <a href="https://graniteshares.com/spacex-leveraged-etfs/" target="_blank" rel="sponsored noopener">
+    <img src="https://raw.githubusercontent.com/benjiesiegel1414/spaceETFs/main/SPAL_SNK-728x90.jpg" alt="GraniteShares SpaceX Leveraged ETFs">
   </a>
-  <div class="sponsor-label">Sponsored</div>
+  <div class="sponsor-label">Sponsored By</div>
 </div>
 
 <footer>
