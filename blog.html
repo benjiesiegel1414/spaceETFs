@@ -117,12 +117,21 @@
             padding-bottom:80px;
         }
         .blog-card{
+            position:relative;
             background:var(--bg-panel); border:1px solid var(--line);
             border-radius:16px; overflow:hidden; display:flex; flex-direction:column;
             transition:transform .2s, border-color .2s;
         }
         .blog-card:hover{
             transform:translateY(-6px); border-color:var(--purple-deep);
+        }
+        .blog-new-badge{
+            position:absolute; top:14px; left:14px; z-index:3;
+            font-size:0.65rem; font-weight:800; letter-spacing:1px;
+            text-transform:uppercase;
+            background:var(--green); color:#052e1c;
+            padding:4px 10px; border-radius:999px;
+            box-shadow:0 0 14px rgba(52,211,153,.5);
         }
         .blog-thumb{
             height:200px;
@@ -210,7 +219,21 @@
 <section class="wrap">
     <div class="blog-grid">
 
-        <!-- Post 1 -->
+        <!-- Post 1 — SPCX IPO (NEW) -->
+        <a href="https://topspaceetfs.com/spacex-ipo-public-spcx.html" style="text-decoration:none; color:inherit;">
+            <article class="blog-card">
+                <span class="blog-new-badge">New</span>
+                <div class="blog-thumb"><span>Breaking</span></div>
+                <div class="blog-body">
+                    <div class="blog-tag">BREAKING</div>
+                    <h3>SpaceX Is Now Public (SPCX): What It Means for Space ETF Investors</h3>
+                    <p>SpaceX completed the largest IPO in history on June 12, 2026. Here's how the stock has traded since, what Nasdaq-100 inclusion means, and how NASA, UFO, and ARKX fit in now.</p>
+                    <div class="blog-meta"><span>July 1, 2026</span><span>9 min read</span></div>
+                </div>
+            </article>
+        </a>
+
+        <!-- Post 2 -->
         <a href="https://topspaceetfs.com/all-in" style="text-decoration:none; color:inherit;">
             <article class="blog-card">
                 <div class="blog-thumb"><span>Market Outlook</span></div>
@@ -223,7 +246,7 @@
             </article>
         </a>
 
-        <!-- Post 2 -->
+        <!-- Post 3 -->
         <a href="https://topspaceetfs.com/10-space-etfs-to-buy" style="text-decoration:none; color:inherit;">
             <article class="blog-card">
                 <div class="blog-thumb"><span>Rankings</span></div>
@@ -236,7 +259,7 @@
             </article>
         </a>
 
-        <!-- Post 3 -->
+        <!-- Post 4 -->
         <a href="https://topspaceetfs.com/5-must-see-space-etfs" style="text-decoration:none; color:inherit;">
             <article class="blog-card">
                 <div class="blog-thumb"><span>ETF Guide</span></div>
