@@ -16,12 +16,14 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Refresh data/funds.json
+      - name: Refresh fund data
         run: python3 scripts/update_funds.py
+      - name: Rebuild fund pages
+        run: python3 scripts/build_pages.py
       - name: Commit
         run: |
           git config user.name "benjiesiegel1414"
           git config user.email "benjiesbusiness@gmail.com"
-          git add data/funds.json
+          git add -A data sitemap.xml '*.html'
           git diff --cached --quiet || git commit -m "Update fund data"
           git push
