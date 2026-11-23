@@ -121,9 +121,14 @@
 </div></section>
 
 <section class="sec"><div class="wrap">
-  <h2>Activity on the site, last 90 days</h2>
-  <p class="sub">Straight from Google Analytics. This is the event count by event name for the TopSpaceETFs.com property, by day.</p>
-  <div class="ga"><div class="cap"><span>Event count by Event name over time</span><span>Aug 24 to Nov 21, 2026 · Google Analytics 4</span></div><img src="/ga-events-90d.png" alt="Google Analytics chart of daily event counts on TopSpaceETFs.com over the last 90 days" width="1740" height="370" loading="lazy"></div>
+  <h2>Activity on the site since launch</h2>
+  <p class="sub">Daily event counts from Google Analytics, from the day the site went live to now. Tap a series to show or hide it.</p>
+  <div class="card" style="margin:0">
+    <div class="ch"><span>Event count by event name</span><div class="rng" id="evRng"><button data-r="30">30D</button><button data-r="90">90D</button><button data-r="0" class="on">Since launch</button></div></div>
+    <div id="evChart" style="position:relative;height:360px;padding:10px 8px 0"><div id="evTip" style="position:absolute;pointer-events:none;background:#1a1630;border:1px solid var(--line);border-radius:8px;padding:8px 11px;font:600 .76rem 'JetBrains Mono',monospace;display:none;white-space:nowrap;z-index:3;line-height:1.6"></div></div>
+    <div id="evLegend" style="display:flex;flex-wrap:wrap;gap:8px;padding:6px 18px 12px"></div>
+    <p class="note" id="evNote">Source: Google Analytics 4, TopSpaceETFs.com property.</p>
+  </div>
 </div></section>
 
 <section class="sec"><div class="wrap">
@@ -213,6 +218,47 @@ TSE.load().then(function(d){
   document.getElementById('aFunds').textContent=n;
   document.getElementById('aAum').textContent='$'+(t/1e9).toFixed(1)+'B';
 }).catch(function(){});
+</script>
+<script>
+(function(){
+  var META=[['total','All events','#b794f6'],['page_view','Page views','#60a5fa'],['session_start','Sessions','#34d399'],['first_visit','New visitors','#f472b6'],['user_engagement','Engaged visits','#fbbf24'],['click','Outbound clicks','#f87171']];
+  var box=document.getElementById('evChart'),tip=document.getElementById('evTip'),leg=document.getElementById('evLegend'),D=null,range=0,off={};
+  function fmtD(i){var d=new Date(D.start+'T12:00:00');d.setDate(d.getDate()+i);return d;}
+  function draw(){
+    if(!D)return; var n=D.series.total.length,from=range?Math.max(0,n-range):0,len=n-from;
+    var W=box.clientWidth-16,H=box.clientHeight-10,l=40,r=14,t=10,b=28,mx=1;
+    META.forEach(function(m){if(!off[m[0]])D.series[m[0]].slice(from).forEach(function(v){if(v>mx)mx=v;});});
+    var step=mx>200?50:mx>80?20:mx>30?10:5; mx=Math.ceil(mx/step)*step;
+    var X=function(i){return l+(W-l-r)*i/(len-1);},Y=function(v){return t+(H-t-b)*(1-v/mx);},g='';
+    for(var v=0;v<=mx;v+=step){g+='<line x1="'+l+'" x2="'+(W-r)+'" y1="'+Y(v)+'" y2="'+Y(v)+'" stroke="#221d38"/><text x="'+(l-8)+'" y="'+(Y(v)+4)+'" fill="#a8a3bd" font-size="11" text-anchor="end" font-family="JetBrains Mono,monospace">'+v+'</text>';}
+    var ticks=Math.min(6,len),k; for(k=0;k<ticks;k++){var i=Math.round((len-1)*k/(ticks-1));g+='<text x="'+X(i)+'" y="'+(H-8)+'" fill="#a8a3bd" font-size="11" text-anchor="'+(k===0?'start':k===ticks-1?'end':'middle')+'">'+fmtD(from+i).toLocaleDateString('en-US',{month:'short',day:'numeric'})+'</text>';}
+    META.slice().reverse().forEach(function(m){
+      if(off[m[0]])return; var s=D.series[m[0]].slice(from),d='';
+      s.forEach(function(v,i){d+=(i?'L':'M')+X(i).toFixed(1)+' '+Y(v).toFixed(1);});
+      if(m[0]==='total')g+='<path d="'+d+'L'+X(len-1)+' '+Y(0)+'L'+X(0)+' '+Y(0)+'Z" fill="rgba(139,92,246,.14)"/>';
+      g+='<path d="'+d+'" fill="none" stroke="'+m[2]+'" stroke-width="'+(m[0]==='total'?2.2:1.6)+'" stroke-linejoin="round"/>';
+    });
+    var old=box.querySelector('svg'); if(old)box.removeChild(old);
+    box.insertAdjacentHTML('beforeend','<svg viewBox="0 0 '+W+' '+H+'" style="width:100%;height:100%;display:block">'+g+'<line id="evL" y1="'+t+'" y2="'+(H-b)+'" stroke="#7d7896" stroke-dasharray="3 3" style="display:none"/></svg>');
+    var sv=box.querySelector('svg'),line=sv.querySelector('#evL');
+    function mv(e){var rc=sv.getBoundingClientRect(),cx=(e.touches?e.touches[0].clientX:e.clientX)-rc.left,i=Math.round((cx/rc.width*W-l)/(W-l-r)*(len-1));i=Math.max(0,Math.min(len-1,i));
+      var x=X(i);line.setAttribute('x1',x);line.setAttribute('x2',x);line.style.display='';
+      var h='<span style="color:#a8a3bd">'+fmtD(from+i).toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'})+'</span>';
+      META.forEach(function(m){if(!off[m[0]])h+='<br><span style="color:'+m[2]+'">●</span> '+m[1]+': '+D.series[m[0]][from+i];});
+      tip.innerHTML=h;tip.style.display='block';var tx=x/W*rc.width+16;if(tx+tip.offsetWidth>rc.width-8)tx=x/W*rc.width-tip.offsetWidth-16;tip.style.left=Math.max(4,tx)+'px';tip.style.top='14px';}
+    sv.addEventListener('mousemove',mv);sv.addEventListener('touchmove',mv,{passive:true});sv.addEventListener('mouseleave',function(){line.style.display='none';tip.style.display='none';});
+  }
+  function legend(){
+    leg.innerHTML=META.map(function(m){var tot=D.series[m[0]].reduce(function(a,b){return a+b;},0);return '<button type="button" data-k="'+m[0]+'" style="cursor:pointer;display:flex;align-items:center;gap:8px;font:600 .78rem Inter,sans-serif;color:'+(off[m[0]]?'#5d5878':'#f5f3ff')+';background:#141126;border:1px solid var(--line);border-radius:999px;padding:6px 12px"><i style="width:10px;height:10px;border-radius:50%;background:'+(off[m[0]]?'#3a3458':m[2])+';display:block"></i>'+m[1]+' <span style="font-family:JetBrains Mono,monospace;color:#a8a3bd">'+tot.toLocaleString()+'</span></button>';}).join('');
+    leg.querySelectorAll('button').forEach(function(bt){bt.addEventListener('click',function(){off[bt.dataset.k]=!off[bt.dataset.k];legend();draw();});});
+  }
+  document.querySelectorAll('#evRng button').forEach(function(bt){bt.addEventListener('click',function(){range=+bt.dataset.r;document.querySelectorAll('#evRng button').forEach(function(x){x.classList.toggle('on',x===bt);});draw();});});
+  fetch('/data/events.json').then(function(r){return r.json();}).then(function(d){D=d;legend();draw();
+    var f=function(s){return new Date(s+'T12:00:00').toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});};
+    document.getElementById('evNote').textContent='Source: Google Analytics 4, TopSpaceETFs.com property. '+f(d.start)+' to '+f(d.end)+'. Totals are for the whole period.';
+  }).catch(function(){box.innerHTML='<p style="padding:30px;color:#a8a3bd">Chart data is not available right now.</p>';});
+  var rt;window.addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(draw,150);});
+})();
 </script>
 </body>
 </html>
