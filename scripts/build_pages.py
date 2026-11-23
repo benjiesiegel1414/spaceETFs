@@ -172,7 +172,7 @@ def main():
         p2 = ""
         if top and not is_lev: p2 = "Its largest position is %s at %.2f%% of the fund, and the top 10 holdings make up %s of assets." % (E(top["n"]), top["w"], ("%.1f%%" % f["top10"]) if f.get("top10") else "most")
         if spx and not is_lev: p2 += " SpaceX ($SPCX) is %.2f%% of the portfolio." % spx
-        if is_lev: p2 = "This fund resets every day. It is built for short term trading, and over longer periods its return can be very different from a simple multiple of the stock or basket it follows. See <a href=\"/leveraged-spacex-etfs-spch-spax-spal-spcu.html\">how daily leveraged funds work</a>."
+        if is_lev: p2 = "This fund resets every day. It is built for short term trading, and over longer periods its return can be very different from a simple multiple of the stock or basket it follows. See <a href=\"/leveraged-spacex-etfs-spch-spax-spal-spcu\">how daily leveraged funds work</a>."
         p3 = "$%s ranks %s of %d funds we track by assets and %s by lowest fee." % (t, ord_(R["aum"][t][0]), N, ord_(R["fee"][t][0]))
         if t in R["y1"]: p3 += " Over the past year it ranks %s of %d by total return." % (ord_(R["y1"][t][0]), R["y1"][t][1])
         # ---------- key stats
@@ -214,7 +214,7 @@ def main():
         # ---------- holdings
         mx = max([h["w"] for h in hold] or [1])
         def hname(h):
-            if h["s"] in POSTS: return '<a href="/etfs-that-hold-%s.html" title="ETFs that hold %s">%s</a>' % (POSTS[h["s"]], E(h["n"]), E(h["n"]))
+            if h["s"] in POSTS: return '<a href="/etfs-that-hold-%s" title="ETFs that hold %s">%s</a>' % (POSTS[h["s"]], E(h["n"]), E(h["n"]))
             return E(h["n"])
         def others(sym):
             o = sorted([(g["hw"][sym], g["t"]) for g in funds if g["t"] != t and sym in g["hw"] and g["cat"] != "Leveraged & Inverse"], reverse=True)[:4]
@@ -239,30 +239,30 @@ def main():
         if dv:
             drows = "".join("<tr><td class=\"n\">%s</td><td>$%.4f</td></tr>" % (dfmt(datetime.date.fromisoformat(d)), amt) for d, amt in dv[:10])
             last12 = sum(amt for d, amt in dv if datetime.date.fromisoformat(d) > a["last_d"] - datetime.timedelta(days=365))
-            divhtml = '<div class="kv">%s</div><div class="scroll"><table class="t"><thead><tr><th class="n">Ex-dividend date</th><th>Amount per share</th></tr></thead><tbody>%s</tbody></table></div><p class="note">Paid over the last 12 months: $%.2f per share. On $10,000 invested that is about $%s a year at the current yield. Payouts are not guaranteed. See <a href="/do-space-etfs-pay-dividends.html">which space ETFs pay dividends</a>.</p>' % (
+            divhtml = '<div class="kv">%s</div><div class="scroll"><table class="t"><thead><tr><th class="n">Ex-dividend date</th><th>Amount per share</th></tr></thead><tbody>%s</tbody></table></div><p class="note">Paid over the last 12 months: $%.2f per share. On $10,000 invested that is about $%s a year at the current yield. Payouts are not guaranteed. See <a href="/do-space-etfs-pay-dividends">which space ETFs pay dividends</a>.</p>' % (
                 kv("Dividend yield", "%.2f%%" % f["yld"] if f["yld"] else "n/a") + kv("Frequency", f.get("freq") or "Irregular") + kv("Last ex-dividend date", f.get("exdiv", "n/a")) + kv("Yield rank", ("%d of %d payers" % R["yld"][t]) if t in R["yld"] else "n/a"), drows, last12, format(round(100 * f["yld"]), ","))
         else:
-            divhtml = '<div class="pad"><p>$%s has not paid a dividend. Most space funds pay little or nothing because the companies they hold are still investing in growth. See <a href="/do-space-etfs-pay-dividends.html">every space ETF that pays a dividend</a>.</p></div>' % t
+            divhtml = '<div class="pad"><p>$%s has not paid a dividend. Most space funds pay little or nothing because the companies they hold are still investing in growth. See <a href="/do-space-etfs-pay-dividends">every space ETF that pays a dividend</a>.</p></div>' % t
         # ---------- cost
         def cost(e, yrs):
             v = 10000.0
             for _ in range(yrs): v = v * 1.07 * (1 - e / 100)
             return 10000 * 1.07 ** yrs - v
-        costhtml = '<div class="kv">%s</div><p class="note">Hypothetical: $10,000 growing 7%% a year before fees. The %s average fee among funds we track is %.2f%%. Compare every fund in <a href="/space-etf-expense-ratios-compared.html">Space ETF Fees Compared</a>.</p>' % (
+        costhtml = '<div class="kv">%s</div><p class="note">Hypothetical: $10,000 growing 7%% a year before fees. The %s average fee among funds we track is %.2f%%. Compare every fund in <a href="/space-etf-expense-ratios-compared">Space ETF Fees Compared</a>.</p>' % (
             kv("Cost per $10,000 a year", "$%d" % round(f["exp"] * 100)) + kv("Fee rank (1 = cheapest)", "%d of %d" % R["fee"][t]) + kv("Fees over 10 years", money(cost(f["exp"], 10))) + kv("Fees over 20 years", money(cost(f["exp"], 20))) + kv("vs. %s average" % E(f["cat"]), '<span class="%s">%s pts</span>' % ("up" if f["exp"] <= avg_fee else "dn", ("%+.2f" % (f["exp"] - avg_fee)))) + kv("Same fee tier", " ".join('<a href="/%s">%s</a>' % (g["t"], g["t"]) for g in funds if g is not f and abs(g["exp"] - f["exp"]) < 0.006)[:400] or "none"),
             E(f["cat"]).lower(), avg_fee)
         # ---------- side rail
         ranks = "".join('<a class="rank" href="%s"><i>#%d / %d</i><span>%s</span><b>%s</b></a>' % x for x in [
             ("/#rankings", R["aum"][t][0], N, "Assets", f["aumf"]),
-            ("/space-etf-expense-ratios-compared.html", R["fee"][t][0], N, "Lowest fee", "%.2f%%" % f["exp"])] +
-            ([("/best-performing-space-etfs-2026.html", R["y1"][t][0], R["y1"][t][1], "1 year return", pct(f["y1"]))] if t in R["y1"] else []) +
-            ([("/best-performing-space-etfs-2026.html", R["m1"][t][0], R["m1"][t][1], "1 month return", pct(per["1M"]))] if t in R["m1"] else []) +
-            ([("/do-space-etfs-pay-dividends.html", R["yld"][t][0], R["yld"][t][1], "Dividend yield", "%.2f%%" % f["yld"])] if t in R["yld"] else []) +
+            ("/space-etf-expense-ratios-compared", R["fee"][t][0], N, "Lowest fee", "%.2f%%" % f["exp"])] +
+            ([("/best-performing-space-etfs-2026", R["y1"][t][0], R["y1"][t][1], "1 year return", pct(f["y1"]))] if t in R["y1"] else []) +
+            ([("/best-performing-space-etfs-2026", R["m1"][t][0], R["m1"][t][1], "1 month return", pct(per["1M"]))] if t in R["m1"] else []) +
+            ([("/do-space-etfs-pay-dividends", R["yld"][t][0], R["yld"][t][1], "Dividend yield", "%.2f%%" % f["yld"])] if t in R["yld"] else []) +
             ([("/#rankings", R["hold"][t][0], R["hold"][t][1], "Most holdings", str(f["holdings"]))] if t in R["hold"] else []))
         same = [g for g in funds if g["prov"] == f["prov"] and g is not f]
         issuer = "".join('<a href="/%s"><b>%s</b><span>%s</span><em>%s</em></a>' % (g["t"], g["t"], E(g["name"]), g["aumf"]) for g in same)
         al = sorted(arts.get(t, []), reverse=True)[:6]
-        artshtml = "".join('<a href="/%s.html"><img src="/covers/%s.jpg" alt="" loading="lazy" onerror="this.style.visibility=\'hidden\'"><span>%s</span></a>' % (s, s, E(ti)) for _, s, ti in al)
+        artshtml = "".join('<a href="/%s"><img src="/covers/%s.jpg" alt="" loading="lazy" onerror="this.style.visibility=\'hidden\'"><span>%s</span></a>' % (s, s, E(ti)) for _, s, ti in al)
         allchips = "".join('<a href="/%s">%s</a>' % (g["t"], g["t"]) for g in funds if g is not f)
         prev, nxt = funds[i - 1], funds[(i + 1) % N]
         faqs = [("What is the expense ratio of %s?" % t, "%s charges %.2f%% a year, or about $%d for every $10,000 invested. That ranks %s of %d funds tracked on TopSpaceETFs.com from cheapest to most expensive." % (t, f["exp"], round(f["exp"] * 100), ord_(R["fee"][t][0]), N)),
