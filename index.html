@@ -488,6 +488,98 @@
   .display-ad img{width:100%; height:auto; display:block;}
   .display-ad .sponsor-label{font-size:0.72rem; color:var(--grey); letter-spacing:1px; text-transform:uppercase;}
 </style>
+<style id="tsx-v2">
+  header{position:static !important;}
+  .nav-cta .btn-blog{border-color:var(--purple); color:var(--white); background:rgba(139,92,246,.16); font-weight:700;}
+  .nav-cta .btn-blog:hover{background:var(--purple); color:#fff;}
+  @media(max-width:900px){.nav-cta .btn-sister{display:none;} .nav{padding:14px 0 !important;}}
+
+  .up{color:var(--green);} .dn{color:var(--red);} .fl{color:var(--grey);}
+
+  /* hero extras */
+  .hero{padding-top:64px !important;}
+  .hero-stats{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:14px; overflow:hidden; max-width:880px; margin:40px auto 0; text-align:left;}
+  .hero-stats div{background:rgba(15,13,28,.9); padding:16px 18px;}
+  .hero-stats b{display:block; font:700 1.35rem 'JetBrains Mono',monospace; letter-spacing:-.5px; color:var(--white);}
+  .hero-stats span{font-size:.68rem; letter-spacing:1.4px; text-transform:uppercase; color:var(--grey);}
+  .hero-stats small{font:600 .74rem 'JetBrains Mono',monospace; margin-left:6px;}
+  @media(max-width:700px){.hero-stats{grid-template-columns:1fr 1fr;} .hero-stats b{font-size:1.1rem;}}
+  .tape{margin:26px 0 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); overflow:hidden; background:rgba(15,13,28,.6); -webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent); mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);}
+  .tape-track{display:flex; gap:34px; width:max-content; padding:9px 0; animation:tape 70s linear infinite;}
+  .tape:hover .tape-track{animation-play-state:paused;}
+  .tape a{display:flex; gap:8px; align-items:baseline; font:600 .78rem 'JetBrains Mono',monospace; color:var(--white); white-space:nowrap;}
+  .tape a b{color:var(--purple-bright);}
+  @keyframes tape{to{transform:translateX(-50%);}}
+  @media(prefers-reduced-motion:reduce){.tape-track{animation:none;}}
+
+  /* rankings table v2 */
+  #rankings.wrap{max-width:1340px;}
+  .cat-tabs{display:flex; gap:8px; flex-wrap:wrap; margin:0 0 14px;}
+  .cat-tabs button{font:600 .8rem Inter,sans-serif; color:var(--grey); background:var(--bg-panel); border:1px solid var(--line); border-radius:999px; padding:7px 14px; cursor:pointer; transition:all .15s;}
+  .cat-tabs button b{font:600 .7rem 'JetBrains Mono',monospace; opacity:.7; margin-left:5px;}
+  .cat-tabs button:hover{color:var(--white); border-color:var(--purple);}
+  .cat-tabs button.on{background:var(--purple); border-color:var(--purple); color:#fff;}
+  #etfTable{min-width:0 !important; table-layout:auto;}
+  #etfTable thead th{padding:13px 12px; font-size:.66rem; letter-spacing:1.1px; white-space:nowrap; background:#0c0a18; position:relative;}
+  #etfTable thead th:first-child, #etfTable tbody td:first-child{padding-left:20px;}
+  #etfTable tbody td{padding:12px 12px; font-size:.86rem; vertical-align:middle; white-space:nowrap;}
+  #etfTable tbody td.ticker-cell{white-space:normal; display:table-cell;}
+  #etfTable .tc{display:flex; align-items:center; gap:12px; min-width:230px;}
+  #etfTable .ticker-icon{width:54px; height:34px; border-radius:8px; font:700 .74rem 'JetBrains Mono',monospace; display:flex; align-items:center; justify-content:center; flex-shrink:0; color:var(--purple-bright); background:rgba(139,92,246,.12); border:1px solid rgba(139,92,246,.32);}
+  #etfTable .ticker-name b{font-size:.88rem; line-height:1.25;}
+  #etfTable .ticker-name small{font-size:.72rem;}
+  #etfTable .px b{display:block; font:600 .9rem 'JetBrains Mono',monospace;}
+  #etfTable .px small{font:600 .72rem 'JetBrains Mono',monospace;}
+  #etfTable .ret{display:inline-block; min-width:64px; text-align:right; font:600 .8rem 'JetBrains Mono',monospace; padding:4px 8px; border-radius:6px;}
+  #etfTable .ret.up{background:rgba(52,211,153,.1);} #etfTable .ret.dn{background:rgba(248,113,113,.1);}
+  #etfTable .ret.na{color:#6f6a88; font-weight:500;}
+  #etfTable .newtag{font:700 .62rem 'JetBrains Mono',monospace; letter-spacing:1px; color:var(--purple-bright); border:1px solid rgba(139,92,246,.4); border-radius:5px; padding:2px 6px;}
+  #etfTable tbody tr[data-symbol] td:last-child::after{display:none;}
+  .tbl-foot{display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; padding:12px 20px; border-top:1px solid var(--line); font-size:.74rem; color:var(--grey); background:#0c0a18;}
+  @media(max-width:1180px){#etfTable .c-hold, #etfTable .c-inc{display:none;}}
+  @media(max-width:980px){#etfTable .c-exp{display:none;} .table-scroll{overflow-x:auto;} #etfTable{min-width:760px !important;}}
+  @media(max-width:760px){
+    .table-scroll{overflow-x:visible;} #etfTable{min-width:0 !important;}
+    #etfTable .c-hold, #etfTable .c-inc, #etfTable .c-exp{display:block;}
+    #etfTable tbody tr{grid-template-columns:1fr 1fr 1fr; gap:12px 10px; padding:16px;}
+    #etfTable tbody td{padding:0 !important; text-align:left !important;}
+    #etfTable tbody td.ticker-cell{display:block; grid-column:1/-1;}
+    #etfTable .tc{min-width:0;}
+    #etfTable .ret{min-width:0; text-align:left; padding:2px 6px;}
+    #etfTable .px b{display:inline; margin-right:6px;}
+    .tbl-foot{padding:12px 16px;}
+  }
+
+  /* why space v2 */
+  .why2{display:grid; grid-template-columns:minmax(0,5fr) minmax(0,7fr); gap:0; border:1px solid var(--line); border-radius:20px; overflow:hidden; background:linear-gradient(180deg,#0f0d1c,#0a0814);}
+  .why2-viz{position:relative; min-height:440px; border-right:1px solid var(--line); background:radial-gradient(circle at 50% 55%, rgba(139,92,246,.22), transparent 62%), #08070f; overflow:hidden;}
+  .why2-viz svg{position:absolute; left:0; top:0; width:100%; height:calc(100% - 70px); overflow:visible;}
+  .why2-viz .hud{position:absolute; left:18px; top:16px; font:600 .64rem 'JetBrains Mono',monospace; letter-spacing:1.6px; color:#7d7896; text-transform:uppercase;}
+  .why2-viz .hud b{color:var(--green);}
+  .why2-kpis{position:absolute; left:0; right:0; bottom:0; display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid var(--line); background:rgba(8,7,15,.82); backdrop-filter:blur(6px);}
+  .why2-kpis div{padding:14px 16px; border-right:1px solid var(--line);} .why2-kpis div:last-child{border-right:0;}
+  .why2-kpis b{display:block; font:700 1.25rem 'JetBrains Mono',monospace; color:var(--white);}
+  .why2-kpis span{font-size:.62rem; letter-spacing:1.3px; text-transform:uppercase; color:var(--grey);}
+  .orb{transform-origin:260px 230px; animation:orb 26s linear infinite;} .orb.b{animation-duration:40s; animation-direction:reverse;} .orb.c{animation-duration:60s;}
+  @keyframes orb{to{transform:rotate(360deg);}}
+  @media(prefers-reduced-motion:reduce){.orb{animation:none;}}
+  .why2-list{display:grid; grid-template-columns:1fr 1fr;}
+  .why2-item{padding:26px 26px 24px; border-bottom:1px solid var(--line); border-right:1px solid var(--line); position:relative; transition:background .2s;}
+  .why2-item:nth-child(2n){border-right:0;} .why2-item:nth-last-child(-n+2){border-bottom:0;}
+  .why2-item:hover{background:rgba(139,92,246,.06);}
+  .why2-item .no{font:600 .66rem 'JetBrains Mono',monospace; letter-spacing:1.6px; color:var(--purple-bright); display:flex; align-items:center; gap:10px; margin-bottom:14px;}
+  .why2-item .no::after{content:""; flex:1; height:1px; background:linear-gradient(90deg,rgba(139,92,246,.5),transparent);}
+  .why2-item h3{font-size:1.02rem; font-weight:700; margin-bottom:8px; letter-spacing:-.2px;}
+  .why2-item p{color:var(--grey); font-size:.86rem; line-height:1.6;}
+  .why2-item a{color:var(--purple-bright); font-weight:600; font-size:.8rem; display:inline-block; margin-top:10px;}
+  @media(max-width:980px){.why2{grid-template-columns:1fr;} .why2-viz{min-height:340px; border-right:0; border-bottom:1px solid var(--line);}}
+  @media(max-width:600px){.why2-list{grid-template-columns:1fr;} .why2-item{border-right:0 !important; border-bottom:1px solid var(--line) !important;} .why2-item:last-child{border-bottom:0 !important;}}
+
+  /* blog cover images */
+  .blog-thumb.has-img{height:170px; background:#0a0814; padding:0;}
+  .blog-thumb.has-img::before{display:none;}
+  .blog-thumb.has-img img{width:100%; height:100%; object-fit:cover; display:block;}
+</style>
 </head>
 <body>
 <div class="stars"></div>
@@ -502,25 +594,31 @@
     <a href="/" class="logo"><span class="logo-mark"></span><span class="logo-text">Top<span>Space</span>ETFs.com</span></a>
     <div class="shooting-star" id="shootingStar"></div>
     <div class="nav-cta">
-      <a href="https://topdividendetfs.com" class="btn btn-ghost">Top Dividend ETFs ↗</a>
-      <a href="https://monthlyetfs.com" class="btn btn-ghost">Monthly ETFs ↗</a>
-      <a href="https://weeklyetfs.com" class="btn btn-ghost">Weekly ETFs ↗</a>
-      <a href="https://growthetfs.com" class="btn btn-ghost">Growth ETFs ↗</a>
+      <a href="/blog.html" class="btn btn-ghost btn-blog">Blog</a>
+      <a href="https://topdividendetfs.com" class="btn btn-ghost btn-sister">Top Dividend ETFs ↗</a>
+      <a href="https://monthlyetfs.com" class="btn btn-ghost btn-sister">Monthly ETFs ↗</a>
+      <a href="https://weeklyetfs.com" class="btn btn-ghost btn-sister">Weekly ETFs ↗</a>
+      <a href="https://growthetfs.com" class="btn btn-ghost btn-sister">Growth ETFs ↗</a>
     </div>
   </div>
 </header>
 
 <section class="hero wrap">
-  <div class="eyebrow"><span class="dot"></span> Data Updated Daily</div>
+  <div class="eyebrow"><span class="dot"></span> <span id="heroEyebrow">Live Prices · Data Updated Daily</span></div>
   <h1>The Best <span class="grad">Space & Aerospace ETFs</span><br>Ranked, Tracked, Explained.</h1>
-  <p class="sub">From satellite mega-constellations to lunar logistics... We track every fund riding the new space economy!<br>
-    Hand-picked curated list updated often!<br>
-  </p>
+  <p class="sub">From satellite mega-constellations to lunar logistics, we track every fund riding the new space economy. Live prices, returns, holdings and fees for <b id="heroCount" style="color:var(--white)">every</b> space ETFs, all in one place.</p>
   <div class="hero-ctas">
     <a href="#rankings" class="btn btn-primary">View Top ETFs</a>
     <a href="#why" class="btn btn-ghost">Why Space ETFs?</a>
   </div>
+  <div class="hero-stats" id="heroStats" aria-live="polite">
+    <div><b id="hsFunds">--</b><span>Space ETFs tracked</span></div>
+    <div><b id="hsAum">--</b><span>Combined assets</span></div>
+    <div><b id="hsBest">--</b><span>Best 1 year return</span></div>
+    <div><b id="hsNew">--</b><span>Launched in 2026</span></div>
+  </div>
 </section>
+<div class="tape" aria-hidden="true"><div class="tape-track" id="tapeTrack"></div></div>
 
 <!-- DISPLAY AD BANNER -->
 <div class="display-ad">
@@ -534,10 +632,12 @@
   <div class="section-head">
     <div>
       <h2>Top Space ETFs <span>Ranked</span></h2>
-      <p>Click any row to view its full scorecard. Click a column header to sort. Search by ticker, name, or provider below:</p>
+      <p>Click any row to view its full scorecard. Click a column header to sort. Filter by type or search by ticker, name, or provider below:</p>
     </div>
-    <div class="updated-badge"><span class="dot"></span> Data Updated Daily</div>
+    <div class="updated-badge"><span class="dot"></span> <span id="updatedTxt">Data Updated Daily</span></div>
   </div>
+
+  <div class="cat-tabs" id="catTabs"></div>
 
   <div class="search-wrap">
     <div class="search-box">
@@ -554,16 +654,20 @@
         <thead>
           <tr>
             <th data-col="symbol" class="sortable">ETF<span class="sort-icon"></span></th>
-            <th data-col="dividendYield" class="sortable num">Dividend Yield<span class="sort-icon"></span></th>
+            <th data-col="price" class="sortable num">Price / Today<span class="sort-icon"></span></th>
+            <th data-col="ytd" class="sortable num">YTD<span class="sort-icon"></span></th>
+            <th data-col="y1" class="sortable num">1 Year<span class="sort-icon"></span></th>
+            <th data-col="si" class="sortable num">Since Inception<span class="sort-icon"></span></th>
+            <th data-col="yield" class="sortable num">Yield<span class="sort-icon"></span></th>
             <th data-col="aum" class="sortable num">AUM<span class="sort-icon"></span></th>
-            <th data-col="provider" class="sortable">Fund Provider<span class="sort-icon"></span></th>
-            <th data-col="expenseRatio" class="sortable center">Expense Ratio<span class="sort-icon"></span></th>
-            <th data-col="inceptionDate" class="sortable">Inception Date<span class="sort-icon"></span></th>
+            <th data-col="exp" class="sortable num c-exp">Expense<span class="sort-icon"></span></th>
+            <th data-col="hold" class="sortable num c-hold">Holdings<span class="sort-icon"></span></th>
+            <th data-col="inc" class="sortable num c-inc">Inception<span class="sort-icon"></span></th>
           </tr>
         </thead>
         <tbody id="etfTableBody">
           <tr>
-            <td colspan="6">
+            <td colspan="10">
               <div class="table-status">
                 <div class="spinner"></div>
                 <div class="status-msg">Loading ETF data…</div>
@@ -574,12 +678,13 @@
         </tbody>
       </table>
     </div>
+    <div class="tbl-foot"><span>YTD and 1 year are total returns. Since inception is the price return from the first day of trading. Funds launched this year show their return since launch under YTD.</span><span id="tblAsOf"></span></div>
   </div>
 
   <p style="margin-top:12px; font-size:0.82rem; color:var(--grey);">
-    <strong>Note:</strong> ETFs are sorted by inception date (oldest to newest). 
-    ETFs are chosen based on which space ETFs seem interesting, talked about often or other metrics 
-    &amp; not intended to be a buy or sell signal EVER.
+    <strong>Note:</strong> ETFs are sorted by assets under management (largest first). Click any column to re-sort.
+    ETFs are chosen based on which space ETFs seem interesting, talked about often or other metrics
+    &amp; not intended to be a buy or sell signal EVER. Leveraged and inverse ETFs reset daily and can lose most of their value quickly.
   </p>
   <p style="margin-top:8px; font-size:0.8rem; color:var(--grey);">*Data updated daily. Nothing on TopSpaceETFs.com is financial advice</p>
 
@@ -597,37 +702,46 @@
       <h2>Why <span>Space ETFs</span> Right Now</h2>
       <p>A new wave of launches, IPOs, and government contracts is reshaping the sector.</p>
     </div>
+    <a href="/space-etfs-101.html" class="btn btn-ghost">Space ETFs 101 →</a>
   </div>
-  <div class="features-grid">
-    <div class="feature-card">
-      <div class="feature-icon">🚀</div>
-      <h3>IPO Wave</h3>
-      <p>A growing list of space-economy companies — from launch providers to satellite operators — are heading toward public markets, expanding the universe of investable names.</p>
+  <div class="why2">
+    <div class="why2-viz">
+      <div class="hud">Orbital map · <b>live fund data</b></div>
+      <svg viewBox="90 0 340 460" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        <defs>
+          <radialGradient id="pl" cx="38%" cy="34%" r="75%"><stop offset="0" stop-color="#c4b5fd"/><stop offset=".45" stop-color="#7c3aed"/><stop offset="1" stop-color="#1e1147"/></radialGradient>
+          <radialGradient id="gl" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#8b5cf6" stop-opacity=".45"/><stop offset="1" stop-color="#8b5cf6" stop-opacity="0"/></radialGradient>
+          <pattern id="gr" width="26" height="26" patternUnits="userSpaceOnUse"><path d="M26 0H0V26" fill="none" stroke="#2a2540" stroke-width=".6" opacity=".55"/></pattern>
+        </defs>
+        <rect x="-400" y="-400" width="1320" height="1260" fill="url(#gr)"/>
+        <circle cx="260" cy="230" r="150" fill="url(#gl)"/>
+        <g fill="none" stroke="#8b5cf6" stroke-opacity=".38" stroke-width="1">
+          <ellipse cx="260" cy="230" rx="96" ry="96" stroke-dasharray="2 6"/>
+          <ellipse cx="260" cy="230" rx="150" ry="150" stroke-dasharray="1 7"/>
+          <ellipse cx="260" cy="230" rx="206" ry="206" stroke-dasharray="1 9" stroke-opacity=".25"/>
+        </g>
+        <circle cx="260" cy="230" r="50" fill="url(#pl)"/>
+        <path d="M214 222c18-10 74-12 92 4M218 244c22 8 62 8 84-2" stroke="#ede9fe" stroke-opacity=".28" fill="none"/>
+        <g class="orb"><circle cx="356" cy="230" r="5" fill="#34d399"/><circle cx="356" cy="230" r="11" fill="none" stroke="#34d399" stroke-opacity=".4"/><circle cx="164" cy="230" r="3.5" fill="#b794f6"/></g>
+        <g class="orb b"><circle cx="260" cy="80" r="4.5" fill="#f5f3ff"/><circle cx="366" cy="336" r="3.5" fill="#b794f6"/><circle cx="154" cy="336" r="3" fill="#34d399"/></g>
+        <g class="orb c"><circle cx="466" cy="230" r="4" fill="#b794f6"/><circle cx="54" cy="230" r="3" fill="#f5f3ff"/><circle cx="260" cy="24" r="3" fill="#b794f6"/></g>
+        <g font-family="JetBrains Mono, monospace" font-size="9" fill="#7d7896" letter-spacing="1.2">
+          <text x="300" y="128">LEO</text><text x="388" y="96">GEO</text><text x="104" y="52">CISLUNAR</text>
+        </g>
+      </svg>
+      <div class="why2-kpis">
+        <div><b id="wkFunds">--</b><span>Funds tracked</span></div>
+        <div><b id="wkIssuers">--</b><span>Fund issuers</span></div>
+        <div><b id="wkLow">--</b><span>Lowest fee</span></div>
+      </div>
     </div>
-    <div class="feature-card">
-      <div class="feature-icon">🛰️</div>
-      <h3>Diversified Exposure</h3>
-      <p>Space ETFs spread risk across launch, satellite, communications, and defense-adjacent companies — instead of betting on a single rocket company.</p>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">🏛️</div>
-      <h3>Government Tailwinds</h3>
-      <p>Defense and civil space budgets continue to expand globally, supporting long-term contracts for many of the holdings inside these funds.</p>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">📡</div>
-      <h3>Satellite Internet Boom</h3>
-      <p>Low-earth-orbit broadband is scaling fast, driving revenue for satellite manufacturers, launch providers, and ground infrastructure companies.</p>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">📊</div>
-      <h3>Side-by-Side Data</h3>
-      <p>Compare expense ratios, AUM, Fund providers, and more across every major space-themed funds updated often!</p>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">💜</div>
-      <h3>From the TopDividendETFs Team</h3>
-      <p>Built by the same team behind TopDividendETFs.com, applying the same research-first approach to the space investing theme.</p>
+    <div class="why2-list">
+      <div class="why2-item"><div class="no">01 / PUBLIC MARKETS</div><h3>The IPO wave has arrived</h3><p>Launch providers, satellite operators and lunar companies are now listed stocks. That gives space funds a much deeper bench of pure-play holdings than they had even two years ago.</p><a href="/spacex-ipo-public-spcx.html">SpaceX is public: what changed →</a></div>
+      <div class="why2-item"><div class="no">02 / DIVERSIFICATION</div><h3>One ticker, the whole supply chain</h3><p>Space ETFs spread risk across launch, satellites, communications and ground systems, so you are not betting everything on a single rocket company.</p><a href="/space-etfs-101.html">How space ETFs work →</a></div>
+      <div class="why2-item"><div class="no">03 / GOVERNMENT DEMAND</div><h3>Long contracts, steady budgets</h3><p>Defense and civil space programs keep signing multi-year contracts with the companies inside these funds, which helps smooth out the lumpy commercial launch calendar.</p><a href="/etfs-that-hold-kratos.html">Defense names inside space ETFs →</a></div>
+      <div class="why2-item"><div class="no">04 / SATELLITE BROADBAND</div><h3>Low-earth orbit is scaling fast</h3><p>Direct-to-phone service and broadband constellations are turning into recurring revenue for satellite builders, launch providers and ground networks.</p><a href="/etfs-that-hold-ast-spacemobile.html">Who holds AST SpaceMobile →</a></div>
+      <div class="why2-item"><div class="no">05 / SIDE-BY-SIDE DATA</div><h3>Every fund on one screen</h3><p>Compare live prices, returns, fees, assets and holdings counts across every major space-themed fund. The table refreshes on its own, so you never see stale numbers.</p><a href="#rankings">Open the rankings →</a></div>
+      <div class="why2-item"><div class="no">06 / WHO WE ARE</div><h3>From the TopDividendETFs team</h3><p>Built by the same team behind TopDividendETFs.com, applying the same research-first approach to the space investing theme.</p><a href="https://topdividendetfs.com" target="_blank" rel="noopener">Visit TopDividendETFs.com →</a></div>
     </div>
   </div>
 </section>
@@ -759,179 +873,143 @@
   </div>
 </footer>
 
+<script src="/site.js"></script>
 <script>
-const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSrmLZYgKhMuwExsTbxDBBrN0aTAj0KIlFH5kPeZblp_7FXO7AGfgwilgbt3qCKF9XIir_QTNeYRpqy/pub?gid=0&single=true&output=csv';
+let etfData = [], sortCol = 'aum', sortDir = 'desc', activeCat = 'All';
+const pct = TSE.pct, cls = TSE.cls;
+const COLS = {symbol:r=>r.Symbol, price:r=>r._price, ytd:r=>r._ytd, y1:r=>r._y1, si:r=>r._si, yield:r=>r._yield, aum:r=>r._aum, exp:r=>r._exp, hold:r=>r._hold, inc:r=>r._inc ? r._inc.getTime() : null};
 
-let etfData = [];
-let sortCol = 'inceptionDate';
-let sortDir = 'asc';
-
-function parseCSV(text) {
-  const lines = text.trim().split('\n');
-  const headers = splitCSVLine(lines[0]);
-  return lines.slice(1).map(line => {
-    const vals = splitCSVLine(line);
-    const obj = {};
-    headers.forEach((h, i) => { obj[h.trim()] = (vals[i] || '').trim(); });
-    return obj;
-  }).filter(row => Object.values(row).some(v => v !== ''));
-}
-
-function splitCSVLine(line) {
-  const result = [];
-  let cur = '', inQuote = false;
-  for (let i = 0; i < line.length; i++) {
-    const ch = line[i];
-    if (ch === '"') { inQuote = !inQuote; continue; }
-    if (ch === ',' && !inQuote) { result.push(cur); cur = ''; continue; }
-    cur += ch;
-  }
-  result.push(cur);
-  return result;
-}
-
-function toSortVal(col, raw) {
-  if (!raw || raw === '—' || raw === '') return -Infinity;
-  if (col === 'aum') {
-    const clean = raw.replace(/[$,+\s]/g, '').toUpperCase();
-    const num = parseFloat(clean);
-    if (clean.includes('B')) return num * 1e9;
-    if (clean.includes('M')) return num * 1e6;
-    if (clean.includes('K')) return num * 1e3;
-    return num || -Infinity;
-  }
-  if (col === 'dividendYield' || col === 'expenseRatio') {
-    return parseFloat(raw.replace(/[%~\s]/g, '')) || -Infinity;
-  }
-  if (col === 'inceptionDate') {
-    const d = new Date(raw);
-    return isNaN(d.getTime()) ? -Infinity : d.getTime();
-  }
-  return raw.toLowerCase();
+function retCell(v, isNew){
+  if (v == null || isNaN(v)) return '<span class="ret na">' + (isNew ? 'New' : 'n/a') + '</span>';
+  return '<span class="ret ' + cls(v) + '">' + pct(v) + '</span>';
 }
 
 function renderTable(data) {
   const tbody = document.getElementById('etfTableBody');
   if (!data.length) {
-    tbody.innerHTML = '<tr><td colspan="6"><div class="table-status"><div class="status-msg">No ETFs found matching your search.</div></div></td></tr>';
+    tbody.innerHTML = '<tr><td colspan="10"><div class="table-status"><div class="status-msg">No ETFs found matching your search.</div></div></td></tr>';
     return;
   }
-  tbody.innerHTML = data.map((row) => {
-    const symbol  = row['Symbol']         || '?';
-    const name    = row['Name']           || symbol;
-    const div     = row['Dividend Yield'] || '—';
-    const aum     = row['AUM']            || '—';
-    const prov    = row['Fund Provider']  || '—';
-    const expense = row['Expense Ratio']  || '—';
-    const incept  = row['Inception Date'] || '—';
-    return `<tr data-symbol="${symbol}" title="View full scorecard for ${symbol}">
-      <td data-label="ETF" class="ticker-cell">
-        <div class="ticker-icon">${symbol}</div>
-        <div class="ticker-name"><b>${name}</b><small>${symbol}</small></div>
-      </td>
-      <td data-label="Dividend Yield" class="num mono">${div}</td>
-      <td data-label="AUM" class="num mono">${aum}</td>
-      <td data-label="Fund Provider">${prov}</td>
-      <td data-label="Expense Ratio" class="center mono">${expense}</td>
-      <td data-label="Inception Date">${incept}</td>
+  tbody.innerHTML = data.map(r => {
+    const px = r._price ? '$' + r._price.toFixed(2) : 'n/a';
+    const ch = r._chg != null ? '<small class="' + cls(r._chg) + '">' + pct(r._chg, 2) + '</small>' : '';
+    return `<tr data-symbol="${r.Symbol}" title="View full scorecard for ${r.Symbol}">
+      <td data-label="ETF" class="ticker-cell"><div class="tc">
+        <div class="ticker-icon">${r.Symbol}</div>
+        <div class="ticker-name"><b>${r.Name}</b><small>${r['Fund Provider'] || ''} · ${r._cat}${r._new ? ' · <span class="newtag">NEW</span>' : ''}</small></div>
+      </div></td>
+      <td data-label="Price / Today" class="num px"><b>${px}</b>${ch}</td>
+      <td data-label="${r._new ? 'Since Launch' : 'YTD'}" class="num">${retCell(r._ytd)}</td>
+      <td data-label="1 Year" class="num">${retCell(r._y1, true)}</td>
+      <td data-label="Since Inception" class="num">${retCell(r._si)}</td>
+      <td data-label="Yield" class="num mono">${r['Dividend Yield'] || 'n/a'}</td>
+      <td data-label="AUM" class="num mono">${r.AUM || 'n/a'}</td>
+      <td data-label="Expense" class="num mono c-exp">${r['Expense Ratio'] || 'n/a'}</td>
+      <td data-label="Holdings" class="num mono c-hold">${r._hold || 'n/a'}</td>
+      <td data-label="Inception" class="num c-inc">${r['Inception Date'] || 'n/a'}</td>
     </tr>`;
   }).join('');
-  attachRowClickHandlers();
+  tbody.querySelectorAll('tr[data-symbol]').forEach(tr => tr.addEventListener('click', () => {
+    window.location.href = 'etf.html?symbol=' + encodeURIComponent(tr.getAttribute('data-symbol'));
+  }));
 }
 
-function attachRowClickHandlers() {
-  document.querySelectorAll('#etfTableBody tr[data-symbol]').forEach(tr => {
-    tr.addEventListener('click', () => {
-      const symbol = tr.getAttribute('data-symbol');
-      window.location.href = 'etf.html?symbol=' + encodeURIComponent(symbol);
-    });
+function sortData(col, keepDir) {
+  if (!keepDir) {
+    if (sortCol === col) sortDir = sortDir === 'asc' ? 'desc' : 'asc';
+    else { sortCol = col; sortDir = (col === 'symbol' || col === 'exp' || col === 'inc') ? 'asc' : 'desc'; }
+  }
+  const get = COLS[sortCol];
+  etfData.sort((a, b) => {
+    const va = get(a), vb = get(b);
+    const na = va == null || (typeof va === 'number' && isNaN(va)), nb = vb == null || (typeof vb === 'number' && isNaN(vb));
+    if (na && nb) return 0; if (na) return 1; if (nb) return -1;
+    if (va === vb) return 0;
+    const cmp = va < vb ? -1 : 1;
+    return sortDir === 'asc' ? cmp : -cmp;
   });
-}
-
-function sortData(col) {
-  if (sortCol === col) {
-    sortDir = sortDir === 'asc' ? 'desc' : 'asc';
-  } else {
-    sortCol = col;
-    sortDir = 'asc';
-  }
-  const colMap = {
-    symbol:       'Symbol',
-    dividendYield:'Dividend Yield',
-    aum:          'AUM',
-    provider:     'Fund Provider',
-    expenseRatio: 'Expense Ratio',
-    inceptionDate:'Inception Date',
-  };
-  const key = colMap[col];
-  if (key) {
-    etfData.sort((a, b) => {
-      const va = toSortVal(col, a[key] || '');
-      const vb = toSortVal(col, b[key] || '');
-      if (va === vb) return 0;
-      if (va === -Infinity) return 1;
-      if (vb === -Infinity) return -1;
-      const cmp = va < vb ? -1 : 1;
-      return sortDir === 'asc' ? cmp : -cmp;
-    });
-  }
   applySearch();
   document.querySelectorAll('#etfTable thead th.sortable').forEach(th => {
     th.classList.remove('sort-asc', 'sort-desc');
-    if (th.dataset.col === col) {
-      th.classList.add(sortDir === 'asc' ? 'sort-asc' : 'sort-desc');
-    }
+    if (th.dataset.col === sortCol) th.classList.add(sortDir === 'asc' ? 'sort-asc' : 'sort-desc');
   });
 }
 
 function applySearch() {
   const q = document.getElementById('etfSearch').value.trim().toLowerCase();
   document.getElementById('searchClear').classList.toggle('visible', q.length > 0);
+  let rows = activeCat === 'All' ? etfData : etfData.filter(r => r._cat === activeCat);
+  const base = rows.length;
+  if (q) rows = rows.filter(r => [r.Symbol, r.Name, r['Fund Provider'], r._cat].some(v => (v || '').toLowerCase().includes(q)));
+  renderTable(rows);
+  document.getElementById('searchCount').innerHTML = (q || activeCat !== 'All')
+    ? 'Showing <b>' + rows.length + '</b> of <b>' + etfData.length + '</b> ETFs' : '';
+}
 
-  const filtered = q ? etfData.filter(row => {
-    return ['Symbol','Name','Fund Provider','Dividend Yield','AUM','Expense Ratio','Inception Date']
-      .some(k => (row[k] || '').toLowerCase().includes(q));
-  }) : etfData;
+function renderTabs() {
+  const order = ['All', 'Space', 'Aerospace & Defense', 'Leveraged & Inverse', 'Income'];
+  const counts = {All: etfData.length};
+  etfData.forEach(r => counts[r._cat] = (counts[r._cat] || 0) + 1);
+  const el = document.getElementById('catTabs');
+  el.innerHTML = order.filter(c => counts[c]).map(c => '<button type="button" data-cat="' + c + '"' + (c === activeCat ? ' class="on"' : '') + '>' + (c === 'All' ? 'All ETFs' : c) + '<b>' + counts[c] + '</b></button>').join('');
+  el.querySelectorAll('button').forEach(b => b.addEventListener('click', () => { activeCat = b.dataset.cat; renderTabs(); applySearch(); }));
+}
 
-  renderTable(filtered);
-
-  const countEl = document.getElementById('searchCount');
-  countEl.innerHTML = (q && filtered.length !== etfData.length)
-    ? 'Showing <b>' + filtered.length + '</b> of <b>' + etfData.length + '</b> ETFs'
-    : '';
+function renderHero(d) {
+  const rows = d.rows, n = rows.length;
+  const total = rows.reduce((s, r) => s + (r._aum || 0), 0);
+  const set = (id, v) => { const e = document.getElementById(id); if (e) e.innerHTML = v; };
+  set('heroCount', n); set('hsFunds', n); set('wkFunds', n);
+  set('hsAum', '$' + (total / 1e9).toFixed(1) + 'B');
+  const unlev = rows.filter(r => r._cat !== 'Leveraged & Inverse' && r._y1 != null).sort((a, b) => b._y1 - a._y1)[0];
+  if (unlev) set('hsBest', unlev.Symbol + '<small class="' + cls(unlev._y1) + '">' + pct(unlev._y1) + '</small>');
+  set('hsNew', rows.filter(r => r._inc && r._inc.getFullYear() === 2026).length);
+  set('wkIssuers', new Set(rows.map(r => r['Fund Provider'])).size);
+  const low = rows.filter(r => r._exp > 0).sort((a, b) => a._exp - b._exp)[0];
+  if (low) set('wkLow', low._exp.toFixed(2) + '%');
+  const tape = rows.filter(r => r._price).map(r => '<a href="etf.html?symbol=' + r.Symbol + '"><b>$' + r.Symbol + '</b>' + r._price.toFixed(2) + (r._chg != null ? '<span class="' + cls(r._chg) + '">' + pct(r._chg, 2) + '</span>' : '') + '</a>').join('');
+  set('tapeTrack', tape + tape);
+  if (d.updated) {
+    const dt = new Date(d.updated + 'T12:00:00');
+    set('tblAsOf', 'Fund stats refreshed ' + dt.toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric'}) + ' · prices delayed up to 20 minutes');
+  }
 }
 
 async function loadETFData() {
   try {
-    const res = await fetch(SHEET_CSV_URL);
-    if (!res.ok) throw new Error('HTTP ' + res.status);
-    const text = await res.text();
-    etfData = parseCSV(text);
-    
-    // Default sort: OLDEST to NEWEST by inception date
-    sortData('inceptionDate');
-    
-    renderTable(etfData);
+    const d = await TSE.load();
+    etfData = d.rows;
+    const want = new URLSearchParams(location.search).get('cat');
+    if (want && etfData.some(r => r._cat === want)) activeCat = want;
+    renderTabs();
+    sortData('aum', true);
+    renderHero(d);
   } catch (err) {
     console.error(err);
     document.getElementById('etfTableBody').innerHTML =
-      '<tr><td colspan="6"><div class="table-status">' +
-      '<div class="status-msg">Could not load ETF data</div>' +
-      '<div class="status-sub">Please refresh the page to try again.</div>' +
-      '</div></td></tr>';
+      '<tr><td colspan="10"><div class="table-status"><div class="status-msg">Could not load ETF data</div><div class="status-sub">Please refresh the page to try again.</div></div></td></tr>';
   }
 }
 
-document.querySelectorAll('#etfTable thead th.sortable').forEach(th => {
-  th.addEventListener('click', () => sortData(th.dataset.col));
-});
+/* keep the homepage blog section current: pull the newest posts from the blog page */
+fetch('/blog.html').then(r => r.text()).then(h => {
+  const doc = new DOMParser().parseFromString(h, 'text/html');
+  const cards = [...doc.querySelectorAll('article.blog-card')].slice(0, 8);
+  const grid = document.querySelector('#blog .blog-grid');
+  if (!grid || cards.length < 3) return;
+  grid.innerHTML = cards.map((a, i) => {
+    const l = a.closest('a'); if (!l) return '';
+    const t = a.querySelector('h3'), p = a.querySelector('.blog-body p'), tag = a.querySelector('.blog-tag'), meta = a.querySelector('.blog-meta');
+    return '<a href="' + l.getAttribute('href') + '" class="blog-card-link"><article class="blog-card">' + (i === 0 ? '<span class="blog-new-badge">New</span>' : '') +
+      '<div class="blog-thumb"><span class="blog-thumb-icon"></span></div><div class="blog-body"><div class="blog-tag">' + (tag ? tag.textContent : 'Article') + '</div><h3>' + (t ? t.textContent : '') + '</h3><p>' + (p ? p.textContent : '') + '</p><div class="blog-meta">' + (meta ? meta.innerHTML : '') + '</div><div class="blog-cta">Read Article <span class="arrow">→</span></div></div></article></a>';
+  }).join('');
+  TSE.covers(grid);
+}).catch(() => {});
 
+document.querySelectorAll('#etfTable thead th.sortable').forEach(th => th.addEventListener('click', () => sortData(th.dataset.col)));
 document.getElementById('etfSearch').addEventListener('input', applySearch);
-
 document.getElementById('searchClear').addEventListener('click', () => {
-  document.getElementById('etfSearch').value = '';
-  applySearch();
-  document.getElementById('etfSearch').focus();
+  document.getElementById('etfSearch').value = ''; applySearch(); document.getElementById('etfSearch').focus();
 });
 
 function setShootDistance() {

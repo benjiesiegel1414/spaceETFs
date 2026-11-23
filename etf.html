@@ -256,6 +256,7 @@
     <a href="/" class="logo"><span class="logo-mark"></span><span class="logo-text">Top<span>Space</span>ETFs.com</span></a>
     <div class="shooting-star" id="shootingStar"></div>
     <div class="nav-cta">
+      <a href="/blog.html" class="btn btn-ghost btn-blog" style="border-color:var(--purple);color:var(--white);background:rgba(139,92,246,.16);font-weight:700;">Blog</a>
       <a href="https://topdividendetfs.com" class="btn btn-ghost">Top Dividend ETFs ↗</a>
       <a href="https://monthlyetfs.com" class="btn btn-ghost">Monthly ETFs ↗</a>
       <a href="https://weeklyetfs.com" class="btn btn-ghost">Weekly ETFs ↗</a>
@@ -301,6 +302,13 @@
     <div class="updated-badge"><span class="dot"></span> Data Updated Daily</div>
   </section>
 
+  <section class="stat-grid" id="perfGrid" style="margin-bottom:18px;">
+    <div class="stat-card"><div class="stat-label">Price</div><div class="stat-value" id="statPrice">—</div></div>
+    <div class="stat-card"><div class="stat-label" id="lblYtd">YTD Return</div><div class="stat-value" id="statYtd">—</div></div>
+    <div class="stat-card"><div class="stat-label">1 Year Return</div><div class="stat-value" id="statY1">—</div></div>
+    <div class="stat-card"><div class="stat-label">Since Inception</div><div class="stat-value" id="statSi">—</div></div>
+  </section>
+
   <section class="stat-grid">
     <div class="stat-card">
       <div class="stat-label">Dividend Yield</div>
@@ -329,6 +337,9 @@
     <div class="detail-row"><span class="label">Assets Under Management</span><span class="value" id="detailAUM">—</span></div>
     <div class="detail-row"><span class="label">Expense Ratio</span><span class="value" id="detailExpense">—</span></div>
     <div class="detail-row"><span class="label">Inception Date</span><span class="value" id="detailInception">—</span></div>
+    <div class="detail-row"><span class="label">Number of Holdings</span><span class="value" id="detailHoldings">—</span></div>
+    <div class="detail-row"><span class="label">Fund Type</span><span class="value" id="detailCat">—</span></div>
+    <div class="detail-row"><span class="label">Payout Frequency</span><span class="value" id="detailFreq">—</span></div>
   </section>
 
   <div class="cta-row">
@@ -393,6 +404,7 @@
   </div>
 </footer>
 
+<script src="/site.js"></script>
 <script>
 const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSrmLZYgKhMuwExsTbxDBBrN0aTAj0KIlFH5kPeZblp_7FXO7AGfgwilgbt3qCKF9XIir_QTNeYRpqy/pub?gid=0&single=true&output=csv';
 
@@ -452,10 +464,7 @@ async function loadScorecard() {
   }
 
   try {
-    const res = await fetch(SHEET_CSV_URL);
-    if (!res.ok) throw new Error('HTTP ' + res.status);
-    const text = await res.text();
-    const rows = parseCSV(text);
+    const rows = (await TSE.load()).rows;
 
     const row = rows.find(r => (r['Symbol'] || '').trim().toUpperCase() === symbol);
 
@@ -477,12 +486,21 @@ async function loadScorecard() {
     document.getElementById('etfName').childNodes[0].textContent = name + ' ';
     document.getElementById('etfSymbolBadge').textContent = sym;
     document.getElementById('etfSub').textContent =
-      'Full scorecard for ' + name + ' (' + sym + '), pulled from our live rankings data — dividend yield, AUM, fees, and provider details in one place.';
+      'Full scorecard for ' + name + ' (' + sym + '), pulled from our live rankings data: price, returns, dividend yield, AUM, fees and holdings in one place.';
 
     document.getElementById('statYield').textContent = yieldVal;
     document.getElementById('statAUM').textContent = aum;
     document.getElementById('statExpense').textContent = expense;
     document.getElementById('statInception').textContent = incept;
+
+    const col = v => v == null ? '' : v > 0 ? '#34d399' : v < 0 ? '#f87171' : '';
+    const setRet = (id, v, na) => { const e = document.getElementById(id); e.textContent = v == null ? (na || 'n/a') : TSE.pct(v); e.style.color = col(v); };
+    document.getElementById('statPrice').innerHTML = row._price ? '$' + row._price.toFixed(2) + (row._chg != null ? ' <span style="font-size:.9rem;color:' + col(row._chg) + '">' + TSE.pct(row._chg, 2) + '</span>' : '') : 'n/a';
+    if (row._new) document.getElementById('lblYtd').textContent = 'Since Launch (2026)';
+    setRet('statYtd', row._ytd); setRet('statY1', row._y1, 'New fund'); setRet('statSi', row._si);
+    document.getElementById('detailHoldings').textContent = row._hold || 'n/a';
+    document.getElementById('detailCat').textContent = row._cat;
+    document.getElementById('detailFreq').textContent = row._freq || 'None';
 
     document.getElementById('detailSymbol').textContent = sym;
     document.getElementById('detailName').textContent = name;
