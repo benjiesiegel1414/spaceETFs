@@ -579,6 +579,32 @@
   .blog-thumb.has-img{height:170px; background:#0a0814; padding:0;}
   .blog-thumb.has-img::before{display:none;}
   .blog-thumb.has-img img{width:100%; height:100%; object-fit:cover; display:block;}
+
+  /* table alignment v3: every data column centered under its heading */
+  #etfTable{table-layout:fixed; width:100%;}
+  #etfTable thead th{text-align:center !important; padding:14px 6px; vertical-align:middle;}
+  #etfTable thead th:first-child{text-align:left !important; width:27%; padding-left:20px;}
+  #etfTable tbody td{text-align:center !important; padding:13px 6px;}
+  #etfTable tbody td.ticker-cell{text-align:left !important; padding-left:20px;}
+  #etfTable th[data-col="price"]{width:9.5%;} #etfTable th[data-col="ytd"], #etfTable th[data-col="y1"]{width:8%;}
+  #etfTable th[data-col="si"]{width:9%;} #etfTable th[data-col="yield"]{width:6.5%;} #etfTable th[data-col="aum"]{width:7.5%;}
+  #etfTable th[data-col="exp"]{width:7.5%;} #etfTable th[data-col="hold"]{width:7.5%;} #etfTable th[data-col="inc"]{width:9.5%;}
+  #etfTable thead th .sort-icon{margin-left:4px;}
+  #etfTable thead th .th2{display:block; font-size:.58rem; letter-spacing:.8px; opacity:.7; margin-top:2px;}
+  #etfTable .tc{min-width:0;}
+  #etfTable .ticker-name{min-width:0;}
+  #etfTable .ticker-name b{overflow-wrap:anywhere;}
+  #etfTable .ret{min-width:68px; text-align:center;}
+  #etfTable .px b, #etfTable .px small{display:block; text-align:center;}
+  #etfTable td.c-inc{font-size:.8rem;}
+  @media(max-width:1180px){#etfTable thead th:first-child{width:32%;}}
+  @media(max-width:980px){#etfTable{table-layout:auto;}}
+  @media(max-width:760px){
+    #etfTable{table-layout:auto;}
+    #etfTable tbody td{text-align:left !important; padding:0 !important;}
+    #etfTable .ret{min-width:0; text-align:left;}
+    #etfTable .px b, #etfTable .px small{display:inline; text-align:left;}
+  }
 </style>
 </head>
 <body>
@@ -654,10 +680,10 @@
         <thead>
           <tr>
             <th data-col="symbol" class="sortable">ETF<span class="sort-icon"></span></th>
-            <th data-col="price" class="sortable num">Price / Today<span class="sort-icon"></span></th>
+            <th data-col="price" class="sortable num">Price<span class="sort-icon"></span><span class="th2">Today</span></th>
             <th data-col="ytd" class="sortable num">YTD<span class="sort-icon"></span></th>
             <th data-col="y1" class="sortable num">1 Year<span class="sort-icon"></span></th>
-            <th data-col="si" class="sortable num">Since Inception<span class="sort-icon"></span></th>
+            <th data-col="si" class="sortable num">Since<span class="sort-icon"></span><span class="th2">Inception</span></th>
             <th data-col="yield" class="sortable num">Yield<span class="sort-icon"></span></th>
             <th data-col="aum" class="sortable num">AUM<span class="sort-icon"></span></th>
             <th data-col="exp" class="sortable num c-exp">Expense<span class="sort-icon"></span></th>
