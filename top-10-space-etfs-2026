@@ -21,11 +21,11 @@
     <!-- Primary SEO -->
     <meta name="description" content="Discover the 10 best space and aerospace ETFs for 2026. We rank the largest funds by AUM including NASA, UFO, ARKX, ITA and more with latest data, holdings, performance insights and expert analysis.">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://topspaceetfs.com/blog/10-top-space-etfs-2026.html">
+    <link rel="canonical" href="https://topspaceetfs.com/blog/10-top-space-etfs-2026">
 
     <!-- Open Graph -->
     <meta property="og:type"        content="article">
-    <meta property="og:url"         content="https://topspaceetfs.com/blog/10-top-space-etfs-2026.html">
+    <meta property="og:url"         content="https://topspaceetfs.com/blog/10-top-space-etfs-2026">
     <meta property="og:title"       content="10 Top Space ETFs To Buy in 2026">
     <meta property="og:description" content="The definitive guide to the biggest and best space economy ETFs heading into the second half of 2026. Compare NASA, UFO, ARKX, ITA and more.">
     <meta property="og:image"       content="https://topspaceetfs.com/covers/10-space-etfs-to-buy.jpg">
@@ -36,7 +36,7 @@
 
     <!-- Twitter / X Card -->
     <meta name="twitter:card"        content="summary_large_image">
-    <meta name="twitter:url"         content="https://topspaceetfs.com/blog/10-top-space-etfs-2026.html">
+    <meta name="twitter:url"         content="https://topspaceetfs.com/blog/10-top-space-etfs-2026">
     <meta name="twitter:title"       content="10 Top Space ETFs To Buy in 2026">
     <meta name="twitter:description" content="The definitive guide to the biggest and best space economy ETFs heading into the second half of 2026. Compare NASA, UFO, ARKX, ITA and more.">
     <meta name="twitter:image"       content="https://topspaceetfs.com/covers/10-space-etfs-to-buy.jpg">
@@ -245,7 +245,7 @@
     <a href="https://topspaceetfs.com/" class="logo"><span class="logo-mark"></span><span class="logo-text">Top<span>Space</span>ETFs.com</span></a>
     <div class="shooting-star" id="shootingStar"></div>
     <div class="nav-cta">
-      <a href="/blog.html" class="btn btn-ghost btn-blog" style="border-color:var(--purple);color:var(--white);background:rgba(139,92,246,.16);font-weight:700;">Blog</a>
+      <a href="/blog" class="btn btn-ghost btn-blog" style="border-color:var(--purple);color:var(--white);background:rgba(139,92,246,.16);font-weight:700;">Blog</a>
       <a href="https://topdividendetfs.com" class="btn btn-ghost">Top Dividend ETFs ↗</a>
       <a href="https://monthlyetfs.com" class="btn btn-ghost">Monthly ETFs ↗</a>
       <a href="https://weeklyetfs.com" class="btn btn-ghost">Weekly ETFs ↗</a>
@@ -410,7 +410,7 @@
         <h4>Site</h4>
         <ul>
           <li><a href="https://TopSpaceETFs.com/">Rankings</a></li>
-          <li><a href="https://TopSpaceETFs.com/blog/10-top-space-etfs-2026.html">Blog</a></li>
+          <li><a href="https://TopSpaceETFs.com/blog/10-top-space-etfs-2026">Blog</a></li>
         </ul>
       </div>
 
@@ -430,9 +430,9 @@
       <div>
         <h4>Legal</h4>
         <ul>
-          <li><a href="https://TopSpaceETFs.com/legal.html">Disclosure</a></li>
-          <li><a href="https://TopSpaceETFs.com/privacy-policy.html">Privacy Policy</a></li>
-          <li><a href="https://TopSpaceETFs.com/terms-of-use.html">Terms of Use</a></li>
+          <li><a href="https://TopSpaceETFs.com/legal">Disclosure</a></li>
+          <li><a href="https://TopSpaceETFs.com/privacy-policy">Privacy Policy</a></li>
+          <li><a href="https://TopSpaceETFs.com/terms-of-use">Terms of Use</a></li>
         </ul>
       </div>
 
